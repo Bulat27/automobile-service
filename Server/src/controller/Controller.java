@@ -5,7 +5,10 @@
  */
 package controller;
 
+import domain.Employee;
 import java.io.IOException;
+import system_operation.AbstractSO;
+import system_operation.login.LoginSO;
 import thread.ServerThread;
 
 /**
@@ -37,6 +40,14 @@ public class Controller {
     
     public void stopServer() throws IOException{
         serverThread.stopThread();
+    }
+
+    public Employee login(Employee requestEmployee) throws Exception {
+        LoginSO loginSO = new LoginSO();//TODO: Once you put getResult in AbstractSO, then use AbstractSO here and only cast in returu e.g.
+        //return (Employee) loginSO.getResult();
+        loginSO.execute(requestEmployee);
+        
+        return loginSO.getEmployee();
     }
 
 }

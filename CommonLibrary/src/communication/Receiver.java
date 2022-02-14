@@ -21,7 +21,8 @@ public class Receiver {
     }
 
     public Object receive() throws Exception {
-        try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+        try {
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             return in.readObject();
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Obrisi ovo!

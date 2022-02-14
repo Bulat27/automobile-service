@@ -23,7 +23,8 @@ public class Sender {
     }
 
     public void send(Object object) throws Exception {
-        try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()))) {
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             out.writeObject(object);
             out.flush();
         } catch (IOException ex) {

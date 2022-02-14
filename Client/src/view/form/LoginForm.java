@@ -5,6 +5,8 @@
  */
 package view.form;
 
+import controller.Controller;
+import domain.Employee;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,16 +95,16 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
+        try {//TODO: Very important! Each form should have a FormController. Also, you need a Coordinator to coordinate all the forms and their Controllers!
             validateForm();
-//            //User user = controller.login(txtUsername.getText().trim(), String.valueOf(txtPassword.getPassword()));
-//            User user = Controller.getInstance().login(txtUsername.getText().trim(), String.valueOf(txtPassword.getPassword()));
-//            JOptionPane.showMessageDialog(this, "Welcome, " + user.getFirstName());
-//            this.dispose();
-//            Controller.getInstance().setCurrentUser(user);
-//            new FrmMain().setVisible(true);
+
+            Employee employee = Controller.getInstance().login(txtUsername.getText().trim(), String.valueOf(txtPassword.getPassword()));
+            JOptionPane.showMessageDialog(this, "Welcome, " + employee.getFirstName());
+            this.dispose();
+//            Controller.getInstance().setCurrentUser(employee);//TODO: Consider saving it on the client and server side or just the server side! 
+            new MainForm().setVisible(true);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.printStackTrace();//TODO: Delete this!
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -117,7 +119,7 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void validateForm() throws Exception {
+    private void validateForm() throws Exception {//TODO: Make a Validator for this!
         String errorMessage = "";
         if (txtUsername.getText().isEmpty()) {
             errorMessage += "Username cannot be empty!\n";

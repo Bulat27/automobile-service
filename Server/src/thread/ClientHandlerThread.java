@@ -10,6 +10,8 @@ import communication.Request;
 import communication.Response;
 import communication.Sender;
 import communication.util.Operation;
+import communication.util.ResponseType;
+import controller.Controller;
 import domain.Employee;
 import java.io.IOException;
 import java.net.Socket;
@@ -25,7 +27,7 @@ public class ClientHandlerThread extends Thread {
     private Socket socket;
     private Sender sender;
     private Receiver receiver;
-    private Employee employee;
+    private Employee authenticatedEmployee;
 
     public ClientHandlerThread(Socket socket) {
         this.socket = socket;
@@ -51,7 +53,7 @@ public class ClientHandlerThread extends Thread {
 
     private Response handleRequest(Request request) {
         Operation operation = request.getOperation();
-        
+
         switch (operation) {
             case LOGIN:
                 return login(request);
@@ -59,30 +61,28 @@ public class ClientHandlerThread extends Thread {
                 return null;//TODO: Maybe throw an Exception or something, not the best idea to return null
         }
     }
-    
-    private Response login(Request request){
+
+    private Response login(Request request) {
         Response response = new Response();
-        
-//        User requestUser = (User) request.getArgument();
-//        
-//        try {
-//            //proveri da li korisnik postoji u sistemu
-//            User user = Controller.getInstance().
-//                    login(requestUser.getUsername(),
-//                            requestUser.getPassword());
-//            System.out.println("Uspesna prijava na sistem...");
-//            response.setResponseType(ResponseType.SUCCESS);
-//            response.setResult(user);
-//            this.user=user;//TODO: Think about whether this is a good solution!
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            response.setResponseType(ResponseType.ERROR);
-//            response.setException(ex);
-//        }
+
+        Employee requestEmployee = (Employee) request.getArgument();
+
+        try {
+            //proveri da li korisnik postoji u sistemu
+            Employee employee = Controller.getInstance().login(requestEmployee);
+            System.out.println("Successful authentication!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(employee);
+            this.authenticatedEmployee = employee;//TODO: Think about whether this is a good solution!
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
         return response;
     }
-    
-     public void stopThread() throws IOException {
+
+    public void stopThread() throws IOException {
         if (socket != null && !socket.isClosed()) {
             socket.close();
         }
