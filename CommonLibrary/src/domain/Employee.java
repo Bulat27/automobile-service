@@ -21,16 +21,20 @@ public class Employee implements Serializable{
     private boolean adminStatus;
     private BigDecimal hourlyRate;
     private LocalDate dateOfEmployment;
+    private String username;
+    private String password;
 
     public Employee() {}
 
-    public Employee(Long employeeID, String firstName, String lastName, boolean adminStatus, BigDecimal hourlyRate, LocalDate dateOfEmployment) {
+    public Employee(Long employeeID, String firstName, String lastName, boolean adminStatus, BigDecimal hourlyRate, LocalDate dateOfEmployment, String username, String password) {
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.adminStatus = adminStatus;
         this.hourlyRate = hourlyRate;
         this.dateOfEmployment = dateOfEmployment;
+        this.username = username;
+        this.password = password;
     }
 
     public Long getEmployeeID() {
@@ -81,7 +85,23 @@ public class Employee implements Serializable{
         this.dateOfEmployment = dateOfEmployment;
     }
 
-    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+     @Override
     public String toString() {
         return firstName + " " + lastName;
     }
