@@ -5,7 +5,7 @@
  */
 package main;
 
-import form.MainForm;
+import view.form.MainForm;
 
 /**
  *

@@ -104,11 +104,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Start server"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStartServerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnStopServer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Stop server"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopServerActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAuthenticatedEmployees">
       <Properties>

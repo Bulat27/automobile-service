@@ -39,10 +39,16 @@ public class ServerThread extends Thread {
                 ex.printStackTrace();//TODO: Think about this handling here! Is a Logger enough or something else is neccessary?
             }
         }
-        stopAllThreads();
+        stopAllClientThreads();
     }
 
-    private void stopAllThreads() {
+    public void stopThread() throws IOException {
+        if (serverSocket != null && serverSocket.isBound()) {//TODO: Check this out! Should i call stopAll() here or leave it as it is? Read some more docs about isBound()
+            serverSocket.close();
+        }
+    }
+
+    private void stopAllClientThreads() {
         for (ClientHandlerThread client : clients) {
             try {
                 client.stopThread();

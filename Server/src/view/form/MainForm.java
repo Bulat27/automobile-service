@@ -3,7 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package form;
+package view.form;
+
+import controller.Controller;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +22,7 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+        toggleStartStopButtons(true);
     }
 
     /**
@@ -47,8 +54,18 @@ public class MainForm extends javax.swing.JFrame {
         lblServerStatusText.setText("Server is stopped!");
 
         btnStartServer.setText("Start server");
+        btnStartServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartServerActionPerformed(evt);
+            }
+        });
 
         btnStopServer.setText("Stop server");
+        btnStopServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopServerActionPerformed(evt);
+            }
+        });
 
         lblAuthenticatedEmployees.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblAuthenticatedEmployees.setText("Authenticated employees:");
@@ -117,6 +134,30 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartServerActionPerformed
+        try {
+            Controller.getInstance().startServer();
+            toggleStartStopButtons(false);
+        } catch (IOException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Start server error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnStartServerActionPerformed
+
+    private void btnStopServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopServerActionPerformed
+        try {
+            Controller.getInstance().stopServer();
+            toggleStartStopButtons(true);
+        } catch (IOException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this, ex.getMessage(), "Stop server error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnStopServerActionPerformed
+
+    private void toggleStartStopButtons(boolean signal){
+        btnStartServer.setEnabled(signal);
+        btnStopServer.setEnabled(!signal);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStartServer;
     private javax.swing.JButton btnStopServer;
