@@ -6,10 +6,12 @@
 package view.form;
 
 import controller.Controller;
+import domain.Employee;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.form.model.TableModelEmployee;
 
 /**
  *
@@ -23,6 +25,7 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm() {
         initComponents();
         toggleStartStopButtons(true);
+        prepareTable(); //TODO: This can be moved to some Form Controller!
     }
 
     /**
@@ -136,7 +139,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartServerActionPerformed
         try {
-            Controller.getInstance().startServer();
+            Controller.getInstance().startServer(this);
             toggleStartStopButtons(false);
         } catch (IOException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,11 +153,11 @@ public class MainForm extends javax.swing.JFrame {
             toggleStartStopButtons(true);
         } catch (IOException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-             JOptionPane.showMessageDialog(this, ex.getMessage(), "Stop server error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Stop server error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnStopServerActionPerformed
 
-    private void toggleStartStopButtons(boolean signal){
+    private void toggleStartStopButtons(boolean signal) {
         btnStartServer.setEnabled(signal);
         btnStopServer.setEnabled(!signal);
     }
@@ -171,4 +174,14 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemServerConfiguration;
     private javax.swing.JTable tblEmployees;
     // End of variables declaration//GEN-END:variables
+
+    private void prepareTable() {
+        TableModelEmployee tme = new TableModelEmployee();
+        tblEmployees.setModel(tme);
+    }
+    
+    public void addEmployee(Employee employee){
+        TableModelEmployee tme = (TableModelEmployee) tblEmployees.getModel();
+        tme.addEmployee(employee);
+    }
 }

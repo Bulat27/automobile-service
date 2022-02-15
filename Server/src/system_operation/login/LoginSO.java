@@ -19,8 +19,7 @@ public class LoginSO extends AbstractSO {
 
      //TODO: You can use GeneralDomainObject here once you make it. In fact, you can probaly put it in AbstractSO
     @Override
-    protected void precondition(Object param) {
-    }
+    protected void precondition(Object param) {}
 
     @Override
     protected void executeOperation(Object param) throws Exception {

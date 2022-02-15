@@ -10,6 +10,7 @@ import java.io.IOException;
 import system_operation.AbstractSO;
 import system_operation.login.LoginSO;
 import thread.ServerThread;
+import view.form.MainForm;
 
 /**
  *
@@ -30,10 +31,10 @@ public class Controller {
         return instance;
     }
 
-    public void startServer() throws IOException {
+    public void startServer(MainForm mainForm) throws IOException {
         if (serverThread == null || !serverThread.isAlive()) {
             
-            serverThread = new ServerThread();
+            serverThread = new ServerThread(mainForm);
             serverThread.start();
         }
     }

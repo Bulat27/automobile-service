@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.form.MainForm;
 
 /**
  *
@@ -28,11 +29,13 @@ public class ClientHandlerThread extends Thread {
     private Sender sender;
     private Receiver receiver;
     private Employee authenticatedEmployee;
+    private final MainForm mainForm;
 
-    public ClientHandlerThread(Socket socket) {
+    public ClientHandlerThread(Socket socket, MainForm mainForm) {
         this.socket = socket;
         this.sender = new Sender(socket);
         this.receiver = new Receiver(socket);
+        this.mainForm = mainForm;
     }
 
     @Override
@@ -74,6 +77,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(employee);
             this.authenticatedEmployee = employee;//TODO: Think about whether this is a good solution!
+            mainForm.addEmployee(employee);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);
