@@ -47,7 +47,7 @@ public class Controller {
         //return (Employee) loginSO.getResult();
         loginSO.execute(requestEmployee);
         
-        return loginSO.getEmployee();
+        return (Employee) loginSO.getResult();
     }
 
 }

@@ -7,6 +7,7 @@ package system_operation;
 
 import database.broker.DatabaseBroker;
 import database.broker.impl.DatabaseBrokerImpl;
+import domain.GeneralDObject;
 
 /**
  *
@@ -16,6 +17,7 @@ public abstract class AbstractSO {
     
     //TODO: Add a reference to a Database broker (if each SO needs it)
     protected final DatabaseBroker dbBroker;
+    protected GeneralDObject result;
 
     public AbstractSO() {
         dbBroker = new DatabaseBrokerImpl();

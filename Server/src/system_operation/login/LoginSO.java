@@ -17,8 +17,7 @@ import system_operation.AbstractSO;
  */
 public class LoginSO extends AbstractSO {
 
-    private Employee employee; //TODO: You can use GeneralDomainObject here once you make it. In fact, you can probaly put it in AbstractSO
-
+     //TODO: You can use GeneralDomainObject here once you make it. In fact, you can probaly put it in AbstractSO
     @Override
     protected void precondition(Object param) {
     }
@@ -33,15 +32,15 @@ public class LoginSO extends AbstractSO {
         for (GeneralDObject e : employees) {
             if (((Employee) e).getUsername().equals(employeeParam.getUsername())
                     && ((Employee) e).getPassword().equals(employeeParam.getPassword())) {
-                employee = (Employee) e;
+                result = e;
             }
         }
-        if (employee == null) {
+        if (result == null) {
             throw new Exception("Unknown employee!");
         }
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public GeneralDObject getResult() {
+        return result;
     }
 }
