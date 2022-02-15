@@ -41,4 +41,13 @@ public class Controller {
         }
         throw response.getException();
     }
+
+    public void logOut() throws Exception{
+        Request request = new Request(Operation.LOGIN, null);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.ERROR)) {
+            throw response.getException();
+        }
+    }
 }

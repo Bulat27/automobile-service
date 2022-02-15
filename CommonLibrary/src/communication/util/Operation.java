@@ -10,5 +10,6 @@ package communication.util;
  * @author Dragon
  */
 public enum Operation {
-    LOGIN   
+    LOGIN,
+    LOGOUT
 }

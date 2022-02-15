@@ -19,6 +19,8 @@ import view.form.model.TableModelEmployee;
  */
 public class MainForm extends javax.swing.JFrame {
 
+    private TableModelEmployee tme;
+    
     /**
      * Creates new form MainForm
      */
@@ -176,12 +178,15 @@ public class MainForm extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void prepareTable() {
-        TableModelEmployee tme = new TableModelEmployee();
+        tme = new TableModelEmployee();
         tblEmployees.setModel(tme);
     }
     
     public void addEmployee(Employee employee){
-        TableModelEmployee tme = (TableModelEmployee) tblEmployees.getModel();
         tme.addEmployee(employee);
+    }
+    
+    public void removeEmployee(Employee employee){
+        tme.removeEmployee(employee);
     }
 }

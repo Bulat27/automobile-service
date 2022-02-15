@@ -5,6 +5,13 @@
  */
 package view.form;
 
+import controller.Controller;
+import java.awt.event.WindowListener;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dragon
@@ -16,6 +23,7 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+//        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//TODO: You can add a listener and make it do the same as log out
     }
 
     /**
@@ -27,22 +35,71 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnLogOut = new javax.swing.JButton();
+        menuBarMain = new javax.swing.JMenuBar();
+        menuEmployee = new javax.swing.JMenu();
+        menuServiceBook = new javax.swing.JMenu();
+        menuService = new javax.swing.JMenu();
+        menuRepair = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnLogOut.setText("Log out");
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogOutActionPerformed(evt);
+            }
+        });
+
+        menuEmployee.setText("Employee");
+        menuBarMain.add(menuEmployee);
+
+        menuServiceBook.setText("Service book");
+        menuBarMain.add(menuServiceBook);
+
+        menuService.setText("Service");
+        menuBarMain.add(menuService);
+
+        menuRepair.setText("Repair");
+        menuBarMain.add(menuRepair);
+
+        setJMenuBar(menuBarMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(197, 197, 197)
+                .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(303, Short.MAX_VALUE)
+                .addComponent(btnLogOut)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+//        try {
+//            Controller.getInstance().logOut();
+//        } catch (Exception ex) {
+//            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);  
+//        }
+        this.dispose();//Dispose even if there is an error on the server side. The client doesn't care about that!
+    }//GEN-LAST:event_btnLogOutActionPerformed
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogOut;
+    private javax.swing.JMenuBar menuBarMain;
+    private javax.swing.JMenu menuEmployee;
+    private javax.swing.JMenu menuRepair;
+    private javax.swing.JMenu menuService;
+    private javax.swing.JMenu menuServiceBook;
     // End of variables declaration//GEN-END:variables
 }

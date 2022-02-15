@@ -51,6 +51,8 @@ public class ClientHandlerThread extends Thread {
         } catch (Exception ex) {
             Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);//TODO: Don't just log it, find a way to notify the
             //user of what happened.
+            mainForm.removeEmployee(authenticatedEmployee);//TODO: You could also remove this ClientHandlerThread from the list!
+            
         }
     }
 
@@ -60,6 +62,8 @@ public class ClientHandlerThread extends Thread {
         switch (operation) {
             case LOGIN:
                 return login(request);
+//            case LOGOUT:
+//                return logout(request);    
             default:
                 return null;//TODO: Maybe throw an Exception or something, not the best idea to return null
         }
@@ -71,13 +75,12 @@ public class ClientHandlerThread extends Thread {
         Employee requestEmployee = (Employee) request.getArgument();
 
         try {
-            //proveri da li korisnik postoji u sistemu
             Employee employee = Controller.getInstance().login(requestEmployee);
             System.out.println("Successful authentication!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(employee);
             this.authenticatedEmployee = employee;//TODO: Think about whether this is a good solution!
-            mainForm.addEmployee(employee);
+            mainForm.addEmployee(authenticatedEmployee);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);
@@ -91,4 +94,23 @@ public class ClientHandlerThread extends Thread {
             socket.close();
         }
     }
+
+//    private Response logout(Request request) {
+//        Response response = new Response();
+//        
+////        try {       
+////            Employee employee = Controller.getInstance().login(requestEmployee);
+////            System.out.println("Successful authentication!");
+////            response.setResponseType(ResponseType.SUCCESS);
+////            response.setResult(employee);
+////            this.authenticatedEmployee = employee;//TODO: Think about whether this is a good solution!
+////            mainForm.addEmployee(employee);
+////        } catch (Exception ex) {
+////            ex.printStackTrace();//TODO: Delete this!
+////            response.setResponseType(ResponseType.ERROR);
+////            response.setException(ex);
+////        }
+//        
+//        return response;
+//    }
 }

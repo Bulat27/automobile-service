@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  *
@@ -123,5 +124,27 @@ public class Employee implements GeneralDObject{
     @Override
     public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
         return new Employee(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getInt("admin_status") == 1, rs.getBigDecimal("hourly_rate"), rs.getDate("date_of_employment").toLocalDate(), rs.getString("username"), rs.getString("password"));
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.employeeID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {//TODO: You can also use username here once it is unique!
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Employee other = (Employee) obj;
+        return true;
     }
 }

@@ -65,8 +65,8 @@ public class TableModelEmployee extends AbstractTableModel {
         fireTableRowsInserted(employees.size() - 1, employees.size() - 1);//TODO: Make sure this suffices
     }
 
-    public void removeEmployee(int row) {
-        employees.remove(row);
+    public void removeEmployee(Employee employee) {
+        employees.remove(employee);
         fireTableDataChanged();
     }
 

@@ -47,7 +47,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         lblPassword.setText("Password:");
 
-        btnLogin.setText("Login");
+        btnLogin.setText("Log in");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
