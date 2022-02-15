@@ -6,13 +6,15 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 /**
  *
  * @author Dragon
  */
-public class ServiceBook implements Serializable{
+public class ServiceBook implements GeneralDObject{
     
     private Long serviceBookID;
     private String clientFirstName;
@@ -79,5 +81,15 @@ public class ServiceBook implements Serializable{
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String getTableName() {
+        return "service_book";
+    }
+
+    @Override
+    public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

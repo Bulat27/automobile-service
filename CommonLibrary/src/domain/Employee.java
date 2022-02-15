@@ -7,13 +7,15 @@ package domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 /**
  *
  * @author Dragon
  */
-public class Employee implements Serializable{
+public class Employee implements GeneralDObject{
     
     private Long employeeID;
     private String firstName;
@@ -111,5 +113,15 @@ public class Employee implements Serializable{
      @Override
     public String toString() {
         return firstName + " " + lastName;
+    }
+
+    @Override
+    public String getTableName() {
+        return "employee";
+    }
+
+    @Override
+    public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
+        return new Employee(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getInt("admin_status") == 1, rs.getBigDecimal("hourly_rate"), rs.getDate("date_of_employment").toLocalDate(), rs.getString("username"), rs.getString("password"));
     }
 }

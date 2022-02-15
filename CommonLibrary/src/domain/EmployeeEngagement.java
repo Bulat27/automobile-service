@@ -6,12 +6,14 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author Dragon
  */
-public class EmployeeEngagement implements Serializable{
+public class EmployeeEngagement implements GeneralDObject{
     
     private Employee employee;
     private RepairItem repairItem;
@@ -47,5 +49,15 @@ public class EmployeeEngagement implements Serializable{
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public String getTableName() {
+        return "employee_engagement";
+    }
+
+    @Override
+    public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

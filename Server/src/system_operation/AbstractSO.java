@@ -5,6 +5,9 @@
  */
 package system_operation;
 
+import database.broker.DatabaseBroker;
+import database.broker.impl.DatabaseBrokerImpl;
+
 /**
  *
  * @author Dragon
@@ -12,6 +15,12 @@ package system_operation;
 public abstract class AbstractSO {
     
     //TODO: Add a reference to a Database broker (if each SO needs it)
+    protected final DatabaseBroker dbBroker;
+
+    public AbstractSO() {
+        dbBroker = new DatabaseBrokerImpl();
+    }
+    
      public void execute(Object param) throws Exception {
         try {
             precondition(param);
@@ -33,20 +42,20 @@ public abstract class AbstractSO {
     protected abstract void executeOperation(Object param) throws Exception;
      
     //TODO: Implement these when you implement the Database broker!
-    private void startTransaction() {
-        
+    private void startTransaction() throws Exception {
+        dbBroker.connect();
     }
 
-    private void commitTransaction() {
-        
+    private void commitTransaction() throws Exception {
+        dbBroker.commitTransaction();
     }
 
-    private void rollbackTransaction() {
-        
+    private void rollbackTransaction() throws Exception {
+        dbBroker.rollbackTransaction();
     }
 
-    private void closeConnection() {
-       
+    private void closeConnection() throws Exception {
+       dbBroker.closeConnection();
     }
      
      

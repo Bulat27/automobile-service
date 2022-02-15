@@ -7,13 +7,15 @@ package domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 /**
  *
  * @author Dragon
  */
-public class RepairItem implements Serializable{
+public class RepairItem implements GeneralDObject{
     
     private Repair repair;
     private Integer orderNumber;
@@ -110,4 +112,14 @@ public class RepairItem implements Serializable{
     public void setService(Service service) {
         this.service = service;
     }  
+
+    @Override
+    public String getTableName() {
+        return "repair_item";
+    }
+
+    @Override
+    public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

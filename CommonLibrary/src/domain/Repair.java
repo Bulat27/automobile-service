@@ -7,12 +7,14 @@ package domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author Dragon
  */
-public class Repair implements Serializable {
+public class Repair implements GeneralDObject {
 
     private Long repairID;
     private BigDecimal totalRevenue;
@@ -58,5 +60,15 @@ public class Repair implements Serializable {
 
     public void setServiceBook(ServiceBook serviceBook) {
         this.serviceBook = serviceBook;
+    }
+
+    @Override
+    public String getTableName() {
+        return "repair";
+    }
+
+    @Override
+    public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

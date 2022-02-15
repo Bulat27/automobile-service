@@ -25,8 +25,8 @@ public class Receiver {
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             return in.readObject();
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Obrisi ovo!
-            throw new Exception("Error receiving object:" + ex.getMessage());
+            ex.printStackTrace();//TODO: Delete this!
+            throw new Exception("Error receiving object:" + ex.getMessage());//TODO: Find a way to close the Stream without closing the socket!
         }
     }
 }

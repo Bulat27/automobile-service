@@ -6,6 +6,7 @@
 package system_operation.login;
 
 import domain.Employee;
+import domain.GeneralDObject;
 import java.util.ArrayList;
 import java.util.List;
 import system_operation.AbstractSO;
@@ -14,33 +15,30 @@ import system_operation.AbstractSO;
  *
  * @author Dragon
  */
-public class LoginSO extends AbstractSO{
-    
+public class LoginSO extends AbstractSO {
+
     private Employee employee; //TODO: You can use GeneralDomainObject here once you make it. In fact, you can probaly put it in AbstractSO
 
     @Override
     protected void precondition(Object param) {
-        
     }
 
     @Override
-    protected void executeOperation(Object param) throws Exception{
-        
-            //List<Employee> employees = storageUser.getAll();//TODO: Do this in a broker!
-            List<Employee> employees = new ArrayList<>();
-            Employee e3 = new Employee("bbr", "bbr");
-            e3.setFirstName("bbr");
-            employees.add(new Employee("nikola", "nikola"));
-            employees.add(new Employee("nikola27", "nikola27"));
-            employees.add(e3);
-            Employee employeeParam = (Employee) param;
-            
-            for (Employee e : employees) {
-                if (e.getUsername().equals(employeeParam.getUsername()) && e.getPassword().equals(employeeParam.getPassword())) {
-                    employee = e;
-                }
+    protected void executeOperation(Object param) throws Exception {
+
+        List<GeneralDObject> employees = dbBroker.findRecords(new Employee());
+
+        Employee employeeParam = (Employee) param;
+
+        for (GeneralDObject e : employees) {
+            if (((Employee) e).getUsername().equals(employeeParam.getUsername())
+                    && ((Employee) e).getPassword().equals(employeeParam.getPassword())) {
+                employee = (Employee) e;
             }
-            if(employee == null) throw new Exception("Unknown employee!");
+        }
+        if (employee == null) {
+            throw new Exception("Unknown employee!");
+        }
     }
 
     public Employee getEmployee() {
