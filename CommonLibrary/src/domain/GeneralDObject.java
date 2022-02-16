@@ -6,6 +6,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,6 +16,9 @@ import java.sql.SQLException;
  */
 public interface GeneralDObject extends Serializable{
     
-    public String getTableName();
-    public GeneralDObject getNewRecord(ResultSet rs) throws SQLException;
+    String getTableName();
+    GeneralDObject getNewRecord(ResultSet rs) throws SQLException;
+    String getInsertionColumns();
+    String getAtrPlaceHolders();
+    void setPreparedStatementParameters(PreparedStatement ps) throws SQLException;
 }

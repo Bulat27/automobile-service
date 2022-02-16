@@ -5,8 +5,8 @@
  */
 package domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -32,6 +32,13 @@ public class Service implements GeneralDObject {
         this.materialCost = materialCost;
     }
 
+    public Service(BigDecimal price, String name, String description, BigDecimal materialCost) {
+        this.price = price;
+        this.name = name;
+        this.description = description;
+        this.materialCost = materialCost;
+    }
+    
     public Long getServiceID() {
         return serviceID;
     }
@@ -85,5 +92,23 @@ public class Service implements GeneralDObject {
     @Override
     public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getInsertionColumns() {
+        return "price, name, description, material_cost";
+    }
+
+    @Override
+    public String getAtrPlaceHolders() {
+        return "? , ? , ?, ?";
+    }
+
+    @Override
+    public void setPreparedStatementParameters(PreparedStatement ps) throws SQLException{
+        ps.setBigDecimal(1, price);
+        ps.setString(2, name);
+        ps.setString(3, description);
+        ps.setBigDecimal(4, materialCost);
     }
 }

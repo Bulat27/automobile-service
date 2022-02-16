@@ -9,6 +9,7 @@ import repository.database.broker.DatabaseBroker;
 import repository.database.connection.DBConnectionFactory;
 import domain.GeneralDObject;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -54,6 +55,39 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
                 listGDO.add(gdo.getNewRecord(rs));
             }
             return listGDO;
+        }
+    }
+
+    @Override
+    public void insertRecord(GeneralDObject gdo) throws Exception {
+        String query = "INSERT INTO " + gdo.getTableName() + "(" + gdo.getInsertionColumns() + ") VALUES(" + gdo.getAtrPlaceHolders() + ")";
+        executePreparedUpdate(query, gdo);
+    }
+    
+//     public boolean executeUpdate(String upit) {
+//        Statement st = null;
+//        boolean signal = false;
+//        try {
+//            st = conn.createStatement();
+//            int rowcount = st.executeUpdate(upit);
+//            if (rowcount > 0) {
+//                signal = true;
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(BrokerBazePodataka1.class.getName()).log(Level.SEVERE, null, ex);
+//            signal = false;
+//        } finally {
+//            close(null, st, null);
+//        }
+//        return signal;
+//    }
+    
+    //Works for INSERT and UPDATE, not for delete
+    public void executePreparedUpdate(String query, GeneralDObject gdo) throws Exception{
+        try(PreparedStatement ps = connection.prepareStatement(query)){
+            gdo.setPreparedStatementParameters(ps);
+            int rowCount = ps.executeUpdate();
+            if(rowCount <= 0) throw new Exception("No rows affected, failed insert or update");
         }
     }
 }

@@ -15,4 +15,5 @@ import java.util.List;
 public interface Repository<T> {
     
      public List<T> findRecords(T t) throws Exception;
+     public void insertRecord(T t) throws Exception;
 }

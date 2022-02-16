@@ -6,9 +6,11 @@
 package controller;
 
 import domain.Employee;
+import domain.Service;
 import java.io.IOException;
 import system_operation.AbstractSO;
 import system_operation.login.LoginSO;
+import system_operation.service.SaveServiceSO;
 import thread.ServerThread;
 import view.form.MainForm;
 
@@ -49,6 +51,11 @@ public class Controller {
         loginSO.execute(requestEmployee);
         
         return (Employee) loginSO.getResult();
+    }
+
+    public void saveService(Service service) throws Exception{
+        SaveServiceSO saveServiceSO = new SaveServiceSO();
+        saveServiceSO.execute(service);
     }
 
 }

@@ -40,7 +40,7 @@ public abstract class AbstractSO {
         }
     }
 
-    protected abstract void precondition(Object param);
+    protected abstract void precondition(Object param) throws Exception;
 
     protected abstract void executeOperation(Object param) throws Exception;
 

@@ -11,5 +11,6 @@ package communication.util;
  */
 public enum Operation {
     LOGIN,
-    LOGOUT
+    LOGOUT,
+    SAVE_SERVICE
 }

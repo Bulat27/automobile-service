@@ -5,8 +5,8 @@
  */
 package domain;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -146,5 +146,20 @@ public class Employee implements GeneralDObject{
         }
         final Employee other = (Employee) obj;
         return true;
+    }
+
+    @Override
+    public String getInsertionColumns() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getAtrPlaceHolders() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setPreparedStatementParameters(PreparedStatement ps) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

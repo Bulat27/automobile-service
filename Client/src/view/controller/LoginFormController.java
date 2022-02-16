@@ -5,12 +5,10 @@
  */
 package view.controller;
 
-import controller.Controller;
+import controller.EmployeeController;
 import domain.Employee;
-import javax.swing.JOptionPane;
 import view.coordinator.Coordinator;
 import view.form.LoginForm;
-import view.form.MainForm;
 
 /**
  *
@@ -34,10 +32,10 @@ public class LoginFormController {
 //
 //            Employee requestEmployee = new Employee(username, String.valueOf(password));
 //            
-//            Employee employee = Controller.getInstance().login(requestEmployee);
+//            Employee employee = EmployeeController.getInstance().login(requestEmployee);
 //            JOptionPane.showMessageDialog(loginForm, "Welcome, " + employee.getFirstName());
 //            loginForm.dispose();
-////            Controller.getInstance().setCurrentUser(employee);//TODO: Consider saving it on the client and server side or just the server side! 
+////            EmployeeController.getInstance().setCurrentUser(employee);//TODO: Consider saving it on the client and server side or just the server side! 
 //            new MainForm().setVisible(true);
 //        } catch (Exception ex) {
 //            ex.printStackTrace();//TODO: Delete this!
@@ -51,16 +49,16 @@ public class LoginFormController {
 
             Employee requestEmployee = new Employee(username, String.valueOf(password));
             
-            Employee employee = Controller.getInstance().login(requestEmployee);
+            Employee employee = EmployeeController.getInstance().login(requestEmployee);
 //            loginForm.dispose();
-//            Controller.getInstance().setCurrentUser(employee);//TODO: Consider saving it on the client and server side or just the server side! 
+//            EmployeeController.getInstance().setCurrentUser(employee);//TODO: Consider saving it on the client and server side or just the server side! 
 //            new MainForm().setVisible(true);
             
             return employee;
     }
 
     public void coordinateForms() {
-        Coordinator.getInstance().closeLoginForm();
+        closeForm();
         Coordinator.getInstance().openMainForm();
     }
 

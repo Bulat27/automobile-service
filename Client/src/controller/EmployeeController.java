@@ -16,16 +16,16 @@ import domain.Employee;
  *
  * @author Dragon
  */
-public class Controller {
+public class EmployeeController {
 
-    private static Controller instance;
+    private static EmployeeController instance;
 
-    private Controller() {
+    private EmployeeController() {
     }
 
-    public static Controller getInstance() {
+    public static EmployeeController getInstance() {
         if (instance == null) {
-            instance = new Controller();
+            instance = new EmployeeController();
         }
         return instance;
     }
@@ -40,12 +40,12 @@ public class Controller {
         throw response.getException();
     }
 
-    public void logOut() throws Exception {
-        Request request = new Request(Operation.LOGIN, null);
-        Response response = Communication.getInstance().sendRequest(request);
-
-        if (response.getResponseType().equals(ResponseType.ERROR)) {
-            throw response.getException();
-        }
-    }
+//    public void logOut() throws Exception {
+//        Request request = new Request(Operation.LOGIN, null);
+//        Response response = Communication.getInstance().sendRequest(request);
+//
+//        if (response.getResponseType().equals(ResponseType.ERROR)) {
+//            throw response.getException();
+//        }
+//    }
 }

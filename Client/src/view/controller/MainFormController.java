@@ -5,6 +5,7 @@
  */
 package view.controller;
 
+import view.coordinator.Coordinator;
 import view.form.MainForm;
 
 /**
@@ -25,5 +26,13 @@ public class MainFormController {
 
     public void closeForm() {
         mainForm.dispose();
+    }
+
+    public void openFormAddService() {
+        Coordinator.getInstance().openAddServiceForm();
+    }
+
+    public MainForm getMainForm() {
+        return mainForm;
     }
 }

@@ -13,6 +13,7 @@ import communication.util.Operation;
 import communication.util.ResponseType;
 import controller.Controller;
 import domain.Employee;
+import domain.Service;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -52,7 +53,7 @@ public class ClientHandlerThread extends Thread {
             Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);//TODO: Don't just log it, find a way to notify the
             //user of what happened.
             mainForm.removeEmployee(authenticatedEmployee);//TODO: You could also remove this ClientHandlerThread from the list!
-            
+
         }
     }
 
@@ -62,6 +63,8 @@ public class ClientHandlerThread extends Thread {
         switch (operation) {
             case LOGIN:
                 return login(request);
+            case SAVE_SERVICE:
+                return saveService(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -99,7 +102,7 @@ public class ClientHandlerThread extends Thread {
 //        Response response = new Response();
 //        
 ////        try {       
-////            Employee employee = Controller.getInstance().login(requestEmployee);
+////            Employee employee = Controller.getInstance().login(service);
 ////            System.out.println("Successful authentication!");
 ////            response.setResponseType(ResponseType.SUCCESS);
 ////            response.setResult(employee);
@@ -113,4 +116,20 @@ public class ClientHandlerThread extends Thread {
 //        
 //        return response;
 //    }
+    private Response saveService(Request request) {
+        Response response = new Response();
+
+        Service service = (Service) request.getArgument();
+
+        try {
+            Controller.getInstance().saveService(service);
+            System.out.println("Successfully saved Service!");
+            response.setResponseType(ResponseType.SUCCESS);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
 }
