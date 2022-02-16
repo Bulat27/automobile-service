@@ -7,6 +7,7 @@ package communication;
 
 import java.io.IOException;
 import java.net.Socket;
+import view.coordinator.Coordinator;
 import view.form.LoginForm;
 
 /**
@@ -38,7 +39,8 @@ public class Communication {
         sender = new Sender(socket);
         receiver = new Receiver(socket);
         connected = true;
-        new LoginForm().setVisible(true);//TODO: This can be done by some Coordinator or something, we will se about that!
+//        new LoginForm().setVisible(true);//TODO: This can be done by some Coordinator or something, we will se about that!
+        Coordinator.getInstance().openLoginForm();
     }
 
     public Response sendRequest(Request request) throws Exception  {

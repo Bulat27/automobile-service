@@ -7,7 +7,12 @@ package view.form;
 
 import controller.Controller;
 import domain.Employee;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import view.controller.LoginFormController;
 
 /**
  *
@@ -15,13 +20,17 @@ import javax.swing.JOptionPane;
  */
 public class LoginForm extends javax.swing.JFrame {
 
+    private final LoginFormController loginController;
+
     /**
      * Creates new form FrmLogin
+     *
+     * @param loginController
      */
     //private Controller controller;
-
-    public LoginForm() {
+    public LoginForm(LoginFormController loginController) {
         initComponents();
+        this.loginController = loginController;
         //this.controller = new Controller();
     }
 
@@ -95,19 +104,14 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {//TODO: Very important! Each form should have a FormController. Also, you need a Coordinator to coordinate all the forms and their Controllers!
-            validateForm();
-
-            Employee employee = Controller.getInstance().login(txtUsername.getText().trim(), String.valueOf(txtPassword.getPassword()));
+        try {
+            Employee employee = loginController.logIn(txtUsername.getText().trim(), txtPassword.getPassword());
             JOptionPane.showMessageDialog(this, "Welcome, " + employee.getFirstName());
-            this.dispose();
-//            Controller.getInstance().setCurrentUser(employee);//TODO: Consider saving it on the client and server side or just the server side! 
-            new MainForm().setVisible(true);
+            loginController.coordinateForms();
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Login Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
 
@@ -119,7 +123,7 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void validateForm() throws Exception {//TODO: Make a Validator for this!
+    public void validateForm() throws Exception {//TODO: Make a Validator for this!
         String errorMessage = "";
         if (txtUsername.getText().isEmpty()) {
             errorMessage += "Username cannot be empty!\n";

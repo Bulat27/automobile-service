@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.controller.MainFormController;
 
 /**
  *
@@ -18,11 +19,15 @@ import javax.swing.JOptionPane;
  */
 public class MainForm extends javax.swing.JFrame {
 
+    private MainFormController mainFormController;
+            
     /**
      * Creates new form MainForm
+     * @param mainFormController
      */
-    public MainForm() {
+    public MainForm(MainFormController mainFormController) {
         initComponents();
+        this.mainFormController = mainFormController;
 //        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);//TODO: You can add a listener and make it do the same as log out
     }
 

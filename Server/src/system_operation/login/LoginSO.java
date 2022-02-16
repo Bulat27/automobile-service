@@ -7,7 +7,6 @@ package system_operation.login;
 
 import domain.Employee;
 import domain.GeneralDObject;
-import java.util.ArrayList;
 import java.util.List;
 import system_operation.AbstractSO;
 
