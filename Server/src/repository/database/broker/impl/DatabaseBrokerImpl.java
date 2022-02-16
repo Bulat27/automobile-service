@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database.broker.impl;
+package repository.database.broker.impl;
 
-import database.broker.DatabaseBroker;
-import database.connection.DBConnectionFactory;
+import repository.database.broker.DatabaseBroker;
+import repository.database.connection.DBConnectionFactory;
 import domain.GeneralDObject;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Dragon
  */
-public class DatabaseBrokerImpl extends DatabaseBroker {
+public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
 
     private Connection connection;
 
@@ -56,5 +56,4 @@ public class DatabaseBrokerImpl extends DatabaseBroker {
             return listGDO;
         }
     }
-
 }

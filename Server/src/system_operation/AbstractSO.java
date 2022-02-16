@@ -5,25 +5,26 @@
  */
 package system_operation;
 
-import database.broker.DatabaseBroker;
-import database.broker.impl.DatabaseBrokerImpl;
+import repository.database.broker.DatabaseBroker;
+import repository.database.broker.impl.DatabaseBrokerImpl;
 import domain.GeneralDObject;
+import repository.Repository;
 
 /**
  *
  * @author Dragon
  */
 public abstract class AbstractSO {
-    
+
     //TODO: Add a reference to a Database broker (if each SO needs it)
-    protected final DatabaseBroker dbBroker;
+    protected final Repository repository;
     protected GeneralDObject result;
 
     public AbstractSO() {
-        dbBroker = new DatabaseBrokerImpl();
+        repository = new DatabaseBrokerImpl();
     }
-    
-     public void execute(Object param) throws Exception {
+
+    public void execute(Object param) throws Exception {
         try {
             precondition(param);
             startTransaction();
@@ -34,31 +35,29 @@ public abstract class AbstractSO {
             System.out.println("Unsuccessful operation!");
             rollbackTransaction();
             throw ex;
-        }finally{
+        } finally {
             closeConnection();//TODO: Check whether you have to close it each time?
         }
     }
 
     protected abstract void precondition(Object param);
-    
+
     protected abstract void executeOperation(Object param) throws Exception;
-     
+
     //TODO: Implement these when you implement the Database broker!
     private void startTransaction() throws Exception {
-        dbBroker.connect();
+        ((DatabaseBroker) repository).connect();
     }
 
     private void commitTransaction() throws Exception {
-        dbBroker.commitTransaction();
+        ((DatabaseBroker) repository).commitTransaction();
     }
 
     private void rollbackTransaction() throws Exception {
-        dbBroker.rollbackTransaction();
+        ((DatabaseBroker) repository).rollbackTransaction();
     }
 
     private void closeConnection() throws Exception {
-       dbBroker.closeConnection();
+        ((DatabaseBroker) repository).closeConnection();
     }
-     
-     
 }

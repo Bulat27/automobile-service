@@ -17,14 +17,15 @@ import system_operation.AbstractSO;
  */
 public class LoginSO extends AbstractSO {
 
-     //TODO: You can use GeneralDomainObject here once you make it. In fact, you can probaly put it in AbstractSO
+    //TODO: You can use GeneralDomainObject here once you make it. In fact, you can probaly put it in AbstractSO
     @Override
-    protected void precondition(Object param) {}
+    protected void precondition(Object param) {
+    }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
 
-        List<GeneralDObject> employees = dbBroker.findRecords(new Employee());
+        List<GeneralDObject> employees = repository.findRecords(new Employee());
 
         Employee employeeParam = (Employee) param;
 
