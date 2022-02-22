@@ -28,8 +28,12 @@ public class MainFormController {
         mainForm.dispose();
     }
 
-    public void openFormAddService() {
+    public void openAddServiceForm() {
         Coordinator.getInstance().openAddServiceForm();
+    }
+    
+    public void openShowServicesForm() throws Exception{
+        Coordinator.getInstance().openShowServicesForm();
     }
 
     public MainForm getMainForm() {

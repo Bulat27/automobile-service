@@ -12,19 +12,19 @@ import system_operation.AbstractSO;
  *
  * @author Dragon
  */
-public class SaveServiceSO extends AbstractSO{
+public class GetAllServicesSO extends AbstractSO{
 
     @Override
     protected void precondition(Object param) throws Exception {
-        if(param == null || !(param instanceof Service)){
-            throw new Exception("Invalid parameter");//TODO: This can be generalized
-        }
-        //TODO: Add validator!
+        //TODO: Add validator if neccessary
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        repository.insertRecord(param);//TODO: CHECK OUT WHY THIS WORKS WITHOUT CASTING! GENERICS|!
+        result = repository.findRecords(new Service());
     }
-    
+
+    public Object getResult() {
+        return result;
+    } 
 }

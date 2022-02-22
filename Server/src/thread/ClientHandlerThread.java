@@ -16,6 +16,7 @@ import domain.Employee;
 import domain.Service;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.form.MainForm;
@@ -65,6 +66,8 @@ public class ClientHandlerThread extends Thread {
                 return login(request);
             case SAVE_SERVICE:
                 return saveService(request);
+            case GET_ALL_SERVICES:
+                return getAllServices(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -125,6 +128,22 @@ public class ClientHandlerThread extends Thread {
             Controller.getInstance().saveService(service);
             System.out.println("Successfully saved Service!");
             response.setResponseType(ResponseType.SUCCESS);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response getAllServices(Request request) {
+        Response response = new Response();
+
+        try {
+            List<Service> services = Controller.getInstance().getAllServices();
+            System.out.println("Successful retrieval of services!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(services);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

@@ -71,11 +71,11 @@ public class Service implements GeneralDObject {
         this.description = description;
     }
 
-    public BigDecimal getCostOfMaterials() {
+    public BigDecimal getMaterialCost() {
         return materialCost;
     }
 
-    public void setCostOfMaterials(BigDecimal materialCost) {
+    public void setMaterialCost(BigDecimal materialCost) {
         this.materialCost = materialCost;
     }
 
@@ -91,7 +91,7 @@ public class Service implements GeneralDObject {
 
     @Override
     public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Service(rs.getLong("id"), rs.getBigDecimal("price"), rs.getString("name"), rs.getString("description"), rs.getBigDecimal("material_cost"));
     }
 
     @Override

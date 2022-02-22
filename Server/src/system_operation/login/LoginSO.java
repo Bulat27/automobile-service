@@ -57,7 +57,7 @@ public class LoginSO extends AbstractSO {
 //        }
 //    }
 
-    public GeneralDObject getResult() {
+    public Object getResult() {
         return result;
     }
 }

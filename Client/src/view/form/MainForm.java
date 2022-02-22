@@ -5,6 +5,9 @@
  */
 package view.form;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.controller.MainFormController;
 
 /**
@@ -90,6 +93,11 @@ public class MainForm extends javax.swing.JFrame {
         menuService.add(menuItemAddService);
 
         menuItemSearchServices.setText("Search");
+        menuItemSearchServices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSearchServicesActionPerformed(evt);
+            }
+        });
         menuService.add(menuItemSearchServices);
 
         menuBarMain.add(menuService);
@@ -137,8 +145,17 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void menuItemAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddServiceActionPerformed
-        mainFormController.openFormAddService();
+        mainFormController.openAddServiceForm();
     }//GEN-LAST:event_menuItemAddServiceActionPerformed
+
+    private void menuItemSearchServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSearchServicesActionPerformed
+        try {
+            mainFormController.openShowServicesForm();
+        } catch (Exception ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error opening show services form: " + ex.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_menuItemSearchServicesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;

@@ -8,7 +8,6 @@ package communication;
 import java.io.IOException;
 import java.net.Socket;
 import view.coordinator.Coordinator;
-import view.form.LoginForm;
 
 /**
  *
@@ -21,6 +20,7 @@ public class Communication {
     private Sender sender;
     private Receiver receiver;
     private boolean connected = false;
+    //TODO: Add the authenticated client on the client side!
 
     private Communication() {
     }

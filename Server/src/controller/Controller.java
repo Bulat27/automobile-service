@@ -8,8 +8,10 @@ package controller;
 import domain.Employee;
 import domain.Service;
 import java.io.IOException;
+import java.util.List;
 import system_operation.AbstractSO;
 import system_operation.login.LoginSO;
+import system_operation.service.GetAllServicesSO;
 import system_operation.service.SaveServiceSO;
 import thread.ServerThread;
 import view.form.MainForm;
@@ -56,6 +58,13 @@ public class Controller {
     public void saveService(Service service) throws Exception{
         SaveServiceSO saveServiceSO = new SaveServiceSO();
         saveServiceSO.execute(service);
+    }
+
+    public List<Service> getAllServices() throws Exception{
+        GetAllServicesSO getAllServicesSO = new GetAllServicesSO();
+        getAllServicesSO.execute(null);
+        
+        return (List<Service>) getAllServicesSO.getResult();
     }
 
 }

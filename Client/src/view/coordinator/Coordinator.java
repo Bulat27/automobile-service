@@ -8,6 +8,7 @@ package view.coordinator;
 import view.controller.AddServiceFormController;
 import view.controller.LoginFormController;
 import view.controller.MainFormController;
+import view.controller.ShowServicesFormController;
 import view.form.MainForm;
 
 /**
@@ -21,6 +22,7 @@ public class Coordinator {
     private LoginFormController loginController;
     private MainFormController mainFormController;
     private AddServiceFormController addServiceFormController;
+    private ShowServicesFormController showServicesFormController;
 
     private Coordinator() {}
 
@@ -52,5 +54,10 @@ public class Coordinator {
     
     public MainForm getMainForm(){
         return mainFormController.getMainForm();
+    }
+    
+    public void openShowServicesForm() throws Exception{
+        showServicesFormController = new ShowServicesFormController();
+        showServicesFormController.openForm();
     }
 }

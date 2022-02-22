@@ -11,6 +11,7 @@ import communication.Response;
 import communication.util.Operation;
 import communication.util.ResponseType;
 import domain.Service;
+import java.util.List;
 
 /**
  *
@@ -39,4 +40,13 @@ public class ServiceController {
         }
     }
 
+    public List<Service> getAllServices() throws Exception {
+        Request request = new Request(Operation.GET_ALL_SERVICES, null);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.SUCCESS)) {
+            return (List<Service>) response.getResult();
+        }
+        throw response.getException();
+    }
 }
