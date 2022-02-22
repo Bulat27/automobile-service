@@ -39,4 +39,13 @@ public class ShowServicesFormController {
         
         showServicesForm.setTableServicesModel(tms);
     }
+
+    public void delete(int selectedRow) throws Exception {
+        TableModelServices tms = (TableModelServices) showServicesForm.getTblServices().getModel();
+        Service service = tms.getService(selectedRow);
+        
+        ServiceController.getInstance().deleteService(service);
+        
+        tms.removeService(selectedRow);
+    }
 }

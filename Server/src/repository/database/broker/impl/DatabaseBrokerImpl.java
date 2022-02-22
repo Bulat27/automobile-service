@@ -61,9 +61,9 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
     @Override
     public void insertRecord(GeneralDObject gdo) throws Exception {
         String query = "INSERT INTO " + gdo.getTableName() + "(" + gdo.getInsertionColumns() + ") VALUES(" + gdo.getAtrPlaceHolders() + ")";
-        executePreparedUpdate(query, gdo);
+        executePreparedStatementUpdate(query, gdo);
     }
-    
+
 //     public boolean executeUpdate(String upit) {
 //        Statement st = null;
 //        boolean signal = false;
@@ -81,13 +81,26 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
 //        }
 //        return signal;
 //    }
-    
     //Works for INSERT and UPDATE, not for delete
-    public void executePreparedUpdate(String query, GeneralDObject gdo) throws Exception{
-        try(PreparedStatement ps = connection.prepareStatement(query)){
+    public void executePreparedStatementUpdate(String query, GeneralDObject gdo) throws Exception {
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
             gdo.setPreparedStatementParameters(ps);
             int rowCount = ps.executeUpdate();
-            if(rowCount <= 0) throw new Exception("No rows affected, failed insert or update");
+            if (rowCount <= 0) {
+                throw new Exception("No rows affected, failed insert or update");
+            }
+        }
+    }
+
+    @Override
+    public void deleteRecord(GeneralDObject gdo) throws Exception {
+        String query = "DELETE FROM " + gdo.getTableName() + " WHERE " + gdo.getWherePKCondition();
+        //TODO: Maybe add execute NonPreparedUpdate
+        try (Statement st = connection.createStatement();) {
+            int rowCount = st.executeUpdate(query);
+            if (rowCount <= 0) {
+                throw new Exception("No rows affected, failed delete");
+            }
         }
     }
 }

@@ -162,4 +162,9 @@ public class Employee implements GeneralDObject{
     public void setPreparedStatementParameters(PreparedStatement ps) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getWherePKCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

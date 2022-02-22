@@ -111,4 +111,9 @@ public class Service implements GeneralDObject {
         ps.setString(3, description);
         ps.setBigDecimal(4, materialCost);
     }
+
+    @Override
+    public String getWherePKCondition() {
+        return "id = " + serviceID;
+    }
 }

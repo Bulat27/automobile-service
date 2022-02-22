@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import system_operation.AbstractSO;
 import system_operation.login.LoginSO;
+import system_operation.service.DeleteServiceSO;
 import system_operation.service.GetAllServicesSO;
 import system_operation.service.SaveServiceSO;
 import thread.ServerThread;
@@ -67,4 +68,8 @@ public class Controller {
         return (List<Service>) getAllServicesSO.getResult();
     }
 
+    public void deleteService(Service service) throws Exception{
+        DeleteServiceSO deleteServiceSO = new DeleteServiceSO();
+        deleteServiceSO.execute(service);
+    }
 }

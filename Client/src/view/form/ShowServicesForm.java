@@ -5,6 +5,10 @@
  */
 package view.form;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import view.controller.ShowServicesFormController;
 
@@ -15,9 +19,10 @@ import view.controller.ShowServicesFormController;
 public class ShowServicesForm extends javax.swing.JDialog {
 
     private ShowServicesFormController showServicesFormController;
-    
+
     /**
      * Creates new form ShowServicesForm
+     *
      * @param parent
      * @param modal
      * @param showServicesFormController
@@ -82,6 +87,11 @@ public class ShowServicesForm extends javax.swing.JDialog {
         );
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnSearch.setText("Search");
 
@@ -134,6 +144,19 @@ public class ShowServicesForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = tblServices.getSelectedRow();
+        if (selectedRow >= 0) {
+            try {
+                showServicesFormController.delete(selectedRow);
+                JOptionPane.showMessageDialog(this, "Service successfully deleted");
+            } catch (Exception ex) {
+                Logger.getLogger(ShowServicesForm.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error deleting service: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
@@ -145,7 +168,11 @@ public class ShowServicesForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtFilterByName;
     // End of variables declaration//GEN-END:variables
 
-  public void setTableServicesModel(TableModel tableModel){
-      tblServices.setModel(tableModel);
-  }  
+    public void setTableServicesModel(TableModel tableModel) {
+        tblServices.setModel(tableModel);
+    }
+
+    public JTable getTblServices() {
+        return tblServices;
+    }
 }

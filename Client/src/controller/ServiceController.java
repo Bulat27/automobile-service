@@ -49,4 +49,13 @@ public class ServiceController {
         }
         throw response.getException();
     }
+
+    public void deleteService(Service service) throws Exception {
+        Request request = new Request(Operation.DELETE_SERVICE, service);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.ERROR)) {
+            throw response.getException();
+        }
+    }
 }

@@ -68,9 +68,13 @@ public class TableModelServices extends AbstractTableModel {
         fireTableRowsInserted(services.size() - 1, services.size() - 1);//TODO: Make sure this suffices
     }
 
-    public void removeService(Service service) {
-        services.remove(service);
+    public void removeService(int index) {
+        services.remove(index);
         fireTableDataChanged();
+    }
+    
+    public Service getService(int index){
+        return services.get(index);
     }
 
     public List<Service> getServices() {

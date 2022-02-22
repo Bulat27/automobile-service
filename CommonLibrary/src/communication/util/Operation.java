@@ -13,5 +13,6 @@ public enum Operation {
     LOGIN,
     LOGOUT,
     SAVE_SERVICE,
-    GET_ALL_SERVICES
+    GET_ALL_SERVICES,
+    DELETE_SERVICE
 }
