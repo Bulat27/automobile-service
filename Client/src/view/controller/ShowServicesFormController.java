@@ -48,4 +48,20 @@ public class ShowServicesFormController {
         
         tms.removeService(selectedRow);
     }
+
+    public void search(String name) throws Exception{
+        //TODO: Add validation!
+        Service s = getServiceWithCondition(name);
+        
+        List<Service> services = ServiceController.getInstance().getServicesByCondition(s);
+        
+        TableModelServices tms = (TableModelServices) showServicesForm.getTblServices().getModel();
+        tms.setServices(services);//TODO: Make sure that this suffices, and that there is no need to instantiate new TableModelServices
+    } 
+
+    private Service getServiceWithCondition(String name) {
+        Service s = new Service();
+        s.setName(name);
+        return s;
+    }
 }

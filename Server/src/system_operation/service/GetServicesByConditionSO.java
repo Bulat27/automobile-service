@@ -12,19 +12,20 @@ import system_operation.AbstractSO;
  *
  * @author Dragon
  */
-public class GetAllServicesSO extends AbstractSO{
+public class GetServicesByConditionSO extends AbstractSO{
 
     @Override
     protected void precondition(Object param) throws Exception {
-        //TODO: Add validator if neccessary
+        //TODO: Add validator!
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        result = repository.findRecords(new Service(), null);
+        Service service = (Service) param;
+        result = repository.findRecords(service, service.getWhereCondition());
     }
 
     public Object getResult() {
         return result;
-    } 
+    }
 }

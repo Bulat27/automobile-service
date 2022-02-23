@@ -80,4 +80,9 @@ public class TableModelServices extends AbstractTableModel {
     public List<Service> getServices() {
         return services;
     }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+        fireTableDataChanged();
+    } 
 }

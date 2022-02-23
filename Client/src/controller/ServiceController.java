@@ -58,4 +58,14 @@ public class ServiceController {
             throw response.getException();
         }
     }
+
+    public List<Service> getServicesByCondition(Service s) throws Exception {
+        Request request = new Request(Operation.GET_SERVICES_BY_CONDITION, s);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.SUCCESS)) {
+            return (List<Service>) response.getResult();
+        }
+        throw response.getException();
+    }
 }

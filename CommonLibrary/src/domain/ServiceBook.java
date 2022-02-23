@@ -109,7 +109,12 @@ public class ServiceBook implements GeneralDObject{
     }
 
     @Override
-    public String getWherePKCondition() {
+    public String getPKWhereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getWhereCondition() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

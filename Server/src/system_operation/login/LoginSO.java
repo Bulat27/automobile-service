@@ -27,7 +27,7 @@ public class LoginSO extends AbstractSO {
     @Override
     protected void executeOperation(Object param) throws Exception {
 
-        List<GeneralDObject> employees = repository.findRecords(new Employee());//TODO: Check out the thing about generics here!
+        List<GeneralDObject> employees = repository.findRecords(new Employee(), null);//TODO: Check out the thing about generics here!
 
         Employee employeeParam = (Employee) param;
 

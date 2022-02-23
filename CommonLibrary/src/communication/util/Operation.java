@@ -14,5 +14,6 @@ public enum Operation {
     LOGOUT,
     SAVE_SERVICE,
     GET_ALL_SERVICES,
-    DELETE_SERVICE
+    DELETE_SERVICE,
+    GET_SERVICES_BY_CONDITION
 }

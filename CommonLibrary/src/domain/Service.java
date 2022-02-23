@@ -113,7 +113,12 @@ public class Service implements GeneralDObject {
     }
 
     @Override
-    public String getWherePKCondition() {
+    public String getPKWhereCondition() {
         return "id = " + serviceID;
+    }
+
+    @Override
+    public String getWhereCondition() {
+        return "name like '%" + name + "%'";
     }
 }

@@ -44,8 +44,10 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
     }
 
     @Override
-    public List<GeneralDObject> findRecords(GeneralDObject gdo) throws Exception {
+    public List<GeneralDObject> findRecords(GeneralDObject gdo, String whereCondition) throws Exception {
         String query = "SELECT * FROM " + gdo.getTableName();//TODO: Add the JOIN for gdo.getJOIN() or something like that!
+        if(whereCondition != null) query += " WHERE " + whereCondition;
+        
         List<GeneralDObject> listGDO = new ArrayList<>();
 
         try (Statement st = connection.createStatement();
@@ -94,7 +96,7 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
 
     @Override
     public void deleteRecord(GeneralDObject gdo) throws Exception {
-        String query = "DELETE FROM " + gdo.getTableName() + " WHERE " + gdo.getWherePKCondition();
+        String query = "DELETE FROM " + gdo.getTableName() + " WHERE " + gdo.getPKWhereCondition();
         //TODO: Maybe add execute NonPreparedUpdate
         try (Statement st = connection.createStatement();) {
             int rowCount = st.executeUpdate(query);

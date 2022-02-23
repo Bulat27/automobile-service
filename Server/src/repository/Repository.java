@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface Repository<T> {
     
-     public List<T> findRecords(T t) throws Exception;
+     public List<T> findRecords(T t, String whereCondition) throws Exception;
      public void insertRecord(T t) throws Exception;
      public void deleteRecord(T t) throws Exception;
 }

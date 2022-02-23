@@ -13,6 +13,7 @@ import system_operation.AbstractSO;
 import system_operation.login.LoginSO;
 import system_operation.service.DeleteServiceSO;
 import system_operation.service.GetAllServicesSO;
+import system_operation.service.GetServicesByConditionSO;
 import system_operation.service.SaveServiceSO;
 import thread.ServerThread;
 import view.form.MainForm;
@@ -71,5 +72,12 @@ public class Controller {
     public void deleteService(Service service) throws Exception{
         DeleteServiceSO deleteServiceSO = new DeleteServiceSO();
         deleteServiceSO.execute(service);
+    }
+
+    public List<Service> getServicesByCondition(Service service) throws Exception{
+        GetServicesByConditionSO getServicesByConditionSO = new GetServicesByConditionSO();
+        getServicesByConditionSO.execute(service);
+        
+        return (List<Service>) getServicesByConditionSO.getResult();
     }
 }
