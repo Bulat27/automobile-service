@@ -9,6 +9,8 @@ import domain.Employee;
 import domain.GeneralDObject;
 import java.util.List;
 import system_operation.AbstractSO;
+import validation.ValidationException;
+import validation.Validator;
 
 /**
  *
@@ -18,10 +20,13 @@ public class LoginSO extends AbstractSO {
 
     //TODO: You can use GeneralDomainObject here once you make it. In fact, you can probaly put it in AbstractSO
     @Override
-    protected void precondition(Object param) throws Exception {
-        if(param == null || !(param instanceof Employee)){
-            throw new Exception("Invalid parameter");
-        }
+    protected void precondition(Object param) throws ValidationException  {
+//        if(param == null || !(param instanceof Employee)){
+//            throw new Exception("Invalid parameter");
+//        }
+          Validator.startValidation()
+                   .throwIfInvalideParameterInstance(param, "Parameter must be an instance of Employee", Employee.class);
+//                   .throwIfInvalide();
     }
 
     @Override

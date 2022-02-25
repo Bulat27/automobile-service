@@ -5,8 +5,10 @@
  */
 package system_operation.service;
 
+import domain.Employee;
 import domain.Service;
 import system_operation.AbstractSO;
+import validation.Validator;
 
 /**
  *
@@ -16,7 +18,9 @@ public class GetServicesByConditionSO extends AbstractSO{
 
     @Override
     protected void precondition(Object param) throws Exception {
-        //TODO: Add validator!
+        Validator.startValidation()
+                   .throwIfInvalideParameterInstance(param, "Parameter must be an instance of Service", Employee.class);
+//                   .throwIfInvalide();
     }
 
     @Override

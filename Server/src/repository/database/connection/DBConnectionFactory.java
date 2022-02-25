@@ -58,14 +58,14 @@ public class DBConnectionFactory {
     }
     
     public void closeConnection() throws SQLException{
-        connection.close();
+        if(connection != null && !connection.isClosed()) connection.close();
     }
     
     public void commitTransaction() throws SQLException{
-        connection.commit();
+        if(connection != null && !connection.isClosed()) connection.commit();
     }
     
     public void rollbackTransaction() throws SQLException{
-        connection.rollback();
+        if(connection != null && !connection.isClosed()) connection.rollback();
     }
 }

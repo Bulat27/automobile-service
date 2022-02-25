@@ -70,9 +70,9 @@ public class LoginFormController {
     
     private void validateForm(String username, char[] password) throws ValidationException{
         Validator.startValidation()
-                 .validateNotNullOrEmpty(username, "Username field is required!")
-                 .validateNotNull(password, "Password field is required!")
-                 .validateNotNullOrEmpty(String.valueOf(password), "Password field is required!")
-                 .throwIfInvalide();
+                .validateNotNullOrEmpty(username, "Username field is required!")
+                .validateNotNull(password, "Password field is required!")
+                .validateNotNullOrEmpty(String.valueOf(password), "Password field is required!")
+                .throwIfInvalide();
     }
 }

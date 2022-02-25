@@ -16,7 +16,7 @@ public class GetAllServicesSO extends AbstractSO{
 
     @Override
     protected void precondition(Object param) throws Exception {
-        //TODO: Add validator if neccessary
+        
     }
 
     @Override

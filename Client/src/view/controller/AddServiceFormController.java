@@ -46,10 +46,10 @@ public class AddServiceFormController {
 
     private void validate(String price, String name, String materialCost) throws ValidationException {
         Validator.startValidation()
-                 .validateNotNullOrEmpty(name, "Name field is required!")
-                 .validateValueIsNonNegativeNumber(price, "Price is required and must be a non negative number!")
-                 .validateValueIsNonNegativeNumber(materialCost, "Material cost is required and must be a non negative number!")
-                 .throwIfInvalide();
+                .validateNotNullOrEmpty(name, "Name field is required!")
+                .validateValueIsNonNegativeNumber(price, "Price is required and must be a non negative number!")
+                .validateValueIsNonNegativeNumber(materialCost, "Material cost is required and must be a non negative number!")
+                .throwIfInvalide();
     }
 
     

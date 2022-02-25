@@ -39,13 +39,13 @@ public class Controller {
 
     public void startServer(MainForm mainForm) throws IOException {
         if (serverThread == null || !serverThread.isAlive()) {
-            
+
             serverThread = new ServerThread(mainForm);
             serverThread.start();
         }
     }
-    
-    public void stopServer() throws IOException{
+
+    public void stopServer() throws IOException {
         serverThread.stopThread();
     }
 
@@ -53,31 +53,31 @@ public class Controller {
         LoginSO loginSO = new LoginSO();//TODO: Once you put getResult in AbstractSO, then use AbstractSO here and only cast in returu e.g.
         //return (Employee) loginSO.getResult();
         loginSO.execute(requestEmployee);
-        
+
         return (Employee) loginSO.getResult();
     }
 
-    public void saveService(Service service) throws Exception{
+    public void saveService(Service service) throws Exception {
         SaveServiceSO saveServiceSO = new SaveServiceSO();
-        saveServiceSO.execute(service);
+        saveServiceSO.execute(service);  
     }
 
-    public List<Service> getAllServices() throws Exception{
+    public List<Service> getAllServices() throws Exception {
         GetAllServicesSO getAllServicesSO = new GetAllServicesSO();
         getAllServicesSO.execute(null);
-        
+
         return (List<Service>) getAllServicesSO.getResult();
     }
 
-    public void deleteService(Service service) throws Exception{
+    public void deleteService(Service service) throws Exception {
         DeleteServiceSO deleteServiceSO = new DeleteServiceSO();
         deleteServiceSO.execute(service);
     }
 
-    public List<Service> getServicesByCondition(Service service) throws Exception{
+    public List<Service> getServicesByCondition(Service service) throws Exception {
         GetServicesByConditionSO getServicesByConditionSO = new GetServicesByConditionSO();
         getServicesByConditionSO.execute(service);
-        
+
         return (List<Service>) getServicesByConditionSO.getResult();
     }
 }
