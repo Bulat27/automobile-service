@@ -120,16 +120,16 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    public void validateForm() throws Exception {//TODO: Make a Validator for this!
-        String errorMessage = "";
-        if (txtUsername.getText().isEmpty()) {
-            errorMessage += "Username cannot be empty!\n";
-        }
-        if (String.valueOf(txtPassword.getPassword()).isEmpty()) {
-            errorMessage += "Password cannot be empty!\n";
-        }
-        if (!errorMessage.isEmpty()) {
-            throw new Exception(errorMessage);
-        }
-    }
+//    public void validateForm() throws Exception {//TODO: Make a Validator for this!
+//        String errorMessage = "";
+//        if (txtUsername.getText().isEmpty()) {
+//            errorMessage += "Username cannot be empty!\n";
+//        }
+//        if (String.valueOf(txtPassword.getPassword()).isEmpty()) {
+//            errorMessage += "Password cannot be empty!\n";
+//        }
+//        if (!errorMessage.isEmpty()) {
+//            throw new Exception(errorMessage);
+//        }
+//    }
 }

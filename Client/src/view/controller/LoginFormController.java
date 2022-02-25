@@ -7,6 +7,8 @@ package view.controller;
 
 import controller.EmployeeController;
 import domain.Employee;
+import validation.ValidationException;
+import validation.Validator;
 import view.coordinator.Coordinator;
 import view.form.LoginForm;
 
@@ -45,7 +47,7 @@ public class LoginFormController {
     
         public Employee logIn(String username, char[] password) throws Exception {
           //TODO: Very important! Each form should have a FormController. Also, you need a Coordinator to coordinate all the forms and their Controllers!
-            loginForm.validateForm();//TODO: This needs to be changed! Separate Validator!
+            validateForm(username, password);//TODO: This needs to be changed! Separate Validator!
 
             Employee requestEmployee = new Employee(username, String.valueOf(password));
             
@@ -64,5 +66,13 @@ public class LoginFormController {
 
     public void closeForm() {
         loginForm.dispose();
+    }
+    
+    private void validateForm(String username, char[] password) throws ValidationException{
+        Validator.startValidation()
+                 .validateNotNullOrEmpty(username, "Username field is required!")
+                 .validateNotNull(password, "Password field is required!")
+                 .validateNotNullOrEmpty(String.valueOf(password), "Password field is required!")
+                 .throwIfInvalide();
     }
 }

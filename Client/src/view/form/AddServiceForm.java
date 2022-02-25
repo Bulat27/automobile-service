@@ -124,8 +124,8 @@ public class AddServiceForm extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            addServiceFormController.save(new BigDecimal(txtPrice.getText()), txtName.getText(),
-                    txtDescription.getText(), new BigDecimal(txtMaterialCost.getText()));
+            addServiceFormController.save(txtPrice.getText(), txtName.getText(),
+                    txtDescription.getText(), txtMaterialCost.getText());
              JOptionPane.showMessageDialog(this, "Service successfully saved");
              addServiceFormController.coordinateForms();
         } catch (Exception ex) {
