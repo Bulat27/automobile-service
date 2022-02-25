@@ -17,8 +17,8 @@ import javax.swing.table.AbstractTableModel;
 public class TableModelEmployee extends AbstractTableModel {
 
     private List<Employee> employees;
-    private final String[] columnNames = new String[]{"Username", "First and last name"};
-    private final Class[] columnClass = new Class[]{String.class, String.class};
+    private final String[] columnNames = new String[]{"Username", "First and last name", "Role"};
+    private final Class[] columnClass = new Class[]{String.class, String.class, String.class};
 
     public TableModelEmployee() {
         this.employees = new ArrayList<>();
@@ -53,6 +53,8 @@ public class TableModelEmployee extends AbstractTableModel {
                 return employee.getUsername();
             case 1:
                 return employee.toString();
+            case 2:
+                return employee.getEmployeeRole();
             default:
                 return "N/A";
         }

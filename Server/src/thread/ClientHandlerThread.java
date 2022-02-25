@@ -71,7 +71,9 @@ public class ClientHandlerThread extends Thread {
             case DELETE_SERVICE:
                 return deleteService(request);
             case GET_SERVICES_BY_CONDITION:
-                return getServicesByCondition(request);    
+                return getServicesByCondition(request);
+            case SAVE_EMPLOYEE:
+                return saveEmployee(request);    
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -183,6 +185,23 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successful retrieval of services by condition!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(services);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response saveEmployee(Request request) {
+        Response response = new Response();
+
+        Employee employee = (Employee) request.getArgument();
+
+        try {
+            Controller.getInstance().saveEmployee(employee);
+            System.out.println("Successfully saved Employee!");
+            response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

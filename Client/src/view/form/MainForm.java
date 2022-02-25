@@ -65,6 +65,11 @@ public class MainForm extends javax.swing.JFrame {
         menuEmployee.setText("Employee");
 
         menuItemAddEmployee.setText("Add");
+        menuItemAddEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAddEmployeeActionPerformed(evt);
+            }
+        });
         menuEmployee.add(menuItemAddEmployee);
 
         menuItemSearchEmployees.setText("Search");
@@ -156,6 +161,10 @@ public class MainForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error opening show services form: " + ex.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_menuItemSearchServicesActionPerformed
+
+    private void menuItemAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddEmployeeActionPerformed
+        mainFormController.openAddEmployeeForm();
+    }//GEN-LAST:event_menuItemAddEmployeeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;

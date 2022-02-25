@@ -8,6 +8,9 @@ package validation;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,15 +73,30 @@ public class Validator {
         return this;
     }
 
-    public Validator validateValueIsDate(String value, String pattern, String errorMessage) {
+//    public Validator validateValueIsDate(String value, String pattern, String errorMessage) {//TODO:Do this using LocalDate and other Java 8 stuff
+//        //TODO: You could also add a validation in order to check if date is the value in the past or something like that!
+//        try {
+//            if (value != null) {
+//                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+//                sdf.parse(value);
+//            } else {
+//                this.validationErrors.add(errorMessage);
+//            }
+//        } catch (ParseException ex) {
+//            this.validationErrors.add(errorMessage);
+//        }
+//        return this;
+//    }
+    public Validator validateValueIsDate(String value, String pattern, String errorMessage) {//TODO:Do this using LocalDate and other Java 8 stuff
+        //TODO: You could also add a validation in order to check if date is the value in the past or something like that!
         try {
             if (value != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-                sdf.parse(value);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
+                LocalDate.parse(value, dtf);
             } else {
                 this.validationErrors.add(errorMessage);
             }
-        } catch (ParseException ex) {
+        } catch (DateTimeParseException ex) {
             this.validationErrors.add(errorMessage);
         }
         return this;

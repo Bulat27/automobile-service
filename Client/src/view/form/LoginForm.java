@@ -18,7 +18,8 @@ import view.controller.LoginFormController;
 public class LoginForm extends javax.swing.JFrame {
 
     private final LoginFormController loginController;
-
+    
+    //TODO: Implement hide and show for JPasswordField (I have saved a bookmark)
     /**
      * Creates new form FrmLogin
      *
@@ -102,7 +103,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         try {
-            Employee employee = loginController.logIn(txtUsername.getText().trim(), txtPassword.getPassword());
+            Employee employee = loginController.logIn(txtUsername.getText(), txtPassword.getPassword());
             JOptionPane.showMessageDialog(this, "Welcome, " + employee.getFirstName());
             loginController.coordinateForms();
         } catch (Exception ex) {

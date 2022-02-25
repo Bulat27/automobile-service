@@ -15,6 +15,10 @@ import view.form.MainForm;
 public class MainFormController {
 
     private MainForm mainForm;
+    
+    public MainForm getMainForm() {
+        return mainForm;
+    }
 
     public MainFormController() {
         mainForm = new MainForm(this);
@@ -35,8 +39,8 @@ public class MainFormController {
     public void openShowServicesForm() throws Exception{
         Coordinator.getInstance().openShowServicesForm();
     }
-
-    public MainForm getMainForm() {
-        return mainForm;
+    
+    public void openAddEmployeeForm(){
+        Coordinator.getInstance().openAddEmployeeForm();
     }
 }

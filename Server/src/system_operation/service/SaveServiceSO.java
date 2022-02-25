@@ -32,5 +32,4 @@ public class SaveServiceSO extends AbstractSO {
     protected void executeOperation(Object param) throws Exception {
         repository.insertRecord(param);//TODO: CHECK OUT WHY THIS WORKS WITHOUT CASTING! GENERICS|!
     }
-
 }

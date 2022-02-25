@@ -47,7 +47,7 @@ public class LoginFormController {
     
         public Employee logIn(String username, char[] password) throws Exception {
           //TODO: Very important! Each form should have a FormController. Also, you need a Coordinator to coordinate all the forms and their Controllers!
-            validateForm(username, password);//TODO: This needs to be changed! Separate Validator!
+            validate(username, password);//TODO: This needs to be changed! Separate Validator!
 
             Employee requestEmployee = new Employee(username, String.valueOf(password));
             
@@ -68,7 +68,7 @@ public class LoginFormController {
         loginForm.dispose();
     }
     
-    private void validateForm(String username, char[] password) throws ValidationException{
+    private void validate(String username, char[] password) throws ValidationException{
         Validator.startValidation()
                 .validateNotNullOrEmpty(username, "Username field is required!")
                 .validateNotNull(password, "Password field is required!")

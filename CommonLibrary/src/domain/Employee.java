@@ -5,7 +5,9 @@
  */
 package domain;
 
+import domain.util.EmployeeRole;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,24 +18,25 @@ import java.util.Objects;
  *
  * @author Dragon
  */
-public class Employee implements GeneralDObject{
-    
+public class Employee implements GeneralDObject {
+
     private Long employeeID;
     private String firstName;
     private String lastName;
-    private boolean adminStatus;
+    private EmployeeRole employeeRole;
     private BigDecimal hourlyRate;
     private LocalDate dateOfEmployment;
     private String username;
     private String password;
 
-    public Employee() {}
+    public Employee() {
+    }
 
-    public Employee(Long employeeID, String firstName, String lastName, boolean adminStatus, BigDecimal hourlyRate, LocalDate dateOfEmployment, String username, String password) {
+    public Employee(Long employeeID, String firstName, String lastName, EmployeeRole employeeRole, BigDecimal hourlyRate, LocalDate dateOfEmployment, String username, String password) {
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.adminStatus = adminStatus;
+        this.employeeRole = employeeRole;
         this.hourlyRate = hourlyRate;
         this.dateOfEmployment = dateOfEmployment;
         this.username = username;
@@ -44,8 +47,16 @@ public class Employee implements GeneralDObject{
         this.username = username;
         this.password = password;
     }
-    
-    
+
+    public Employee(String firstName, String lastName, EmployeeRole employeeRole, BigDecimal hourlyRate, LocalDate dateOfEmployment, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.employeeRole = employeeRole;
+        this.hourlyRate = hourlyRate;
+        this.dateOfEmployment = dateOfEmployment;
+        this.username = username;
+        this.password = password;
+    }
 
     public Long getEmployeeID() {
         return employeeID;
@@ -71,12 +82,12 @@ public class Employee implements GeneralDObject{
         this.lastName = lastName;
     }
 
-    public boolean isAdminStatus() {
-        return adminStatus;
+    public EmployeeRole getEmployeeRole() {
+        return employeeRole;
     }
 
-    public void setAdminStatus(boolean adminStatus) {
-        this.adminStatus = adminStatus;
+    public void setEmployeeRole(EmployeeRole employeeRole) {
+        this.employeeRole = employeeRole;
     }
 
     public BigDecimal getHourlyRate() {
@@ -110,8 +121,8 @@ public class Employee implements GeneralDObject{
     public void setPassword(String password) {
         this.password = password;
     }
-    
-     @Override
+
+    @Override
     public String toString() {
         return firstName + " " + lastName;
     }
@@ -123,7 +134,7 @@ public class Employee implements GeneralDObject{
 
     @Override
     public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
-        return new Employee(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"), rs.getInt("admin_status") == 1, rs.getBigDecimal("hourly_rate"), rs.getDate("date_of_employment").toLocalDate(), rs.getString("username"), rs.getString("password"));
+        return new Employee(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"), EmployeeRole.valueOf(rs.getString("role")), rs.getBigDecimal("hourly_rate"), rs.getDate("date_of_employment").toLocalDate(), rs.getString("username"), rs.getString("password"));
     }
 
     @Override
@@ -150,17 +161,23 @@ public class Employee implements GeneralDObject{
 
     @Override
     public String getInsertionColumns() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "first_name, last_name, role, hourly_rate, date_of_employment, username, password";
     }
 
     @Override
     public String getAtrPlaceHolders() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "?, ?, ?, ?, ?, ?, ?";
     }
 
     @Override
-    public void setPreparedStatementParameters(PreparedStatement ps) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPreparedStatementParameters(PreparedStatement ps) throws SQLException {
+        ps.setString(1, firstName);
+        ps.setString(2, lastName);
+        ps.setString(3, employeeRole.toString());
+        ps.setBigDecimal(4, hourlyRate);
+        ps.setDate(5, Date.valueOf(dateOfEmployment));
+        ps.setString(6, username);
+        ps.setString(7, password);
     }
 
     @Override
