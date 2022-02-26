@@ -43,4 +43,8 @@ public class MainFormController {
     public void openAddEmployeeForm(){
         Coordinator.getInstance().openAddEmployeeForm();
     }
+
+    public void openShowEmployeesForm() throws Exception {
+        Coordinator.getInstance().openShowEmployeesForm();
+    }
 }

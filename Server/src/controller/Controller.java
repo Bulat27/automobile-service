@@ -10,6 +10,7 @@ import domain.Service;
 import java.io.IOException;
 import java.util.List;
 import system_operation.AbstractSO;
+import system_operation.employee.GetAllEmployeesSO;
 import system_operation.employee.SaveEmployeeSO;
 import system_operation.login.LoginSO;
 import system_operation.service.DeleteServiceSO;
@@ -85,5 +86,12 @@ public class Controller {
     public void saveEmployee(Employee employee) throws Exception {
         SaveEmployeeSO saveEmployeeSO = new SaveEmployeeSO();
         saveEmployeeSO.execute(employee);
+    }
+
+    public List<Employee> getAllEmployees() throws Exception {
+        GetAllEmployeesSO getAllEmployeesSO = new GetAllEmployeesSO();
+        getAllEmployeesSO.execute(null);
+        
+        return (List<Employee>) getAllEmployeesSO.getResult();
     }
 }

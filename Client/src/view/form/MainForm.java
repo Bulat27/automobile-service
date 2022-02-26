@@ -73,6 +73,11 @@ public class MainForm extends javax.swing.JFrame {
         menuEmployee.add(menuItemAddEmployee);
 
         menuItemSearchEmployees.setText("Search");
+        menuItemSearchEmployees.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSearchEmployeesActionPerformed(evt);
+            }
+        });
         menuEmployee.add(menuItemSearchEmployees);
 
         menuBarMain.add(menuEmployee);
@@ -158,13 +163,22 @@ public class MainForm extends javax.swing.JFrame {
             mainFormController.openShowServicesForm();
         } catch (Exception ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Error opening show services form: " + ex.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error opening show Services form: " + ex.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_menuItemSearchServicesActionPerformed
 
     private void menuItemAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddEmployeeActionPerformed
         mainFormController.openAddEmployeeForm();
     }//GEN-LAST:event_menuItemAddEmployeeActionPerformed
+
+    private void menuItemSearchEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSearchEmployeesActionPerformed
+        try {
+            mainFormController.openShowEmployeesForm();
+        } catch (Exception ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error opening show Employees form: " + ex.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_menuItemSearchEmployeesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;

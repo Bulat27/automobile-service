@@ -9,6 +9,7 @@ import view.controller.AddEmployeeFormController;
 import view.controller.AddServiceFormController;
 import view.controller.LoginFormController;
 import view.controller.MainFormController;
+import view.controller.ShowEmployeesFormController;
 import view.controller.ShowServicesFormController;
 import view.form.MainForm;
 
@@ -25,6 +26,7 @@ public class Coordinator {
     private AddServiceFormController addServiceFormController;
     private ShowServicesFormController showServicesFormController;
     private AddEmployeeFormController addEmployeeFormController;
+    private ShowEmployeesFormController showEmployeesFormController;
 
     private Coordinator() {
     }
@@ -66,5 +68,10 @@ public class Coordinator {
     public void openAddEmployeeForm() {
         addEmployeeFormController = new AddEmployeeFormController();
         addEmployeeFormController.openForm();
+    }
+    
+    public void openShowEmployeesForm() throws Exception{
+        showEmployeesFormController = new ShowEmployeesFormController();
+        showEmployeesFormController.openForm();
     }
 }

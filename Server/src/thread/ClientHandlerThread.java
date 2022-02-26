@@ -27,7 +27,7 @@ import view.form.MainForm;
  */
 public class ClientHandlerThread extends Thread {
 
-    private Socket socket;
+    private Socket socket;//TODO: These can probably be final!
     private Sender sender;
     private Receiver receiver;
     private Employee authenticatedEmployee;
@@ -73,7 +73,9 @@ public class ClientHandlerThread extends Thread {
             case GET_SERVICES_BY_CONDITION:
                 return getServicesByCondition(request);
             case SAVE_EMPLOYEE:
-                return saveEmployee(request);    
+                return saveEmployee(request);
+            case GET_ALL_EMPLOYEES:
+                return getAllEmployees(request);    
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -147,7 +149,7 @@ public class ClientHandlerThread extends Thread {
 
         try {
             List<Service> services = Controller.getInstance().getAllServices();
-            System.out.println("Successful retrieval of services!");
+            System.out.println("Successful retrieval of Services!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(services);
         } catch (Exception ex) {
@@ -182,7 +184,7 @@ public class ClientHandlerThread extends Thread {
 
         try {
             List<Service> services = Controller.getInstance().getServicesByCondition(service);
-            System.out.println("Successful retrieval of services by condition!");
+            System.out.println("Successful retrieval of Services by condition!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(services);
         } catch (Exception ex) {
@@ -202,6 +204,22 @@ public class ClientHandlerThread extends Thread {
             Controller.getInstance().saveEmployee(employee);
             System.out.println("Successfully saved Employee!");
             response.setResponseType(ResponseType.SUCCESS);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response getAllEmployees(Request request) {
+        Response response = new Response();
+
+        try {
+            List<Employee> employees = Controller.getInstance().getAllEmployees();
+            System.out.println("Successful retrieval of Employees!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(employees);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

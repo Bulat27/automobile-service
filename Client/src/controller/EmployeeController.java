@@ -11,6 +11,7 @@ import communication.Response;
 import communication.util.Operation;
 import communication.util.ResponseType;
 import domain.Employee;
+import java.util.List;
 
 /**
  *
@@ -55,5 +56,15 @@ public class EmployeeController {
         if (response.getResponseType().equals(ResponseType.ERROR)) {
             throw response.getException();
         }
+    }
+
+    public List<Employee> getAllEmployees() throws Exception {
+        Request request = new Request(Operation.GET_ALL_EMPLOYEES, null);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.SUCCESS)) {
+            return (List<Employee>) response.getResult();
+        }
+        throw response.getException();
     }
 }
