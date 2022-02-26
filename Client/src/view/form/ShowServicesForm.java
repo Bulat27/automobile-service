@@ -167,7 +167,7 @@ public class ShowServicesForm extends javax.swing.JDialog {
             showServicesFormController.search(txtFilterByName.getText().trim());
         } catch (Exception ex) {
             Logger.getLogger(ShowServicesForm.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Error searching services: " + ex.getMessage(), "Search Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error searching Services: " + ex.getMessage(), "Search Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 

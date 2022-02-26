@@ -71,8 +71,8 @@ public class AddEmployeeFormController {
 
     private void validate(String firstName, String lastName, String role, String hourlyRate, String dateOfEmployment, String username, char[] password) throws ValidationException {
         Validator.startValidation()
-                .validateNotNullOrEmpty(firstName, "First name field is required!")
-                .validateNotNullOrEmpty(lastName, "Last name field is required!")
+                .validateValueIsAllAlphabets(firstName, "First name field is required and must contain only alphabetic characters!")
+                .validateValueIsAllAlphabets(lastName, "Last name field is required and must contain only alphabetic characters!")
                 .validateNotNullOrEmpty(role, "Role field is required!")
                 .validateValueIsNonNegativeNumber(hourlyRate, "Hourly rate is required and must be a non negative number!")
                 .validateValueIsDate(dateOfEmployment, DATE_PATTERN, "Date field is required and date must be in format: " + DATE_PATTERN)
@@ -81,5 +81,4 @@ public class AddEmployeeFormController {
                 .validateNotNullOrEmpty(String.valueOf(password), "Password field is required!")
                 .throwIfInvalide();
     }
-
 }

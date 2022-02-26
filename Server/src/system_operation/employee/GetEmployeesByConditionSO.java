@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package system_operation.service;
+package system_operation.employee;
 
 import domain.Employee;
-import domain.Service;
 import system_operation.AbstractSO;
 import validation.Validator;
 
@@ -14,19 +13,18 @@ import validation.Validator;
  *
  * @author Dragon
  */
-public class GetServicesByConditionSO extends AbstractSO{
+public class GetEmployeesByConditionSO extends AbstractSO {
 
     @Override
     protected void precondition(Object param) throws Exception {
         Validator.startValidation()
-                   .throwIfInvalideParameterInstance(param, "Parameter must be an instance of Service", Service.class);
-//                   .throwIfInvalide();
+                .throwIfInvalideParameterInstance(param, "Parameter must be an instance of Employee", Employee.class);
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        Service service = (Service) param;
-        result = repository.findRecords(service, service.getWhereCondition());
+        Employee employee = (Employee) param;
+        result = repository.findRecords(employee, employee.getWhereCondition());
     }
 
     public Object getResult() {

@@ -6,8 +6,6 @@
 package validation;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -102,6 +100,13 @@ public class Validator {
         return this;
     }
 
+    public Validator validateValueIsAllAlphabets(String value, String errorMessage) {
+        if (value == null || value.isEmpty() || !value.matches("[a-zA-Z]+")) {
+            this.validationErrors.add(errorMessage);
+        }
+        return this;
+    }
+    
     public Validator validateListIsNotEmpty(List list, String errorMessage) {
         if (list == null || list.isEmpty()) {
             this.validationErrors.add(errorMessage);

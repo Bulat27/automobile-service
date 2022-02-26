@@ -67,4 +67,14 @@ public class EmployeeController {
         }
         throw response.getException();
     }
+
+    public List<Employee> getEmployeesByConditon(Employee employee) throws Exception {
+        Request request = new Request(Operation.GET_EMPLOYEES_BY_CONDITION, employee);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.SUCCESS)) {
+            return (List<Employee>) response.getResult();
+        }
+        throw response.getException();
+    }
 }

@@ -75,7 +75,9 @@ public class ClientHandlerThread extends Thread {
             case SAVE_EMPLOYEE:
                 return saveEmployee(request);
             case GET_ALL_EMPLOYEES:
-                return getAllEmployees(request);    
+                return getAllEmployees(request);
+            case GET_EMPLOYEES_BY_CONDITION:
+                return getEmployeesByCondition(request);    
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -218,6 +220,24 @@ public class ClientHandlerThread extends Thread {
         try {
             List<Employee> employees = Controller.getInstance().getAllEmployees();
             System.out.println("Successful retrieval of Employees!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(employees);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response getEmployeesByCondition(Request request) {
+         Response response = new Response();
+         
+         Employee employee = (Employee) request.getArgument();
+
+        try {
+            List<Employee> employees = Controller.getInstance().getEmployeesByCondition(employee);
+            System.out.println("Successful retrieval of Employees by condition!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(employees);
         } catch (Exception ex) {

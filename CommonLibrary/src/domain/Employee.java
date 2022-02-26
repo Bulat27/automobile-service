@@ -187,6 +187,10 @@ public class Employee implements GeneralDObject {
 
     @Override
     public String getWhereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String firstNameCondition = firstName.isEmpty() ? "1 = 1" : "first_name = '" + firstName + "'";
+        String conjuction = " AND ";
+        String lastNameCondition = lastName.isEmpty() ? "1 = 1" : "last_name = '" + lastName + "'";
+
+        return firstNameCondition += conjuction += lastNameCondition;
     }
 }
