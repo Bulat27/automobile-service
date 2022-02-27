@@ -97,6 +97,11 @@ public class ShowEmployeesForm extends javax.swing.JDialog {
         btnDelete.setText("Delete");
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Last name:");
 
@@ -161,6 +166,14 @@ public class ShowEmployeesForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error searching Employees: " + ex.getMessage(), "Search Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        int selectedRow = tblEmployees.getSelectedRow();
+        
+        if(selectedRow != -1){
+            showEmployeesFormController.openEditEmployeeForm(selectedRow);
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

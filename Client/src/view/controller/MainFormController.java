@@ -7,6 +7,7 @@ package view.controller;
 
 import view.coordinator.Coordinator;
 import view.form.MainForm;
+import static view.util.FormMode.ADD;
 
 /**
  *
@@ -32,8 +33,8 @@ public class MainFormController {
         mainForm.dispose();
     }
 
-    public void openAddServiceForm() {
-        Coordinator.getInstance().openAddServiceForm();
+    public void openServiceForm() {
+        Coordinator.getInstance().openServiceForm();
     }
     
     public void openShowServicesForm() throws Exception{

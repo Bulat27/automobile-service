@@ -5,13 +5,16 @@
  */
 package view.coordinator;
 
-import view.controller.AddEmployeeFormController;
-import view.controller.AddServiceFormController;
+import domain.Employee;
+import view.controller.EmployeeFormController;
+import view.controller.ServiceFormController;
 import view.controller.LoginFormController;
 import view.controller.MainFormController;
 import view.controller.ShowEmployeesFormController;
 import view.controller.ShowServicesFormController;
 import view.form.MainForm;
+import static view.util.FormMode.ADD;
+import static view.util.FormMode.EDIT;
 
 /**
  *
@@ -23,9 +26,9 @@ public class Coordinator {
 
     private LoginFormController loginController;
     private MainFormController mainFormController;
-    private AddServiceFormController addServiceFormController;
+    private ServiceFormController serviceFormController;
     private ShowServicesFormController showServicesFormController;
-    private AddEmployeeFormController addEmployeeFormController;
+    private EmployeeFormController employeeFormController;
     private ShowEmployeesFormController showEmployeesFormController;
 
     private Coordinator() {
@@ -51,9 +54,9 @@ public class Coordinator {
         mainFormController.openForm();
     }
 
-    public void openAddServiceForm() {
-        addServiceFormController = new AddServiceFormController();
-        addServiceFormController.openForm();
+    public void openServiceForm() {
+        serviceFormController = new ServiceFormController();
+        serviceFormController.openForm();
     }
 
     public MainForm getMainForm() {
@@ -66,12 +69,17 @@ public class Coordinator {
     }
 
     public void openAddEmployeeForm() {
-        addEmployeeFormController = new AddEmployeeFormController();
-        addEmployeeFormController.openForm();
+        employeeFormController = new EmployeeFormController(ADD, null);
+        employeeFormController.openForm();
     }
-    
-    public void openShowEmployeesForm() throws Exception{
+
+    public void openShowEmployeesForm() throws Exception {
         showEmployeesFormController = new ShowEmployeesFormController();
         showEmployeesFormController.openForm();
+    }
+
+    public void openEditEmployeeForm(Employee employee) {
+        employeeFormController = new EmployeeFormController(EDIT, employee);
+        employeeFormController.openForm();
     }
 }

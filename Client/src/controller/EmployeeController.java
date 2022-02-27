@@ -49,8 +49,8 @@ public class EmployeeController {
 //            throw response.getException();
 //        }
 //    }
-    public void saveEmployee(Employee employee) throws Exception {
-        Request request = new Request(Operation.SAVE_EMPLOYEE, employee);
+    public void addEmployee(Employee employee) throws Exception {
+        Request request = new Request(Operation.ADD_EMPLOYEE, employee);
         Response response = Communication.getInstance().sendRequest(request);
 
         if (response.getResponseType().equals(ResponseType.ERROR)) {
@@ -76,5 +76,14 @@ public class EmployeeController {
             return (List<Employee>) response.getResult();
         }
         throw response.getException();
+    }
+
+    public void editEmployee(Employee employee) throws Exception {
+        Request request = new Request(Operation.EDIT_EMPLOYEE, employee);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.ERROR)) {
+            throw response.getException();
+        }
     }
 }

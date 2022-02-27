@@ -8,25 +8,25 @@ package view.form;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import view.controller.AddServiceFormController;
+import view.controller.ServiceFormController;
 
 /**
  *
  * @author Dragon
  */
-public class AddServiceForm extends javax.swing.JDialog {
+public class ServiceForm extends javax.swing.JDialog {
 
-    private AddServiceFormController addServiceFormController;
+    private ServiceFormController serviceFormController;
     /**
      * Creates new form FormService
      * @param parent
      * @param modal
      * @param addServiceFormController
      */
-    public AddServiceForm(java.awt.Frame parent, boolean modal, AddServiceFormController addServiceFormController) {
+    public ServiceForm(java.awt.Frame parent, boolean modal, ServiceFormController addServiceFormController) {
         super(parent, modal);
         initComponents();
-        this.addServiceFormController = addServiceFormController;
+        this.serviceFormController = addServiceFormController;
     }
 
     /**
@@ -123,12 +123,12 @@ public class AddServiceForm extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            addServiceFormController.save(txtPrice.getText(), txtName.getText(),
+            serviceFormController.save(txtPrice.getText(), txtName.getText(),
                     txtDescription.getText(), txtMaterialCost.getText());
              JOptionPane.showMessageDialog(this, "Service successfully saved");
-             addServiceFormController.coordinateForms();
+             serviceFormController.coordinateForms();
         } catch (Exception ex) {
-            Logger.getLogger(AddServiceForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServiceForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error saving the service", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed

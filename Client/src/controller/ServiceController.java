@@ -32,7 +32,7 @@ public class ServiceController {
     }
 
     public void saveService(Service service) throws Exception {
-        Request request = new Request(Operation.SAVE_SERVICE, service);
+        Request request = new Request(Operation.ADD_SERVICE, service);
         Response response = Communication.getInstance().sendRequest(request);
 
         if (response.getResponseType().equals(ResponseType.ERROR)) {

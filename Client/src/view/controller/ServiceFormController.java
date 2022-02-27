@@ -11,26 +11,26 @@ import java.math.BigDecimal;
 import validation.ValidationException;
 import validation.Validator;
 import view.coordinator.Coordinator;
-import view.form.AddServiceForm;
+import view.form.ServiceForm;
 
 /**
  *
  * @author Dragon
  */
-public class AddServiceFormController {
+public class ServiceFormController {
 
-    private AddServiceForm addServiceForm;
+    private ServiceForm serviceForm;
 
-    public AddServiceFormController() {
-        addServiceForm = new AddServiceForm(Coordinator.getInstance().getMainForm(), true, this);
+    public ServiceFormController() {
+        serviceForm = new ServiceForm(Coordinator.getInstance().getMainForm(), true, this);
     }
 
     public void openForm() {
-        addServiceForm.setVisible(true);
+        serviceForm.setVisible(true);
     }
 
     public void closeForm() {
-        addServiceForm.dispose();
+        serviceForm.dispose();
     }
 
     public void save(String price, String name, String description, String materialCost) throws Exception {

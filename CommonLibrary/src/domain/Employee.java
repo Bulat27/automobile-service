@@ -182,7 +182,7 @@ public class Employee implements GeneralDObject {
 
     @Override
     public String getPKWhereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "id = " + employeeID;
     }
 
     @Override
@@ -192,5 +192,10 @@ public class Employee implements GeneralDObject {
         String lastNameCondition = lastName.isEmpty() ? "1 = 1" : "last_name = '" + lastName + "'";
 
         return firstNameCondition += conjuction += lastNameCondition;
+    }
+
+    @Override
+    public String getUpdateColumnsWithPlaceHolders() {
+        return "first_name = ?, last_name = ?, role = ?, hourly_rate = ?, date_of_employment = ?, username = ?, password = ?";
     }
 }

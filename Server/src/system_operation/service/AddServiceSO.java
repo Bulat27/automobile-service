@@ -13,7 +13,7 @@ import validation.Validator;
  *
  * @author Dragon
  */
-public class SaveServiceSO extends AbstractSO {
+public class AddServiceSO extends AbstractSO {
 
     @Override
     protected void precondition(Object param) throws Exception {

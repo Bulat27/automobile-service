@@ -96,4 +96,9 @@ public class Repair implements GeneralDObject {
     public String getWhereCondition() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getUpdateColumnsWithPlaceHolders() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

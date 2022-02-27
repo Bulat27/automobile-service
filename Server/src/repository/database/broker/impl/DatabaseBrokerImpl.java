@@ -46,8 +46,10 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
     @Override
     public List<GeneralDObject> findRecords(GeneralDObject gdo, String whereCondition) throws Exception {
         String query = "SELECT * FROM " + gdo.getTableName();//TODO: Add the JOIN for gdo.getJOIN() or something like that!
-        if(whereCondition != null) query += " WHERE " + whereCondition;
-        
+        if (whereCondition != null) {
+            query += " WHERE " + whereCondition;
+        }
+
         List<GeneralDObject> listGDO = new ArrayList<>();
 
         try (Statement st = connection.createStatement();
@@ -63,6 +65,12 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
     @Override
     public void insertRecord(GeneralDObject gdo) throws Exception {
         String query = "INSERT INTO " + gdo.getTableName() + "(" + gdo.getInsertionColumns() + ") VALUES(" + gdo.getAtrPlaceHolders() + ")";
+        executePreparedStatementUpdate(query, gdo);
+    }
+
+    @Override
+    public void updateRecord(GeneralDObject gdo) throws Exception {
+        String query = "UPDATE " + gdo.getTableName() + " SET " + gdo.getUpdateColumnsWithPlaceHolders() + " WHERE " + gdo.getPKWhereCondition();
         executePreparedStatementUpdate(query, gdo);
     }
 

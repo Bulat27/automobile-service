@@ -68,4 +68,10 @@ public class ShowEmployeesFormController {
                 .validateNotNull(lastName, "Last name must not be null!")
                 .throwIfInvalide();
     }
+
+    public void openEditEmployeeForm(int selectedRow) {
+        TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
+        
+        Coordinator.getInstance().openEditEmployeeForm(tme.getEmployee(selectedRow));
+    }
 }

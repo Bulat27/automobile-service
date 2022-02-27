@@ -155,7 +155,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void menuItemAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddServiceActionPerformed
-        mainFormController.openAddServiceForm();
+        mainFormController.openServiceForm();
     }//GEN-LAST:event_menuItemAddServiceActionPerformed
 
     private void menuItemSearchServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSearchServicesActionPerformed

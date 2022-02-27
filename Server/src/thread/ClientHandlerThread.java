@@ -64,20 +64,22 @@ public class ClientHandlerThread extends Thread {
         switch (operation) {
             case LOGIN:
                 return login(request);
-            case SAVE_SERVICE:
-                return saveService(request);
+            case ADD_SERVICE:
+                return addService(request);
             case GET_ALL_SERVICES:
                 return getAllServices(request);
             case DELETE_SERVICE:
                 return deleteService(request);
             case GET_SERVICES_BY_CONDITION:
                 return getServicesByCondition(request);
-            case SAVE_EMPLOYEE:
-                return saveEmployee(request);
+            case ADD_EMPLOYEE:
+                return addEmployee(request);
             case GET_ALL_EMPLOYEES:
                 return getAllEmployees(request);
             case GET_EMPLOYEES_BY_CONDITION:
-                return getEmployeesByCondition(request);    
+                return getEmployeesByCondition(request);
+            case EDIT_EMPLOYEE:
+                return editEmployee(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -129,14 +131,14 @@ public class ClientHandlerThread extends Thread {
 //        
 //        return response;
 //    }
-    private Response saveService(Request request) {
+    private Response addService(Request request) {
         Response response = new Response();
 
         Service service = (Service) request.getArgument();
 
         try {
-            Controller.getInstance().saveService(service);
-            System.out.println("Successfully saved Service!");
+            Controller.getInstance().addService(service);
+            System.out.println("Successfully added Service!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
@@ -180,9 +182,9 @@ public class ClientHandlerThread extends Thread {
     }
 
     private Response getServicesByCondition(Request request) {
-         Response response = new Response();
-         
-         Service service = (Service) request.getArgument();
+        Response response = new Response();
+
+        Service service = (Service) request.getArgument();
 
         try {
             List<Service> services = Controller.getInstance().getServicesByCondition(service);
@@ -197,14 +199,14 @@ public class ClientHandlerThread extends Thread {
         return response;
     }
 
-    private Response saveEmployee(Request request) {
+    private Response addEmployee(Request request) {
         Response response = new Response();
 
         Employee employee = (Employee) request.getArgument();
 
         try {
-            Controller.getInstance().saveEmployee(employee);
-            System.out.println("Successfully saved Employee!");
+            Controller.getInstance().addEmployee(employee);
+            System.out.println("Successfully added Employee!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
@@ -231,15 +233,32 @@ public class ClientHandlerThread extends Thread {
     }
 
     private Response getEmployeesByCondition(Request request) {
-         Response response = new Response();
-         
-         Employee employee = (Employee) request.getArgument();
+        Response response = new Response();
+
+        Employee employee = (Employee) request.getArgument();
 
         try {
             List<Employee> employees = Controller.getInstance().getEmployeesByCondition(employee);
             System.out.println("Successful retrieval of Employees by condition!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(employees);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response editEmployee(Request request) {
+        Response response = new Response();
+
+        Employee employee = (Employee) request.getArgument();
+
+        try {
+            Controller.getInstance().editEmployee(employee);
+            System.out.println("Successfully edited Employee!");
+            response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

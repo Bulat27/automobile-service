@@ -9,15 +9,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import view.controller.AddEmployeeFormController;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import view.controller.EmployeeFormController;
 
 /**
  *
  * @author Dragon
  */
-public class AddEmployeeForm extends javax.swing.JDialog {
+public class EmployeeForm extends javax.swing.JDialog {
 
-    private AddEmployeeFormController addEmployeeFormController;
+    private EmployeeFormController employeeFormController;
     //TODO: Implement hide and show for JPasswordField (I have saved a bookmark)
 
     /**
@@ -27,10 +29,10 @@ public class AddEmployeeForm extends javax.swing.JDialog {
      * @param modal
      * @param addEmployeeFormController
      */
-    public AddEmployeeForm(java.awt.Frame parent, boolean modal, AddEmployeeFormController addEmployeeFormController) {
+    public EmployeeForm(java.awt.Frame parent, boolean modal, EmployeeFormController addEmployeeFormController) {
         super(parent, modal);
         initComponents();
-        this.addEmployeeFormController = addEmployeeFormController;
+        this.employeeFormController = addEmployeeFormController;
     }
 
     /**
@@ -154,12 +156,12 @@ public class AddEmployeeForm extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            addEmployeeFormController.save(txtFirstName.getText(), txtLastName.getText(), cmbRole.getSelectedItem().toString(),
+            employeeFormController.save(txtFirstName.getText(), txtLastName.getText(), cmbRole.getSelectedItem().toString(),
                     txtHourlyRate.getText(), txtDateOfEmployment.getText(), txtUserName.getText(), txtPassword.getPassword());
             JOptionPane.showMessageDialog(this, "Employee successfully saved");
-            addEmployeeFormController.coordinateForms();
+            employeeFormController.coordinateForms();
         } catch (Exception ex) {
-            Logger.getLogger(AddEmployeeForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error saving the employee", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -185,4 +187,28 @@ public class AddEmployeeForm extends javax.swing.JDialog {
     public JComboBox<String> getCmbRole() {
         return cmbRole;
     }
+
+    public JTextField getTxtDateOfEmployment() {
+        return txtDateOfEmployment;
+    }
+
+    public JTextField getTxtFirstName() {
+        return txtFirstName;
+    }
+
+    public JTextField getTxtHourlyRate() {
+        return txtHourlyRate;
+    }
+
+    public JTextField getTxtLastName() {
+        return txtLastName;
+    }
+
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public JTextField getTxtUserName() {
+        return txtUserName;
+    }  
 }

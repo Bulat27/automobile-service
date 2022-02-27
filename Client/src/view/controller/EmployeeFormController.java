@@ -9,46 +9,63 @@ import controller.EmployeeController;
 import domain.Employee;
 import domain.util.EmployeeRole;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JComboBox;
 import validation.ValidationException;
 import validation.Validator;
 import view.coordinator.Coordinator;
-import view.form.AddEmployeeForm;
+import view.form.EmployeeForm;
+import view.util.FormMode;
+import static view.util.FormMode.EDIT;
 
 /**
  *
  * @author Dragon
  */
-public class AddEmployeeFormController {
+public class EmployeeFormController {
 
-    private AddEmployeeForm addEmployeeForm;
+    private EmployeeForm employeeForm;
+    private FormMode formMode;
+    private Employee selectedEmployee;
+
     private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
-    public AddEmployeeFormController() {
-        this.addEmployeeForm = new AddEmployeeForm(Coordinator.getInstance().getMainForm(), true, this);
+    public EmployeeFormController(FormMode formMode, Employee selectedEmployee) {
+        this.formMode = formMode;
+        this.selectedEmployee = selectedEmployee;
+        this.employeeForm = new EmployeeForm(Coordinator.getInstance().getMainForm(), true, this);
     }
 
     public void openForm() {
         prepareForm();
-        addEmployeeForm.setVisible(true);
+        employeeForm.setVisible(true);
     }
 
     public void closeForm() {
-        addEmployeeForm.dispose();
+        employeeForm.dispose();
     }
 
     public void save(String firstName, String lastName, String role, String hourlyRate, String dateOfEmployment, String username, char[] password) throws Exception {
         validate(firstName, lastName, role, hourlyRate, dateOfEmployment, username, password);
-        
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
-        
+
         Employee employee = new Employee(firstName, lastName, EmployeeRole.valueOf(role), new BigDecimal(hourlyRate),
                 LocalDate.parse(dateOfEmployment, dtf), username, String.valueOf(password));
 
-        EmployeeController.getInstance().saveEmployee(employee);
+        switch (formMode) {
+
+            case EDIT:
+                edit(employee);
+                break;
+
+            case ADD:
+                add(employee);
+                break;
+
+            default:
+        }
     }
 
     public void coordinateForms() {
@@ -57,10 +74,14 @@ public class AddEmployeeFormController {
 
     private void prepareForm() {
         prepareRoleComboBox();
+
+        if (formMode == EDIT && selectedEmployee != null) {
+            prepareFields();
+        }
     }
 
     private void prepareRoleComboBox() {
-        JComboBox roleCMB = addEmployeeForm.getCmbRole();
+        JComboBox roleCMB = employeeForm.getCmbRole();
 
         roleCMB.removeAllItems();
 
@@ -80,5 +101,27 @@ public class AddEmployeeFormController {
                 .validateNotNull(password, "Password field is required!")
                 .validateNotNullOrEmpty(String.valueOf(password), "Password field is required!")
                 .throwIfInvalide();
+    }
+
+    private void prepareFields() {
+        employeeForm.getTxtFirstName().setText(selectedEmployee.getFirstName());
+        employeeForm.getTxtLastName().setText(selectedEmployee.getLastName());
+        employeeForm.getCmbRole().setSelectedItem(selectedEmployee.getEmployeeRole());
+        employeeForm.getTxtHourlyRate().setText(String.valueOf(selectedEmployee.getHourlyRate()));
+        employeeForm.getTxtDateOfEmployment().setText(selectedEmployee.getDateOfEmployment().format(DateTimeFormatter.ofPattern(DATE_PATTERN)));//TODO: Move this somewhere else (the pattern thing)
+        employeeForm.getTxtUserName().setText(selectedEmployee.getUsername());
+        employeeForm.getTxtPassword().setText(selectedEmployee.getPassword());//TODO: Implement show and hide!  
+    }
+
+    private void edit(Employee employee) throws Exception {
+        if (selectedEmployee != null) {
+            employee.setEmployeeID(selectedEmployee.getEmployeeID());
+            EmployeeController.getInstance().editEmployee(employee);
+            //TODO: Implement refreshing of the form after edit
+        }
+    }
+
+    private void add(Employee employee) throws Exception {
+        EmployeeController.getInstance().addEmployee(employee);
     }
 }
