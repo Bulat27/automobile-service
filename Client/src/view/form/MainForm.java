@@ -7,6 +7,7 @@ package view.form;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import view.controller.MainFormController;
 
@@ -196,4 +197,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu menuService;
     private javax.swing.JMenu menuServiceBook;
     // End of variables declaration//GEN-END:variables
+
+    public JMenu getMenuEmployee() {
+        return menuEmployee;
+    }  
 }

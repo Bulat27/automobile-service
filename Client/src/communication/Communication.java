@@ -5,6 +5,7 @@
  */
 package communication;
 
+import domain.Employee;
 import java.io.IOException;
 import java.net.Socket;
 import view.coordinator.Coordinator;
@@ -21,6 +22,7 @@ public class Communication {
     private Receiver receiver;
     private boolean connected = false;
     //TODO: Add the authenticated client on the client side!
+    private Employee authenticatedEmployee;
 
     private Communication() {
     }
@@ -43,12 +45,22 @@ public class Communication {
         Coordinator.getInstance().openLoginForm();
     }
 
-    public Response sendRequest(Request request) throws Exception  {
-        if(!connected) throw new Exception("Request cannot be send before a connection has been made!");
+    public Response sendRequest(Request request) throws Exception {
+        if (!connected) {
+            throw new Exception("Request cannot be send before a connection has been made!");
+        }
 //TODO: Make a custom Exception for this!
-        
+
         sender.send(request);
         System.out.println("Request has been sent...");
         return (Response) receiver.receive();
+    }
+
+    public void setAuthenticatedEmployee(Employee authenticatedEmployee) {
+        this.authenticatedEmployee = authenticatedEmployee;
+    }
+
+    public Employee getAuthenticatedEmployee() {
+        return authenticatedEmployee;
     }
 }

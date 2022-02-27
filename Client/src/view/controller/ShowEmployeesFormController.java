@@ -81,7 +81,7 @@ public class ShowEmployeesFormController {
         tme.setEmployee(employee, selectedRow);
     }
 
-    public void delete(int selectedRow) {
+    public void delete(int selectedRow) throws Exception {
         TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
         Employee employee = tme.getEmployee(selectedRow);
 
