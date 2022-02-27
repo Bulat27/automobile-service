@@ -28,12 +28,14 @@ public class EmployeeFormController {
     private EmployeeForm employeeForm;
     private FormMode formMode;
     private Employee selectedEmployee;
+    private int selectedRow;
 
     private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
-    public EmployeeFormController(FormMode formMode, Employee selectedEmployee) {
+    public EmployeeFormController(FormMode formMode, Employee selectedEmployee, int selectedRow) {
         this.formMode = formMode;
         this.selectedEmployee = selectedEmployee;
+        this.selectedRow = selectedRow;
         this.employeeForm = new EmployeeForm(Coordinator.getInstance().getMainForm(), true, this);
     }
 
@@ -118,6 +120,7 @@ public class EmployeeFormController {
             employee.setEmployeeID(selectedEmployee.getEmployeeID());
             EmployeeController.getInstance().editEmployee(employee);
             //TODO: Implement refreshing of the form after edit
+            if(selectedRow != -1) Coordinator.getInstance().refreshShowEmployeesForm(employee, selectedRow);
         }
     }
 

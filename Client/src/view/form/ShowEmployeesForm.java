@@ -95,6 +95,11 @@ public class ShowEmployeesForm extends javax.swing.JDialog {
         });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -169,11 +174,25 @@ public class ShowEmployeesForm extends javax.swing.JDialog {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         int selectedRow = tblEmployees.getSelectedRow();
-        
-        if(selectedRow != -1){
+
+        if (selectedRow >= 0) {
             showEmployeesFormController.openEditEmployeeForm(selectedRow);
         }
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = tblEmployees.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            try {
+                showEmployeesFormController.delete(selectedRow);
+                JOptionPane.showMessageDialog(this, "Employee successfully deleted");
+            } catch (Exception ex) {
+                Logger.getLogger(ShowEmployeesForm.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error deleting Employee: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

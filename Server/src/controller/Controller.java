@@ -13,6 +13,7 @@ import system_operation.AbstractSO;
 import system_operation.employee.GetAllEmployeesSO;
 import system_operation.employee.GetEmployeesByConditionSO;
 import system_operation.employee.AddEmployeeSO;
+import system_operation.employee.DeleteEmployeeSO;
 import system_operation.employee.EditEmployeeSO;
 import system_operation.login.LoginSO;
 import system_operation.service.DeleteServiceSO;
@@ -107,5 +108,10 @@ public class Controller {
     public void editEmployee(Employee employee) throws Exception {
         EditEmployeeSO editEmployeeSO = new EditEmployeeSO();
         editEmployeeSO.execute(employee);
+    }
+    
+    public void deleteEmployee(Employee employee) throws Exception {
+        DeleteEmployeeSO deleteEmployeeSO = new DeleteEmployeeSO();
+        deleteEmployeeSO.execute(employee);
     }
 }

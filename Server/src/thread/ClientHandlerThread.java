@@ -80,6 +80,8 @@ public class ClientHandlerThread extends Thread {
                 return getEmployeesByCondition(request);
             case EDIT_EMPLOYEE:
                 return editEmployee(request);
+            case DELETE_EMPLOYEE:
+                return deleteEmployee(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -258,6 +260,23 @@ public class ClientHandlerThread extends Thread {
         try {
             Controller.getInstance().editEmployee(employee);
             System.out.println("Successfully edited Employee!");
+            response.setResponseType(ResponseType.SUCCESS);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response deleteEmployee(Request request) {
+        Response response = new Response();
+
+        Employee employee = (Employee) request.getArgument();
+
+        try {
+            Controller.getInstance().deleteEmployee(employee);
+            System.out.println("Successfully deleted Employee!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!

@@ -71,7 +71,22 @@ public class ShowEmployeesFormController {
 
     public void openEditEmployeeForm(int selectedRow) {
         TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
-        
-        Coordinator.getInstance().openEditEmployeeForm(tme.getEmployee(selectedRow));
+
+        Coordinator.getInstance().openEditEmployeeForm(tme.getEmployee(selectedRow), selectedRow);
+    }
+
+    public void refreshShowEmployeesForm(Employee employee, int selectedRow) {
+        TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
+
+        tme.setEmployee(employee, selectedRow);
+    }
+
+    public void delete(int selectedRow) {
+        TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
+        Employee employee = tme.getEmployee(selectedRow);
+
+        EmployeeController.getInstance().deleteEmployee(employee);
+
+        tme.removeEmployee(selectedRow);
     }
 }

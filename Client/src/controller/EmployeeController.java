@@ -86,4 +86,13 @@ public class EmployeeController {
             throw response.getException();
         }
     }
+
+    public void deleteEmployee(Employee employee) throws Exception {
+        Request request = new Request(Operation.DELETE_EMPLOYEE, employee);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.ERROR)) {
+            throw response.getException();
+        }
+    }
 }

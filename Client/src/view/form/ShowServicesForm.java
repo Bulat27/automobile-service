@@ -151,13 +151,14 @@ public class ShowServicesForm extends javax.swing.JDialog {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedRow = tblServices.getSelectedRow();
+        
         if (selectedRow >= 0) {
             try {
                 showServicesFormController.delete(selectedRow);
                 JOptionPane.showMessageDialog(this, "Service successfully deleted");
             } catch (Exception ex) {
                 Logger.getLogger(ShowServicesForm.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Error deleting service: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error deleting Service: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed

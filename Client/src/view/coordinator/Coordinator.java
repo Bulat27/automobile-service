@@ -69,7 +69,7 @@ public class Coordinator {
     }
 
     public void openAddEmployeeForm() {
-        employeeFormController = new EmployeeFormController(ADD, null);
+        employeeFormController = new EmployeeFormController(ADD, null, -1);
         employeeFormController.openForm();
     }
 
@@ -78,8 +78,12 @@ public class Coordinator {
         showEmployeesFormController.openForm();
     }
 
-    public void openEditEmployeeForm(Employee employee) {
-        employeeFormController = new EmployeeFormController(EDIT, employee);
+    public void openEditEmployeeForm(Employee employee, int selectedRow) {
+        employeeFormController = new EmployeeFormController(EDIT, employee, selectedRow);
         employeeFormController.openForm();
+    }
+
+    public void refreshShowEmployeesForm(Employee employee, int selectedRow) {
+        showEmployeesFormController.refreshShowEmployeesForm(employee, selectedRow);
     }
 }

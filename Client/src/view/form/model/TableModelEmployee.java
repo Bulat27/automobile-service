@@ -74,8 +74,8 @@ public class TableModelEmployee extends AbstractTableModel {
         fireTableRowsInserted(employees.size() - 1, employees.size() - 1);//TODO: Make sure this suffices
     }
 
-    public void removeEmployee(Employee employee) {
-        employees.remove(employee);
+    public void removeEmployee(int index) {
+        employees.remove(index);
         fireTableDataChanged();
     }
 
@@ -90,5 +90,10 @@ public class TableModelEmployee extends AbstractTableModel {
 
     public Employee getEmployee(int index) {
         return employees.get(index);
+    }
+
+    public void setEmployee(Employee employee, int selectedRow) {
+        employees.set(selectedRow, employee);
+        fireTableDataChanged();
     }
 }
