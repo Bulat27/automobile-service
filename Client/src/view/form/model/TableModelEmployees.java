@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Cartman
  */
-public class TableModelEmployee extends AbstractTableModel {
+public class TableModelEmployees extends AbstractTableModel {
 
     private List<Employee> employees;
     private final String[] columnNames = new String[]{"First and last name", "Role", "Hourly rate", "Employment date", "Username"};
@@ -23,7 +23,7 @@ public class TableModelEmployee extends AbstractTableModel {
 
     private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
-    public TableModelEmployee(List<Employee> employees) {
+    public TableModelEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 

@@ -22,6 +22,8 @@ import system_operation.service.GetAllServicesSO;
 import system_operation.service.GetServicesByConditionSO;
 import system_operation.service.AddServiceSO;
 import system_operation.service_book.AddServiceBookSO;
+import system_operation.service_book.GetAllServiceBooksSO;
+import system_operation.service_book.GetServiceBooksByConditionSO;
 import thread.ServerThread;
 import view.form.MainForm;
 
@@ -30,95 +32,109 @@ import view.form.MainForm;
  * @author Dragon
  */
 public class Controller {
-    
+
     private static Controller instance;
     private ServerThread serverThread;
-    
+
     private Controller() {
     }
-    
+
     public static Controller getInstance() {
         if (instance == null) {
             instance = new Controller();
         }
         return instance;
     }
-    
+
     public void startServer(MainForm mainForm) throws IOException {
         if (serverThread == null || !serverThread.isAlive()) {
-            
+
             serverThread = new ServerThread(mainForm);
             serverThread.start();
         }
     }
-    
+
     public void stopServer() throws IOException {
         serverThread.stopThread();
     }
-    
+
     public Employee login(Employee requestEmployee) throws Exception {
         LoginSO loginSO = new LoginSO();//TODO: Once you put getResult in AbstractSO, then use AbstractSO here and only cast in returu e.g.
         //return (Employee) loginSO.getResult();
         loginSO.execute(requestEmployee);
-        
+
         return (Employee) loginSO.getResult();
     }
-    
+
     public void addService(Service service) throws Exception {
         AddServiceSO addServiceSO = new AddServiceSO();
         addServiceSO.execute(service);
     }
-    
+
     public List<Service> getAllServices() throws Exception {
         GetAllServicesSO getAllServicesSO = new GetAllServicesSO();
         getAllServicesSO.execute(null);
-        
+
         return (List<Service>) getAllServicesSO.getResult();
     }
-    
+
     public void deleteService(Service service) throws Exception {
         DeleteServiceSO deleteServiceSO = new DeleteServiceSO();
         deleteServiceSO.execute(service);
     }
-    
+
     public List<Service> getServicesByCondition(Service service) throws Exception {
         GetServicesByConditionSO getServicesByConditionSO = new GetServicesByConditionSO();
         getServicesByConditionSO.execute(service);
-        
+
         return (List<Service>) getServicesByConditionSO.getResult();
     }
-    
+
     public void addEmployee(Employee employee) throws Exception {
         AddEmployeeSO addEmployeeSO = new AddEmployeeSO();
         addEmployeeSO.execute(employee);
     }
-    
+
     public List<Employee> getAllEmployees() throws Exception {
         GetAllEmployeesSO getAllEmployeesSO = new GetAllEmployeesSO();
         getAllEmployeesSO.execute(null);
-        
+
         return (List<Employee>) getAllEmployeesSO.getResult();
     }
-    
+
     public List<Employee> getEmployeesByCondition(Employee employee) throws Exception {
         GetEmployeesByConditionSO getEmployeesByConditionSO = new GetEmployeesByConditionSO();
         getEmployeesByConditionSO.execute(employee);
-        
+
         return (List<Employee>) getEmployeesByConditionSO.getResult();
     }
-    
+
     public void editEmployee(Employee employee) throws Exception {
         EditEmployeeSO editEmployeeSO = new EditEmployeeSO();
         editEmployeeSO.execute(employee);
     }
-    
+
     public void deleteEmployee(Employee employee) throws Exception {
         DeleteEmployeeSO deleteEmployeeSO = new DeleteEmployeeSO();
         deleteEmployeeSO.execute(employee);
     }
-    
+
     public void addServiceBook(ServiceBook serviceBook) throws Exception {
         AddServiceBookSO addServiceBookSO = new AddServiceBookSO();
         addServiceBookSO.execute(serviceBook);
+    }
+
+    public List<ServiceBook> getAllServiceBooks() throws Exception {
+        GetAllServiceBooksSO getAllServiceBooksSO = new GetAllServiceBooksSO();
+        getAllServiceBooksSO.execute(null);
+
+        return (List<ServiceBook>) getAllServiceBooksSO.getResult();
+    }
+
+    public List<ServiceBook> getServiceBooksByCondition(ServiceBook serviceBook) throws Exception {
+        GetServiceBooksByConditionSO getServiceBooksByConditionSO = new GetServiceBooksByConditionSO();
+        getServiceBooksByConditionSO.execute(serviceBook);
+
+        return (List<ServiceBook>) getServiceBooksByConditionSO.getResult();
     }
 }

@@ -85,6 +85,10 @@ public class ClientHandlerThread extends Thread {
                 return deleteEmployee(request);
             case ADD_SERVICE_BOOK:
                 return addServiceBook(request);
+            case GET_ALL_SERVICE_BOOKS:
+                return getAllServiceBooks(request);
+            case GET_SERVICE_BOOKS_BY_CONDITION:
+                return getServiceBooksByCondition(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -298,6 +302,40 @@ public class ClientHandlerThread extends Thread {
             Controller.getInstance().addServiceBook(serviceBook);
             System.out.println("Successfully added Service book!");
             response.setResponseType(ResponseType.SUCCESS);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response getAllServiceBooks(Request request) {
+        Response response = new Response();
+
+        try {
+            List<ServiceBook> serviceBooks = Controller.getInstance().getAllServiceBooks();
+            System.out.println("Successful retrieval of Service books!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(serviceBooks);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response getServiceBooksByCondition(Request request) {
+        Response response = new Response();
+
+        ServiceBook serviceBook = (ServiceBook) request.getArgument();
+
+        try {
+            List<ServiceBook> serviceBooks = Controller.getInstance().getServiceBooksByCondition(serviceBook);
+            System.out.println("Successful retrieval of Service books by condition!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(serviceBooks);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

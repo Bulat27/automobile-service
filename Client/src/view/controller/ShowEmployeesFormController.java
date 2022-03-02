@@ -12,7 +12,7 @@ import validation.ValidationException;
 import validation.Validator;
 import view.coordinator.Coordinator;
 import view.form.ShowEmployeesForm;
-import view.form.model.TableModelEmployee;
+import view.form.model.TableModelEmployees;
 
 /**
  *
@@ -37,7 +37,7 @@ public class ShowEmployeesFormController {
 
     private void prepareTable() throws Exception {
         List<Employee> employees = EmployeeController.getInstance().getAllEmployees();
-        TableModelEmployee tme = new TableModelEmployee(employees);
+        TableModelEmployees tme = new TableModelEmployees(employees);
 
         showEmployeesForm.setTableEmployeesModel(tme);
     }
@@ -49,7 +49,7 @@ public class ShowEmployeesFormController {
 
         List<Employee> employees = EmployeeController.getInstance().getEmployeesByConditon(employee);
 
-        TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
+        TableModelEmployees tme = (TableModelEmployees) showEmployeesForm.getTblEmployees().getModel();
         tme.setEmployees(employees);
     }
 
@@ -70,19 +70,19 @@ public class ShowEmployeesFormController {
     }
 
     public void openEditEmployeeForm(int selectedRow) {
-        TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
+        TableModelEmployees tme = (TableModelEmployees) showEmployeesForm.getTblEmployees().getModel();
 
         Coordinator.getInstance().openEditEmployeeForm(tme.getEmployee(selectedRow), selectedRow);
     }
 
     public void refreshShowEmployeesForm(Employee employee, int selectedRow) {
-        TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
+        TableModelEmployees tme = (TableModelEmployees) showEmployeesForm.getTblEmployees().getModel();
 
         tme.setEmployee(employee, selectedRow);
     }
 
     public void delete(int selectedRow) throws Exception {
-        TableModelEmployee tme = (TableModelEmployee) showEmployeesForm.getTblEmployees().getModel();
+        TableModelEmployees tme = (TableModelEmployees) showEmployeesForm.getTblEmployees().getModel();
         Employee employee = tme.getEmployee(selectedRow);
 
         EmployeeController.getInstance().deleteEmployee(employee);

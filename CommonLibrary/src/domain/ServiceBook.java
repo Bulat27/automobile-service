@@ -99,7 +99,8 @@ public class ServiceBook implements GeneralDObject {
 
     @Override
     public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ServiceBook(rs.getLong("id"), rs.getString("client_first_name"), rs.getString("client_last_name"),
+                rs.getString("vehicle_description"), rs.getDate("initial_date").toLocalDate(), rs.getInt("active") == 1);
     }
 
     @Override
@@ -128,11 +129,20 @@ public class ServiceBook implements GeneralDObject {
 
     @Override
     public String getWhereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String clientFirstNameCondition = clientFirstName.isEmpty() ? "1 = 1" : "client_first_name = '" + clientFirstName + "'";
+        String conjuction = " AND ";
+        String clientLastNameCondition = clientLastName.isEmpty() ? "1 = 1" : "client_last_name = '" + clientLastName + "'";
+
+        return clientFirstNameCondition += conjuction += clientLastNameCondition;
     }
 
     @Override
     public String getUpdateColumnsWithPlaceHolders() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return clientFirstName + " " + clientLastName;
     }
 }

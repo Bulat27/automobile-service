@@ -11,6 +11,7 @@ import communication.Response;
 import communication.util.Operation;
 import communication.util.ResponseType;
 import domain.ServiceBook;
+import java.util.List;
 
 /**
  *
@@ -37,5 +38,25 @@ public class ServiceBookController {
         if (response.getResponseType().equals(ResponseType.ERROR)) {
             throw response.getException();
         }
+    }
+
+    public List<ServiceBook> getAllServiceBooks() throws Exception {
+        Request request = new Request(Operation.GET_ALL_SERVICE_BOOKS, null);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.SUCCESS)) {
+            return (List<ServiceBook>) response.getResult();
+        }
+        throw response.getException();
+    }
+
+    public List<ServiceBook> getServiceBooksByCondition(ServiceBook serviceBook) throws Exception {
+        Request request = new Request(Operation.GET_SERVICE_BOOKS_BY_CONDITION, serviceBook);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.SUCCESS)) {
+            return (List<ServiceBook>) response.getResult();
+        }
+        throw response.getException();
     }
 }

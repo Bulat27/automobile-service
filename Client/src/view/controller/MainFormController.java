@@ -60,4 +60,8 @@ public class MainFormController {
     public void openAddServiceBookForm() {
         Coordinator.getInstance().openAddServiceBookForm();
     }
+
+    public void openShowServiceBooksForm() throws Exception {
+        Coordinator.getInstance().openShowServiceBooksForm();
+    }
 }

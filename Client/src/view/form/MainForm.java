@@ -94,6 +94,11 @@ public class MainForm extends javax.swing.JFrame {
         menuServiceBook.add(menuItemAddServiceBook);
 
         menuItemSearchServiceBooks.setText("Search");
+        menuItemSearchServiceBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSearchServiceBooksActionPerformed(evt);
+            }
+        });
         menuServiceBook.add(menuItemSearchServiceBooks);
 
         menuBarMain.add(menuServiceBook);
@@ -189,6 +194,16 @@ public class MainForm extends javax.swing.JFrame {
     private void menuItemAddServiceBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddServiceBookActionPerformed
         mainFormController.openAddServiceBookForm();
     }//GEN-LAST:event_menuItemAddServiceBookActionPerformed
+
+    private void menuItemSearchServiceBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSearchServiceBooksActionPerformed
+        try {
+            mainFormController.openShowServiceBooksForm();
+        } catch (Exception ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "Error opening show Service books form: " + ex.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_menuItemSearchServiceBooksActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
