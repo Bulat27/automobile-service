@@ -89,6 +89,8 @@ public class ClientHandlerThread extends Thread {
                 return getAllServiceBooks(request);
             case GET_SERVICE_BOOKS_BY_CONDITION:
                 return getServiceBooksByCondition(request);
+            case DELETE_SERVICE_BOOK:
+                return deleteServiceBook(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -336,6 +338,23 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successful retrieval of Service books by condition!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(serviceBooks);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response deleteServiceBook(Request request) {
+        Response response = new Response();
+
+        ServiceBook serviceBook = (ServiceBook) request.getArgument();
+
+        try {
+            Controller.getInstance().deleteServiceBook(serviceBook);
+            System.out.println("Successfully deleted Service book!");
+            response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

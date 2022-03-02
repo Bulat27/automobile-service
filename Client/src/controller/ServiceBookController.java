@@ -59,4 +59,13 @@ public class ServiceBookController {
         }
         throw response.getException();
     }
+
+    public void deleteServiceBook(ServiceBook serviceBook) throws Exception {
+        Request request = new Request(Operation.DELETE_SERVICE_BOOK, serviceBook);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.ERROR)) {
+            throw response.getException();
+        }
+    }
 }

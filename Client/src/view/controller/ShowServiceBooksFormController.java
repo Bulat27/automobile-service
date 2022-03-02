@@ -68,4 +68,13 @@ public class ShowServiceBooksFormController {
 
         return serviceBook;
     }
+
+    public void delete(int selectedRow) throws Exception {
+        TableModelServiceBooks tmsb = (TableModelServiceBooks) showServiceBooksForm.getTblServiceBooks().getModel();
+        ServiceBook serviceBook = tmsb.getServiceBook(selectedRow);
+        
+        ServiceBookController.getInstance().deleteServiceBook(serviceBook);
+        
+        tmsb.removeServiceBook(selectedRow);
+    }
 }

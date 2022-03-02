@@ -182,17 +182,17 @@ public class ShowServiceBooksForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-//        int selectedRow = tblEmployees.getSelectedRow();
-//
-//        if (selectedRow >= 0) {
-//            try {
-//                showEmployeesFormController.delete(selectedRow);
-//                JOptionPane.showMessageDialog(this, "Employee successfully deleted");
-//            } catch (Exception ex) {
-//                Logger.getLogger(ShowServiceBooksForm.class.getName()).log(Level.SEVERE, null, ex);
-//                JOptionPane.showMessageDialog(this, "Error deleting Employee: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//        }
+        int selectedRow = tblServiceBooks.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            try {
+                showServiceBooksFormController.delete(selectedRow);
+                JOptionPane.showMessageDialog(this, "Service book successfully deleted");
+            } catch (Exception ex) {
+                Logger.getLogger(ShowServiceBooksForm.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Error deleting Service book: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 
