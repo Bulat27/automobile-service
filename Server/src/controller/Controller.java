@@ -7,6 +7,7 @@ package controller;
 
 import domain.Employee;
 import domain.Service;
+import domain.ServiceBook;
 import java.io.IOException;
 import java.util.List;
 import system_operation.AbstractSO;
@@ -20,6 +21,7 @@ import system_operation.service.DeleteServiceSO;
 import system_operation.service.GetAllServicesSO;
 import system_operation.service.GetServicesByConditionSO;
 import system_operation.service.AddServiceSO;
+import system_operation.service_book.AddServiceBookSO;
 import thread.ServerThread;
 import view.form.MainForm;
 
@@ -113,5 +115,10 @@ public class Controller {
     public void deleteEmployee(Employee employee) throws Exception {
         DeleteEmployeeSO deleteEmployeeSO = new DeleteEmployeeSO();
         deleteEmployeeSO.execute(employee);
+    }
+    
+    public void addServiceBook(ServiceBook serviceBook) throws Exception {
+        AddServiceBookSO addServiceBookSO = new AddServiceBookSO();
+        addServiceBookSO.execute(serviceBook);
     }
 }

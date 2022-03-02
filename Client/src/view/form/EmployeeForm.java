@@ -162,7 +162,7 @@ public class EmployeeForm extends javax.swing.JDialog {
             employeeFormController.coordinateForms();
         } catch (Exception ex) {
             Logger.getLogger(EmployeeForm.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error saving the employee", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error saving the Employee", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 

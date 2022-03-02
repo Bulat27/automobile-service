@@ -14,6 +14,7 @@ import communication.util.ResponseType;
 import controller.Controller;
 import domain.Employee;
 import domain.Service;
+import domain.ServiceBook;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
@@ -82,6 +83,8 @@ public class ClientHandlerThread extends Thread {
                 return editEmployee(request);
             case DELETE_EMPLOYEE:
                 return deleteEmployee(request);
+            case ADD_SERVICE_BOOK:
+                return addServiceBook(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -277,6 +280,23 @@ public class ClientHandlerThread extends Thread {
         try {
             Controller.getInstance().deleteEmployee(employee);
             System.out.println("Successfully deleted Employee!");
+            response.setResponseType(ResponseType.SUCCESS);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response addServiceBook(Request request) {
+        Response response = new Response();
+
+        ServiceBook serviceBook = (ServiceBook) request.getArgument();
+
+        try {
+            Controller.getInstance().addServiceBook(serviceBook);
+            System.out.println("Successfully added Service book!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!

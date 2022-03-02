@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,8 +15,8 @@ import java.time.LocalDate;
  *
  * @author Dragon
  */
-public class ServiceBook implements GeneralDObject{
-    
+public class ServiceBook implements GeneralDObject {
+
     private Long serviceBookID;
     private String clientFirstName;
     private String clientLastName;
@@ -28,6 +29,14 @@ public class ServiceBook implements GeneralDObject{
 
     public ServiceBook(Long serviceBookID, String clientFirstName, String clientLastName, String vehicleDescription, LocalDate initialDate, boolean active) {
         this.serviceBookID = serviceBookID;
+        this.clientFirstName = clientFirstName;
+        this.clientLastName = clientLastName;
+        this.vehicleDescription = vehicleDescription;
+        this.initialDate = initialDate;
+        this.active = active;
+    }
+
+    public ServiceBook(String clientFirstName, String clientLastName, String vehicleDescription, LocalDate initialDate, boolean active) {
         this.clientFirstName = clientFirstName;
         this.clientLastName = clientLastName;
         this.vehicleDescription = vehicleDescription;
@@ -95,17 +104,21 @@ public class ServiceBook implements GeneralDObject{
 
     @Override
     public String getInsertionColumns() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "client_first_name, client_last_name, vehicle_description, initial_date, active";
     }
 
     @Override
     public String getAtrPlaceHolders() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "?, ?, ?, ?, ?";
     }
 
     @Override
-    public void setPreparedStatementParameters(PreparedStatement ps) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPreparedStatementParameters(PreparedStatement ps) throws SQLException {
+        ps.setString(1, clientFirstName);
+        ps.setString(2, clientLastName);
+        ps.setString(3, vehicleDescription);
+        ps.setDate(4, Date.valueOf(initialDate));
+        ps.setInt(5, active ? 1 : 0);
     }
 
     @Override

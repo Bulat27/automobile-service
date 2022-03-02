@@ -56,8 +56,12 @@ public class EmployeeFormController {
         Employee employee = new Employee(firstName, lastName, EmployeeRole.valueOf(role), new BigDecimal(hourlyRate),
                 LocalDate.parse(dateOfEmployment, dtf), username, String.valueOf(password));
 
-        switch (formMode) {
+        executeSaving(employee);
+    }
 
+    private void executeSaving(Employee employee) throws Exception {
+        switch (formMode) {
+            
             case EDIT:
                 edit(employee);
                 break;
@@ -65,7 +69,7 @@ public class EmployeeFormController {
             case ADD:
                 add(employee);
                 break;
-
+                
             default:
         }
     }
@@ -120,7 +124,9 @@ public class EmployeeFormController {
             employee.setEmployeeID(selectedEmployee.getEmployeeID());
             EmployeeController.getInstance().editEmployee(employee);
             //TODO: Implement refreshing of the form after edit
-            if(selectedRow != -1) Coordinator.getInstance().refreshShowEmployeesForm(employee, selectedRow);
+            if (selectedRow != -1) {
+                Coordinator.getInstance().refreshShowEmployeesForm(employee, selectedRow);
+            }
         }
     }
 

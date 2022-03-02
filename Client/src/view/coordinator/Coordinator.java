@@ -10,6 +10,7 @@ import view.controller.EmployeeFormController;
 import view.controller.ServiceFormController;
 import view.controller.LoginFormController;
 import view.controller.MainFormController;
+import view.controller.ServiceBookFormController;
 import view.controller.ShowEmployeesFormController;
 import view.controller.ShowServicesFormController;
 import view.form.MainForm;
@@ -30,6 +31,7 @@ public class Coordinator {
     private ShowServicesFormController showServicesFormController;
     private EmployeeFormController employeeFormController;
     private ShowEmployeesFormController showEmployeesFormController;
+    private ServiceBookFormController serviceBookFormController;
 
     private Coordinator() {
     }
@@ -85,5 +87,10 @@ public class Coordinator {
 
     public void refreshShowEmployeesForm(Employee employee, int selectedRow) {
         showEmployeesFormController.refreshShowEmployeesForm(employee, selectedRow);
+    }
+
+    public void openAddServiceBookForm() {
+        serviceBookFormController = new ServiceBookFormController(ADD);
+        serviceBookFormController.openForm();
     }
 }
