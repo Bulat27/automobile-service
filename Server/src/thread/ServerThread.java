@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import properties.util.UtilApplicationProperties;
 import view.form.MainForm;
 
 /**
@@ -23,8 +24,10 @@ public class ServerThread extends Thread {
     private final MainForm mainForm;//TODO: This can probably be done some other way!
 
     public ServerThread(MainForm mainForm) throws IOException {//TODO: Make sure that it is handled. Some JOptionPane...
-        serverSocket = new ServerSocket(9000);//TODO: This needs to be read out of the configuration
-        clients = new ArrayList<>();
+        int serverPort = UtilApplicationProperties.getInstance().getServerPort();
+
+        this.serverSocket = new ServerSocket(serverPort);//TODO: This needs to be read out of the configuration
+        this.clients = new ArrayList<>();
         this.mainForm = mainForm;
     }
 
