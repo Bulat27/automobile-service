@@ -13,6 +13,7 @@ import validation.Validator;
 import view.coordinator.Coordinator;
 import view.form.ServiceBookForm;
 import view.util.FormMode;
+import static view.util.FormMode.EDIT;
 
 /**
  *
@@ -22,9 +23,13 @@ public class ServiceBookFormController {
     
     private ServiceBookForm serviceBookForm;
     private FormMode formMode;
+    private ServiceBook selectedServiceBook;
+    private int selectedRow;
     
-    public ServiceBookFormController(FormMode formMode) {
+    public ServiceBookFormController(FormMode formMode, ServiceBook serviceBook, int selectedRow) {
         this.formMode = formMode;
+        this.selectedServiceBook = serviceBook;
+        this.selectedRow = selectedRow;
         serviceBookForm = new ServiceBookForm(Coordinator.getInstance().getMainForm(), true, this);
     }
     
@@ -38,7 +43,9 @@ public class ServiceBookFormController {
     }
     
     private void prepareForm() {
-        
+        if (formMode == EDIT && selectedServiceBook != null) {
+            prepareFields();
+        }
     }
     
     public void save(String clientFirstName, String clientLastName, String vehicleDescription, boolean active) throws Exception {
@@ -69,7 +76,7 @@ public class ServiceBookFormController {
                 break;
             
             case EDIT:
-                
+                edit(serviceBook);
                 break;
             
             default:
@@ -78,5 +85,25 @@ public class ServiceBookFormController {
     
     private void add(ServiceBook serviceBook) throws Exception {
         ServiceBookController.getInstance().addServiceBook(serviceBook);
+    }
+    
+    private void prepareFields() {
+        serviceBookForm.getTxtClientFirstName().setText(selectedServiceBook.getClientFirstName());
+        serviceBookForm.getTxtClientLastName().setText(selectedServiceBook.getClientLastName());
+        serviceBookForm.getTxtVehicleDescription().setText(selectedServiceBook.getVehicleDescription());
+        serviceBookForm.getCheckBoxActive().setSelected(selectedServiceBook.isActive());
+    }
+    
+    private void edit(ServiceBook serviceBook) throws Exception {
+        if (selectedServiceBook != null) {
+            serviceBook.setServiceBookID(selectedServiceBook.getServiceBookID());
+            serviceBook.setInitialDate(selectedServiceBook.getInitialDate());
+            
+            ServiceBookController.getInstance().editServiceBook(serviceBook);
+            
+            if (selectedRow != -1) {
+                Coordinator.getInstance().refreshShowServiceBooksForm(serviceBook, selectedRow);
+            }
+        }
     }
 }

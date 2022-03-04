@@ -23,6 +23,7 @@ import system_operation.service.GetServicesByConditionSO;
 import system_operation.service.AddServiceSO;
 import system_operation.service_book.AddServiceBookSO;
 import system_operation.service_book.DeleteServiceBookSO;
+import system_operation.service_book.EditServiceBookSO;
 import system_operation.service_book.GetAllServiceBooksSO;
 import system_operation.service_book.GetServiceBooksByConditionSO;
 import thread.ServerThread;
@@ -142,5 +143,10 @@ public class Controller {
     public void deleteServiceBook(ServiceBook serviceBook) throws Exception {
         DeleteServiceBookSO deleteServiceBookSO = new DeleteServiceBookSO();
         deleteServiceBookSO.execute(serviceBook);
+    }
+    
+    public void editServiceBook(ServiceBook serviceBook) throws Exception {
+        EditServiceBookSO editServiceBookSO = new EditServiceBookSO();
+        editServiceBookSO.execute(serviceBook);
     }
 }

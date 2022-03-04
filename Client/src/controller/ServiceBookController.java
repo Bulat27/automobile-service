@@ -68,4 +68,13 @@ public class ServiceBookController {
             throw response.getException();
         }
     }
+
+    public void editServiceBook(ServiceBook serviceBook) throws Exception {
+        Request request = new Request(Operation.EDIT_SERVICE_BOOK, serviceBook);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.ERROR)) {
+            throw response.getException();
+        }
+    }
 }

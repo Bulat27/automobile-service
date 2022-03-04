@@ -6,6 +6,7 @@
 package view.coordinator;
 
 import domain.Employee;
+import domain.ServiceBook;
 import view.controller.EmployeeFormController;
 import view.controller.ServiceFormController;
 import view.controller.LoginFormController;
@@ -92,12 +93,21 @@ public class Coordinator {
     }
 
     public void openAddServiceBookForm() {
-        serviceBookFormController = new ServiceBookFormController(ADD);
+        serviceBookFormController = new ServiceBookFormController(ADD, null, -1);
         serviceBookFormController.openForm();
     }
 
     public void openShowServiceBooksForm() throws Exception {
         showServiceBooksFormController = new ShowServiceBooksFormController();
         showServiceBooksFormController.openForm();
+    }
+
+    public void openEditServiceBookForm(ServiceBook serviceBook, int selectedRow) {
+        serviceBookFormController = new ServiceBookFormController(EDIT, serviceBook, selectedRow);
+        serviceBookFormController.openForm();
+    }
+
+    public void refreshShowServiceBooksForm(ServiceBook serviceBook, int selectedRow) {
+        showServiceBooksFormController.refreshShowServiceBooksForm(serviceBook, selectedRow);
     }
 }

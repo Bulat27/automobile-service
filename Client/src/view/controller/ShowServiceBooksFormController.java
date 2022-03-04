@@ -77,4 +77,16 @@ public class ShowServiceBooksFormController {
         
         tmsb.removeServiceBook(selectedRow);
     }
+
+    public void openEditServiceBookForm(int selectedRow) {
+        TableModelServiceBooks tmsb = (TableModelServiceBooks) showServiceBooksForm.getTblServiceBooks().getModel();
+        
+        Coordinator.getInstance().openEditServiceBookForm(tmsb.getServiceBook(selectedRow), selectedRow);
+    }
+
+    public void refreshShowServiceBooksForm(ServiceBook serviceBook, int selectedRow) {
+        TableModelServiceBooks tmsb = (TableModelServiceBooks) showServiceBooksForm.getTblServiceBooks().getModel();
+        
+        tmsb.setServiceBook(serviceBook, selectedRow);
+    }
 }

@@ -138,7 +138,7 @@ public class ServiceBook implements GeneralDObject {
 
     @Override
     public String getUpdateColumnsWithPlaceHolders() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "client_first_name = ?, client_last_name = ?, vehicle_description = ?, initial_date = ?, active = ?";
     }
 
     @Override

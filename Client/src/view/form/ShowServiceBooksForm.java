@@ -174,11 +174,11 @@ public class ShowServiceBooksForm extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-//        int selectedRow = tblEmployees.getSelectedRow();
-//
-//        if (selectedRow >= 0) {
-//            showEmployeesFormController.openEditEmployeeForm(selectedRow);
-//        }
+        int selectedRow = tblServiceBooks.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            showServiceBooksFormController.openEditServiceBookForm(selectedRow);
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

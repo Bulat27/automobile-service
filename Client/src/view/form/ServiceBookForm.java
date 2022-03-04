@@ -7,7 +7,10 @@ package view.form;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import view.controller.ServiceBookFormController;
 
 /**
@@ -161,4 +164,20 @@ public class ServiceBookForm extends javax.swing.JDialog {
     private javax.swing.JTextField txtClientLastName;
     private javax.swing.JTextArea txtVehicleDescription;
     // End of variables declaration//GEN-END:variables
+
+    public JCheckBox getCheckBoxActive() {
+        return checkBoxActive;
+    }
+
+    public JTextField getTxtClientFirstName() {
+        return txtClientFirstName;
+    }
+
+    public JTextField getTxtClientLastName() {
+        return txtClientLastName;
+    }
+
+    public JTextArea getTxtVehicleDescription() {
+        return txtVehicleDescription;
+    }
 }
