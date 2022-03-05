@@ -24,7 +24,7 @@ public class GetServiceBooksByConditionSO extends AbstractSO {
     @Override
     protected void executeOperation(Object param) throws Exception {
         ServiceBook serviceBook = (ServiceBook) param;
-        result = repository.findRecords(serviceBook, serviceBook.getWhereCondition());
+        result = repository.findRecords(serviceBook, serviceBook.getAttributeValuesWhereCondition());
     }
 
     public Object getResult() {

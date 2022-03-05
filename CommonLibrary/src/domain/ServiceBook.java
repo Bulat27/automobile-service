@@ -128,7 +128,7 @@ public class ServiceBook implements GeneralDObject {
     }
 
     @Override
-    public String getWhereCondition() {
+    public String getAttributeValuesWhereCondition() {
         String clientFirstNameCondition = clientFirstName.isEmpty() ? "1 = 1" : "client_first_name = '" + clientFirstName + "'";
         String conjuction = " AND ";
         String clientLastNameCondition = clientLastName.isEmpty() ? "1 = 1" : "client_last_name = '" + clientLastName + "'";
@@ -144,5 +144,19 @@ public class ServiceBook implements GeneralDObject {
     @Override
     public String toString() {
         return clientFirstName + " " + clientLastName;
+    }
+    
+    public String getGeneralData(){
+        return clientFirstName + " " + clientLastName + ", " + vehicleDescription;
+    }
+
+    @Override
+    public String getFKWhereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getJoinCondition() {
+        return "";
     }
 }

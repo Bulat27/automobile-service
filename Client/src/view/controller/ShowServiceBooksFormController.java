@@ -26,6 +26,10 @@ public class ShowServiceBooksFormController {
         showServiceBooksForm = new ShowServiceBooksForm(Coordinator.getInstance().getMainForm(), true, this);
     }
 
+    public ShowServiceBooksForm getShowServiceBooksForm() {
+        return showServiceBooksForm;
+    }
+
     public void openForm() throws Exception {
         prepareForm();
         showServiceBooksForm.setVisible(true);
@@ -72,21 +76,27 @@ public class ShowServiceBooksFormController {
     public void delete(int selectedRow) throws Exception {
         TableModelServiceBooks tmsb = (TableModelServiceBooks) showServiceBooksForm.getTblServiceBooks().getModel();
         ServiceBook serviceBook = tmsb.getServiceBook(selectedRow);
-        
+
         ServiceBookController.getInstance().deleteServiceBook(serviceBook);
-        
+
         tmsb.removeServiceBook(selectedRow);
     }
 
     public void openEditServiceBookForm(int selectedRow) {
         TableModelServiceBooks tmsb = (TableModelServiceBooks) showServiceBooksForm.getTblServiceBooks().getModel();
-        
+
         Coordinator.getInstance().openEditServiceBookForm(tmsb.getServiceBook(selectedRow), selectedRow);
     }
 
     public void refreshShowServiceBooksForm(ServiceBook serviceBook, int selectedRow) {
         TableModelServiceBooks tmsb = (TableModelServiceBooks) showServiceBooksForm.getTblServiceBooks().getModel();
-        
+
         tmsb.setServiceBook(serviceBook, selectedRow);
+    }
+
+    public void openShowRepairsForm(int selectedRow) throws Exception {
+        TableModelServiceBooks tmsb = (TableModelServiceBooks) showServiceBooksForm.getTblServiceBooks().getModel();
+
+        Coordinator.getInstance().openShowRepairsForm(tmsb.getServiceBook(selectedRow), selectedRow);
     }
 }

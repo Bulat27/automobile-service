@@ -22,6 +22,8 @@ public interface GeneralDObject extends Serializable{
     String getAtrPlaceHolders();
     void setPreparedStatementParameters(PreparedStatement ps) throws SQLException;
     String getPKWhereCondition();
-    String getWhereCondition();
+    String getFKWhereCondition();
+    String getAttributeValuesWhereCondition();
     String getUpdateColumnsWithPlaceHolders();
+    String getJoinCondition();
 }

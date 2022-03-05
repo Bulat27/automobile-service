@@ -45,7 +45,7 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
 
     @Override
     public List<GeneralDObject> findRecords(GeneralDObject gdo, String whereCondition) throws Exception {
-        String query = "SELECT * FROM " + gdo.getTableName();//TODO: Add the JOIN for gdo.getJOIN() or something like that!
+        String query = "SELECT * FROM " + gdo.getTableName() + gdo.getJoinCondition();//TODO: Add the JOIN for gdo.getJOIN() or something like that!
         if (whereCondition != null) {
             query += " WHERE " + whereCondition;
         }

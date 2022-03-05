@@ -26,7 +26,7 @@ public class GetServicesByConditionSO extends AbstractSO{
     @Override
     protected void executeOperation(Object param) throws Exception {
         Service service = (Service) param;
-        result = repository.findRecords(service, service.getWhereCondition());
+        result = repository.findRecords(service, service.getAttributeValuesWhereCondition());
     }
 
     public Object getResult() {

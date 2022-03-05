@@ -118,12 +118,22 @@ public class Service implements GeneralDObject {
     }
 
     @Override
-    public String getWhereCondition() {
+    public String getAttributeValuesWhereCondition() {
         return "name like '%" + name + "%'";
     }
 
     @Override
     public String getUpdateColumnsWithPlaceHolders() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getFKWhereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getJoinCondition() {
+        return "";
     }
 }

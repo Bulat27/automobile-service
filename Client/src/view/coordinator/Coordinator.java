@@ -13,9 +13,11 @@ import view.controller.LoginFormController;
 import view.controller.MainFormController;
 import view.controller.ServiceBookFormController;
 import view.controller.ShowEmployeesFormController;
+import view.controller.ShowRepairsFormController;
 import view.controller.ShowServiceBooksFormController;
 import view.controller.ShowServicesFormController;
 import view.form.MainForm;
+import view.form.ShowServiceBooksForm;
 import static view.util.FormMode.ADD;
 import static view.util.FormMode.EDIT;
 
@@ -35,6 +37,7 @@ public class Coordinator {
     private ShowEmployeesFormController showEmployeesFormController;
     private ServiceBookFormController serviceBookFormController;
     private ShowServiceBooksFormController showServiceBooksFormController;
+    private ShowRepairsFormController showRepairsFormController;
 
     private Coordinator() {
     }
@@ -66,6 +69,10 @@ public class Coordinator {
 
     public MainForm getMainForm() {
         return mainFormController.getMainForm();
+    }
+
+    public ShowServiceBooksForm getShowServiceBooksForm() {
+        return showServiceBooksFormController.getShowServiceBooksForm();
     }
 
     public void openShowServicesForm() throws Exception {
@@ -109,5 +116,10 @@ public class Coordinator {
 
     public void refreshShowServiceBooksForm(ServiceBook serviceBook, int selectedRow) {
         showServiceBooksFormController.refreshShowServiceBooksForm(serviceBook, selectedRow);
+    }
+
+    public void openShowRepairsForm(ServiceBook serviceBook, int selectedRow) throws Exception {
+        showRepairsFormController = new ShowRepairsFormController(serviceBook, selectedRow);
+        showRepairsFormController.openForm();
     }
 }

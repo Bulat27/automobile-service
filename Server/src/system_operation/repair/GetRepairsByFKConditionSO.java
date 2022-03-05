@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package system_operation.employee;
+package system_operation.repair;
 
-import domain.Employee;
+import domain.Repair;
 import system_operation.AbstractSO;
 import validation.Validator;
 
@@ -13,18 +13,18 @@ import validation.Validator;
  *
  * @author Dragon
  */
-public class GetEmployeesByConditionSO extends AbstractSO {
+public class GetRepairsByFKConditionSO extends AbstractSO {
 
     @Override
     protected void precondition(Object param) throws Exception {
         Validator.startValidation()
-                .throwIfInvalideParameterInstance(param, "Parameter must be an instance of Employee", Employee.class);
+                .throwIfInvalideParameterInstance(param, "Parameter must be an instance of Repair", Repair.class);
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        Employee employee = (Employee) param;
-        result = repository.findRecords(employee, employee.getAttributeValuesWhereCondition());
+        Repair repair = (Repair) param;
+        result = repository.findRecords(repair, repair.getFKWhereCondition());
     }
 
     public Object getResult() {

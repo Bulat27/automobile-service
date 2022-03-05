@@ -186,7 +186,7 @@ public class Employee implements GeneralDObject {
     }
 
     @Override
-    public String getWhereCondition() {
+    public String getAttributeValuesWhereCondition() {
         String firstNameCondition = firstName.isEmpty() ? "1 = 1" : "first_name = '" + firstName + "'";
         String conjuction = " AND ";
         String lastNameCondition = lastName.isEmpty() ? "1 = 1" : "last_name = '" + lastName + "'";
@@ -197,5 +197,15 @@ public class Employee implements GeneralDObject {
     @Override
     public String getUpdateColumnsWithPlaceHolders() {
         return "first_name = ?, last_name = ?, role = ?, hourly_rate = ?, date_of_employment = ?, username = ?, password = ?";
+    }
+
+    @Override
+    public String getFKWhereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getJoinCondition() {
+        return "";
     }
 }
