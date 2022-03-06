@@ -6,17 +6,20 @@
 package view.coordinator;
 
 import domain.Employee;
+import domain.Repair;
 import domain.ServiceBook;
 import view.controller.EmployeeFormController;
 import view.controller.ServiceFormController;
 import view.controller.LoginFormController;
 import view.controller.MainFormController;
+import view.controller.RepairFormController;
 import view.controller.ServiceBookFormController;
 import view.controller.ShowEmployeesFormController;
 import view.controller.ShowRepairsFormController;
 import view.controller.ShowServiceBooksFormController;
 import view.controller.ShowServicesFormController;
 import view.form.MainForm;
+import view.form.ShowRepairsForm;
 import view.form.ShowServiceBooksForm;
 import static view.util.FormMode.ADD;
 import static view.util.FormMode.EDIT;
@@ -38,6 +41,7 @@ public class Coordinator {
     private ServiceBookFormController serviceBookFormController;
     private ShowServiceBooksFormController showServiceBooksFormController;
     private ShowRepairsFormController showRepairsFormController;
+    private RepairFormController repairFormController;
 
     private Coordinator() {
     }
@@ -73,6 +77,10 @@ public class Coordinator {
 
     public ShowServiceBooksForm getShowServiceBooksForm() {
         return showServiceBooksFormController.getShowServiceBooksForm();
+    }
+
+    public ShowRepairsForm getShowRepairsForm() {
+        return showRepairsFormController.getShowRepairsForm();
     }
 
     public void openShowServicesForm() throws Exception {
@@ -121,5 +129,15 @@ public class Coordinator {
     public void openShowRepairsForm(ServiceBook serviceBook, int selectedRow) throws Exception {
         showRepairsFormController = new ShowRepairsFormController(serviceBook, selectedRow);
         showRepairsFormController.openForm();
+    }
+
+    public void openAddRepairForm() throws Exception {
+        repairFormController = new RepairFormController(ADD, null, -1);
+        repairFormController.openForm();
+    }
+
+    public void openEditRepairForm(Repair repair, int selectedRow) throws Exception {
+        repairFormController = new RepairFormController(EDIT, repair, selectedRow);
+        repairFormController.openForm();
     }
 }

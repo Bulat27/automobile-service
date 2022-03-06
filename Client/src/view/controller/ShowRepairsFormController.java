@@ -29,6 +29,10 @@ public class ShowRepairsFormController {
         showRepairsForm = new ShowRepairsForm(Coordinator.getInstance().getShowServiceBooksForm(), true, this);
     }
 
+    public ShowRepairsForm getShowRepairsForm() {
+        return showRepairsForm;
+    }
+
     public void openForm() throws Exception {
         prepareForm();
         showRepairsForm.setVisible(true);
@@ -45,6 +49,7 @@ public class ShowRepairsFormController {
         List<Repair> repairs = RepairController.getInstance().getRepairsByFKCondition(repair);
         TableModeRepairs tmr = new TableModeRepairs(repairs);
 
+        selectedServiceBook.setRepairs(repairs);
         showRepairsForm.setTableRepairsModel(tmr);
     }
 
@@ -58,5 +63,15 @@ public class ShowRepairsFormController {
         repair.setServiceBook(selectedServiceBook);
 
         return repair;
+    }
+
+    public void openAddRepairForm() throws Exception {
+        Coordinator.getInstance().openAddRepairForm();
+    }
+
+    public void openEditRepairForm(int selectedRow) throws Exception {
+        TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
+        
+        Coordinator.getInstance().openEditRepairForm(tmr.getRepair(selectedRow), selectedRow);
     }
 }

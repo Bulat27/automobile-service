@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,7 @@ public class ServiceBook implements GeneralDObject {
     private String vehicleDescription;
     private LocalDate initialDate;
     private boolean active;
+    private List<Repair> repairs;
 
     public ServiceBook() {
     }
@@ -92,6 +94,14 @@ public class ServiceBook implements GeneralDObject {
         this.active = active;
     }
 
+    public List<Repair> getRepairs() {
+        return repairs;
+    }
+
+    public void setRepairs(List<Repair> repairs) {
+        this.repairs = repairs;
+    }
+
     @Override
     public String getTableName() {
         return "service_book";
@@ -145,8 +155,8 @@ public class ServiceBook implements GeneralDObject {
     public String toString() {
         return clientFirstName + " " + clientLastName;
     }
-    
-    public String getGeneralData(){
+
+    public String getGeneralData() {
         return clientFirstName + " " + clientLastName + ", " + vehicleDescription;
     }
 

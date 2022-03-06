@@ -14,6 +14,7 @@ import communication.util.ResponseType;
 import controller.Controller;
 import domain.Employee;
 import domain.Repair;
+import domain.RepairItem;
 import domain.Service;
 import domain.ServiceBook;
 import java.io.IOException;
@@ -96,6 +97,8 @@ public class ClientHandlerThread extends Thread {
                 return editServiceBook(request);
             case GET_REPAIRS_BY_FK_CONDITION:
                 return getRepairsByFKCondition(request);
+            case GET_REPAIR_ITEMS_BY_FK_CONDITION:
+                return getRepairItemsByFKCondition(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -395,6 +398,24 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successful retrieval of Repairs by FK condition!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(repairs);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response getRepairItemsByFKCondition(Request request) {
+        Response response = new Response();
+
+        RepairItem repairItem = (RepairItem) request.getArgument();
+
+        try {
+            List<RepairItem> repairItems = Controller.getInstance().getRepairItemsByFKCondition(repairItem);
+            System.out.println("Successful retrieval of Repair items by FK condition!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(repairItems);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

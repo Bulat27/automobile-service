@@ -7,6 +7,7 @@ package controller;
 
 import domain.Employee;
 import domain.Repair;
+import domain.RepairItem;
 import domain.Service;
 import domain.ServiceBook;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import system_operation.employee.DeleteEmployeeSO;
 import system_operation.employee.EditEmployeeSO;
 import system_operation.login.LoginSO;
 import system_operation.repair.GetRepairsByFKConditionSO;
+import system_operation.repair_item.GetRepairItemsByFKConditionSO;
 import system_operation.service.DeleteServiceSO;
 import system_operation.service.GetAllServicesSO;
 import system_operation.service.GetServicesByConditionSO;
@@ -157,5 +159,12 @@ public class Controller {
         getRepairsByFKConditionSO.execute(repair);
 
         return (List<Repair>) getRepairsByFKConditionSO.getResult();
+    }
+
+    public List<RepairItem> getRepairItemsByFKCondition(RepairItem repairItem) throws Exception {
+        GetRepairItemsByFKConditionSO getRepairItemsByFKConditionSO = new GetRepairItemsByFKConditionSO();
+        getRepairItemsByFKConditionSO.execute(repairItem);
+
+        return (List<RepairItem>) getRepairItemsByFKConditionSO.getResult();
     }
 }

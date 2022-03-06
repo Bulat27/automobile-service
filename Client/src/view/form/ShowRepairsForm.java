@@ -6,7 +6,11 @@
 package view.form;
 
 import java.awt.Dialog;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import view.controller.ShowRepairsFormController;
 
@@ -50,6 +54,8 @@ public class ShowRepairsForm extends javax.swing.JDialog {
         tblRepairs = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         lblServiceBookGeneralData = new javax.swing.JLabel();
+        btnDetails = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,13 +85,28 @@ public class ShowRepairsForm extends javax.swing.JDialog {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
-        lblServiceBookGeneralData.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblServiceBookGeneralData.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblServiceBookGeneralData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblServiceBookGeneralData.setText("jLabel1");
+
+        btnDetails.setText("Details");
+        btnDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailsActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +119,10 @@ public class ShowRepairsForm extends javax.swing.JDialog {
                         .addComponent(lblServiceBookGeneralData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                    .addComponent(btnDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,14 +135,42 @@ public class ShowRepairsForm extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdd)
-                        .addContainerGap(620, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDetails)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        try {
+            showRepairsFormController.openAddRepairForm();
+        } catch (Exception ex) {
+            Logger.getLogger(ShowRepairsForm.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this, "Error opening add Repair form: " + ex.getMessage(), "Add Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        int selectedRow = tblRepairs.getSelectedRow();
+        
+        if(selectedRow >= 0){
+            try {
+                showRepairsFormController.openEditRepairForm(selectedRow);
+            } catch (Exception ex) {
+                Logger.getLogger(ShowRepairsForm.class.getName()).log(Level.SEVERE, null, ex);
+                 JOptionPane.showMessageDialog(this, "Error opening edit Repair form: " + ex.getMessage(), "Edit Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnDetailsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDetails;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblServiceBookGeneralData;
@@ -131,5 +183,9 @@ public class ShowRepairsForm extends javax.swing.JDialog {
 
     public JLabel getLblServiceBookGeneralData() {
         return lblServiceBookGeneralData;
+    } 
+
+    public JTable getTblRepairs() {
+        return tblRepairs;
     } 
 }

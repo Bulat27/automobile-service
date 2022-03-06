@@ -15,8 +15,8 @@ import java.time.LocalDate;
  *
  * @author Dragon
  */
-public class RepairItem implements GeneralDObject{
-    
+public class RepairItem implements GeneralDObject {
+
     private Repair repair;
     private Integer orderNumber;
     private LocalDate startDate;
@@ -27,7 +27,8 @@ public class RepairItem implements GeneralDObject{
     private BigDecimal additionalRevenue;
     private Service service;
 
-    public RepairItem() {}
+    public RepairItem() {
+    }
 
     public RepairItem(Repair repair, Integer orderNumber, LocalDate startDate, LocalDate endDate, String remark, BigDecimal employeeExpense, BigDecimal additionalExpense, BigDecimal additionalRevenue, Service service) {
         this.repair = repair;
@@ -111,7 +112,7 @@ public class RepairItem implements GeneralDObject{
 
     public void setService(Service service) {
         this.service = service;
-    }  
+    }
 
     @Override
     public String getTableName() {
@@ -120,7 +121,12 @@ public class RepairItem implements GeneralDObject{
 
     @Override
     public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Service s = new Service(rs.getLong("s.id"), rs.getBigDecimal("s.price"), rs.getString("s.name"),
+                rs.getString("s.description"), rs.getBigDecimal("s.material_cost"));
+
+        return new RepairItem(repair, rs.getInt("ri.order_number"), rs.getDate("ri.start_date").toLocalDate(), rs.getDate("ri.end_date").toLocalDate(),
+                 rs.getString("ri.remark"), rs.getBigDecimal("ri.employee_expense"), rs.getBigDecimal("ri.additional_expense"),
+                 rs.getBigDecimal("ri.additional_revenue"), s);
     }
 
     @Override
@@ -155,11 +161,11 @@ public class RepairItem implements GeneralDObject{
 
     @Override
     public String getFKWhereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "ri.repair_id = " + repair.getRepairID();
     }
 
     @Override
     public String getJoinCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return " ri JOIN service s ON ri.service_id = s.id";
     }
 }
