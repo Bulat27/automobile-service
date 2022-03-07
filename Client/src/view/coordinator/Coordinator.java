@@ -7,18 +7,22 @@ package view.coordinator;
 
 import domain.Employee;
 import domain.Repair;
+import domain.RepairItem;
 import domain.ServiceBook;
+import java.awt.Dialog;
 import view.controller.EmployeeFormController;
 import view.controller.ServiceFormController;
 import view.controller.LoginFormController;
 import view.controller.MainFormController;
 import view.controller.RepairFormController;
+import view.controller.RepairItemFormController;
 import view.controller.ServiceBookFormController;
 import view.controller.ShowEmployeesFormController;
 import view.controller.ShowRepairsFormController;
 import view.controller.ShowServiceBooksFormController;
 import view.controller.ShowServicesFormController;
 import view.form.MainForm;
+import view.form.RepairForm;
 import view.form.ShowRepairsForm;
 import view.form.ShowServiceBooksForm;
 import static view.util.FormMode.ADD;
@@ -42,6 +46,7 @@ public class Coordinator {
     private ShowServiceBooksFormController showServiceBooksFormController;
     private ShowRepairsFormController showRepairsFormController;
     private RepairFormController repairFormController;
+    private RepairItemFormController repairItemFormController;
 
     private Coordinator() {
     }
@@ -77,6 +82,10 @@ public class Coordinator {
 
     public ShowServiceBooksForm getShowServiceBooksForm() {
         return showServiceBooksFormController.getShowServiceBooksForm();
+    }
+
+    public RepairForm getRepairForm() {
+        return repairFormController.getRepairForm();
     }
 
     public ShowRepairsForm getShowRepairsForm() {
@@ -131,13 +140,22 @@ public class Coordinator {
         showRepairsFormController.openForm();
     }
 
-    public void openAddRepairForm() throws Exception {
-        repairFormController = new RepairFormController(ADD, null, -1);
+    public void openAddRepairForm(Repair repair) throws Exception {
+        repairFormController = new RepairFormController(ADD, repair, -1);
         repairFormController.openForm();
     }
 
     public void openEditRepairForm(Repair repair, int selectedRow) throws Exception {
         repairFormController = new RepairFormController(EDIT, repair, selectedRow);
         repairFormController.openForm();
+    }
+
+    public void openAddRepairItemForm(Repair currentRepair) throws Exception {
+        repairItemFormController = new RepairItemFormController(ADD, null, -1, currentRepair);
+        repairItemFormController.openForm();
+    }
+
+    public void refreshRepairForm(RepairItem repairItem) {
+        repairFormController.refreshRepairForm(repairItem);
     }
 }

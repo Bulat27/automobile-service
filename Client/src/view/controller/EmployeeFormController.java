@@ -51,7 +51,7 @@ public class EmployeeFormController {
     public void save(String firstName, String lastName, String role, String hourlyRate, String dateOfEmployment, String username, char[] password) throws Exception {
         validate(firstName, lastName, role, hourlyRate, dateOfEmployment, username, password);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);//TODO: Find a better place for this!
 
         Employee employee = new Employee(firstName, lastName, EmployeeRole.valueOf(role), new BigDecimal(hourlyRate),
                 LocalDate.parse(dateOfEmployment, dtf), username, String.valueOf(password));

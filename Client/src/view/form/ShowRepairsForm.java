@@ -150,19 +150,19 @@ public class ShowRepairsForm extends javax.swing.JDialog {
             showRepairsFormController.openAddRepairForm();
         } catch (Exception ex) {
             Logger.getLogger(ShowRepairsForm.class.getName()).log(Level.SEVERE, null, ex);
-             JOptionPane.showMessageDialog(this, "Error opening add Repair form: " + ex.getMessage(), "Add Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error opening add Repair form: " + ex.getMessage(), "Add Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
         int selectedRow = tblRepairs.getSelectedRow();
-        
-        if(selectedRow >= 0){
+
+        if (selectedRow >= 0) {
             try {
                 showRepairsFormController.openEditRepairForm(selectedRow);
             } catch (Exception ex) {
                 Logger.getLogger(ShowRepairsForm.class.getName()).log(Level.SEVERE, null, ex);
-                 JOptionPane.showMessageDialog(this, "Error opening edit Repair form: " + ex.getMessage(), "Edit Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error opening edit Repair form: " + ex.getMessage(), "Edit Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnDetailsActionPerformed
@@ -183,9 +183,9 @@ public class ShowRepairsForm extends javax.swing.JDialog {
 
     public JLabel getLblServiceBookGeneralData() {
         return lblServiceBookGeneralData;
-    } 
+    }
 
     public JTable getTblRepairs() {
         return tblRepairs;
-    } 
+    }
 }

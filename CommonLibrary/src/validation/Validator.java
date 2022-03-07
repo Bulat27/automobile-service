@@ -71,6 +71,22 @@ public class Validator {
         return this;
     }
 
+    public Validator validateValueIsNonNegativeInteger(String value, String errorMessage) {
+        if (value == null || value.isEmpty()) {
+            this.validationErrors.add(errorMessage);
+        } else {
+            try {
+                int number = Integer.parseInt(value);
+                if (number < 0) {
+                    this.validationErrors.add(errorMessage);
+                }
+            } catch (NumberFormatException e) {
+                this.validationErrors.add(errorMessage);
+            }
+        }
+        return this;
+    }
+
 //    public Validator validateValueIsDate(String value, String pattern, String errorMessage) {//TODO:Do this using LocalDate and other Java 8 stuff
 //        //TODO: You could also add a validation in order to check if date is the value in the past or something like that!
 //        try {
@@ -106,7 +122,7 @@ public class Validator {
         }
         return this;
     }
-    
+
     public Validator validateListIsNotEmpty(List list, String errorMessage) {
         if (list == null || list.isEmpty()) {
             this.validationErrors.add(errorMessage);
@@ -121,6 +137,9 @@ public class Validator {
         return this;
     }
 
+//    public Validator validateIsFirstDateBefore(LocalDate firstDate, LocalDate secondDate, String errorMessage){
+//        
+//    }
     public Validator throwIfInvalideParameterInstance(Object value, String errorMessage, Class<?> cls) throws ValidationException {
         if (!cls.isInstance(value)) {
 //            this.validationErrors.add(errorMessage);

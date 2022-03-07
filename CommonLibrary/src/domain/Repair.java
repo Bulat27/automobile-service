@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,10 +22,10 @@ public class Repair implements GeneralDObject {
     private Long repairID;
     private String name;
     private LocalDate startDate;
-    private BigDecimal totalRevenue;
-    private BigDecimal totalExpense;
+    private BigDecimal totalRevenue = BigDecimal.ZERO;
+    private BigDecimal totalExpense = BigDecimal.ZERO;
     private ServiceBook serviceBook;
-    private List<RepairItem> repairItems;
+    private List<RepairItem> repairItems = new ArrayList<>();
 
     public Repair() {
     }
@@ -36,6 +37,7 @@ public class Repair implements GeneralDObject {
         this.name = name;
         this.startDate = startDate;
         this.serviceBook = serviceBook;
+//        this.repairItems = new ArrayList<>();
     }
 
     public Long getRepairID() {

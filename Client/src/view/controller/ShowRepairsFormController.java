@@ -44,7 +44,7 @@ public class ShowRepairsFormController {
     }
 
     private void prepareTable() throws Exception {
-        Repair repair = getRepairWithFKCondition();
+        Repair repair = getRepairWithCurrentServiceBook();
 
         List<Repair> repairs = RepairController.getInstance().getRepairsByFKCondition(repair);
         TableModeRepairs tmr = new TableModeRepairs(repairs);
@@ -57,7 +57,11 @@ public class ShowRepairsFormController {
         showRepairsForm.getLblServiceBookGeneralData().setText(selectedServiceBook.getGeneralData());
     }
 
-    private Repair getRepairWithFKCondition() {
+    public void openAddRepairForm() throws Exception {
+        Coordinator.getInstance().openAddRepairForm(getRepairWithCurrentServiceBook());
+    }
+
+    private Repair getRepairWithCurrentServiceBook() {
         Repair repair = new Repair();
 
         repair.setServiceBook(selectedServiceBook);
@@ -65,13 +69,9 @@ public class ShowRepairsFormController {
         return repair;
     }
 
-    public void openAddRepairForm() throws Exception {
-        Coordinator.getInstance().openAddRepairForm();
-    }
-
     public void openEditRepairForm(int selectedRow) throws Exception {
         TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
-        
+
         Coordinator.getInstance().openEditRepairForm(tmr.getRepair(selectedRow), selectedRow);
     }
 }

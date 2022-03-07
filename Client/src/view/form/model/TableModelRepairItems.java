@@ -18,8 +18,8 @@ import javax.swing.table.AbstractTableModel;
 public class TableModelRepairItems extends AbstractTableModel {
 
     private List<RepairItem> repairItems;
-    private final String[] columnNames = new String[]{"No.", "Service name", "Start date", "End date", "Remark", "Employee expense", "Extra expense", "Extra revenue"};
-    private final Class[] columnClass = new Class[]{Integer.class, String.class, String.class, String.class, String.class, BigDecimal.class, BigDecimal.class, BigDecimal.class};
+    private final String[] columnNames = new String[]{"No.", "Service name", "Start date", "End date", "Remark", "Emp. expense", "Extra expense", "Extra revenue", "Serv. price", "Mat. cost"};
+    private final Class[] columnClass = new Class[]{Integer.class, String.class, String.class, String.class, String.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class};
 
     private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
@@ -70,6 +70,10 @@ public class TableModelRepairItems extends AbstractTableModel {
                 return repairItem.getAdditionalExpense();
             case 7:
                 return repairItem.getAdditionalRevenue();
+            case 8:
+                return repairItem.getService().getPrice();
+            case 9:
+                return repairItem.getService().getMaterialCost();    
             default:
                 return "N/A";
         }
