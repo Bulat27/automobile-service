@@ -5,6 +5,7 @@
  */
 package view.controller;
 
+import controller.RepairController;
 import controller.RepairItemController;
 import domain.Repair;
 import domain.RepairItem;
@@ -13,12 +14,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import validation.ValidationException;
+import validation.Validator;
 import view.coordinator.Coordinator;
 import view.form.RepairForm;
 import view.form.model.TableModelRepairItems;
 import view.util.FormMode;
 import static view.util.FormMode.ADD;
 import static view.util.FormMode.EDIT;
+import view.util.RefreshMode;
 
 /**
  *
@@ -47,6 +51,14 @@ public class RepairFormController {
     public void openForm() throws Exception {
         prepareForm();
         repairForm.setVisible(true);
+    }
+
+    public void coordinateForms() {
+        closeForm();
+    }
+
+    private void closeForm() {
+        repairForm.dispose();
     }
 
     private void prepareForm() throws Exception {
@@ -105,21 +117,56 @@ public class RepairFormController {
         Coordinator.getInstance().openAddRepairItemForm(currentRepair);
     }
 
-    public void refreshRepairForm(RepairItem repairItem) {
-        updateCurrentRepair(repairItem);
-        updateRepairFormComponents();
+    public void refreshRepairForm(RepairItem repairItem, RefreshMode refreshMode) {
+        updateCurrentRepair(repairItem, refreshMode);
+        updateRepairFormComponents(refreshMode);
+
+        for (RepairItem repairItem1 : currentRepair.getRepairItems()) {//TODO: DELETE THIS!
+            System.out.println(repairItem1.getOrderNumber() + " " + repairItem1.getRemark());
+        }
     }
 
-    private void updateCurrentRepair(RepairItem repairItem) {
-        currentRepair.getRepairItems().add(repairItem);
+    private void updateCurrentRepair(RepairItem repairItem, RefreshMode refreshMode) {
+        updateRepairItems(repairItem, refreshMode);
 
         LocalDate startDate = getEarliestStartDate();
         BigDecimal riTotalRevenue = repairItem.getService().getPrice().add(repairItem.getAdditionalRevenue());
         BigDecimal riTotalExpense = repairItem.getEmployeeExpense().add(repairItem.getAdditionalExpense().add(repairItem.getService().getMaterialCost()));
 
         currentRepair.setStartDate(startDate);
-        currentRepair.setTotalRevenue(currentRepair.getTotalRevenue().add(riTotalRevenue));
-        currentRepair.setTotalExpense(currentRepair.getTotalExpense().add(riTotalExpense));
+        updateFinancialData(riTotalRevenue, riTotalExpense, refreshMode);
+    }
+
+    private void updateRepairItems(RepairItem repairItem, RefreshMode refreshMode) {
+        switch (refreshMode) {
+
+            case REFRESH_ADD:
+                currentRepair.getRepairItems().add(repairItem);
+                break;
+
+            case REFRESH_DELETE:
+                currentRepair.getRepairItems().remove(repairItem);
+                break;
+
+            default:
+        }
+    }
+
+    private void updateFinancialData(BigDecimal riTotalRevenue, BigDecimal riTotalExpense, RefreshMode refreshMode) {
+        switch (refreshMode) {
+
+            case REFRESH_ADD:
+                currentRepair.setTotalRevenue(currentRepair.getTotalRevenue().add(riTotalRevenue));
+                currentRepair.setTotalExpense(currentRepair.getTotalExpense().add(riTotalExpense));
+                break;
+
+            case REFRESH_DELETE:
+                currentRepair.setTotalRevenue(currentRepair.getTotalRevenue().subtract(riTotalRevenue));
+                currentRepair.setTotalExpense(currentRepair.getTotalExpense().subtract(riTotalExpense));
+                break;
+
+            default:
+        }
     }
 
     private LocalDate getEarliestStartDate() {
@@ -130,21 +177,69 @@ public class RepairFormController {
                 earliestDate = repairItem.getStartDate();
             }
         }
-        return earliestDate;
+        return !earliestDate.equals(LocalDate.MAX) ? earliestDate : null;
     }
 
-    private void updateRepairFormComponents() {
+    private void updateRepairFormComponents(RefreshMode refreshMode) {
         TableModelRepairItems tmri = (TableModelRepairItems) repairForm.getTblRepairItems().getModel();
         tmri.setRepairItems(currentRepair.getRepairItems());
 
         updateDerivedFields();
+
+        if (refreshMode == RefreshMode.REFRESH_DELETE) {
+            tmri.resetOrderNumbers();
+        }
     }
 
     private void updateDerivedFields() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);//TODO: Find a better place for this!
-        repairForm.getTxtStartDate().setText(currentRepair.getStartDate().format(dtf));
-
+        if (currentRepair.getStartDate() != null) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);//TODO: Find a better place for this!
+            repairForm.getTxtStartDate().setText(currentRepair.getStartDate().format(dtf));
+        } else {
+            repairForm.getTxtStartDate().setText("");
+        }
         repairForm.getTxtTotalRevenue().setText(String.valueOf(currentRepair.getTotalRevenue()));
         repairForm.getTxtTotalExpense().setText(String.valueOf(currentRepair.getTotalExpense()));
+    }
+
+    public void save(String name) throws Exception {
+        validate(name);
+
+        currentRepair.setName(name);
+
+        executeSaving();
+    }
+
+    private void validate(String name) throws ValidationException {
+        Validator.startValidation()
+                .validateNotNullOrEmpty(name, "Name field is required!")
+                .validateListIsNotEmpty(currentRepair.getRepairItems(), "Repair must have at least one repair item!")
+                .throwIfInvalide();
+    }
+
+    private void executeSaving() throws Exception {
+        switch (formMode) {
+
+            case EDIT:
+
+                break;
+
+            case ADD:
+                addRepair();
+                break;
+
+            default:
+        }
+    }
+
+    private void addRepair() throws Exception {
+        RepairController.getInstance().addRepair(currentRepair);
+    }
+
+    public void delete(int selectedRow) {
+        TableModelRepairItems tmri = (TableModelRepairItems) repairForm.getTblRepairItems().getModel();
+        RepairItem repairItem = tmri.getRepairItem(selectedRow);
+
+        refreshRepairForm(repairItem, RefreshMode.REFRESH_DELETE);
     }
 }

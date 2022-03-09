@@ -73,7 +73,7 @@ public class TableModelRepairItems extends AbstractTableModel {
             case 8:
                 return repairItem.getService().getPrice();
             case 9:
-                return repairItem.getService().getMaterialCost();    
+                return repairItem.getService().getMaterialCost();
             default:
                 return "N/A";
         }
@@ -106,5 +106,11 @@ public class TableModelRepairItems extends AbstractTableModel {
     public void setRepairItem(RepairItem repairItem, int selectedRow) {
         repairItems.set(selectedRow, repairItem);
         fireTableDataChanged();
+    }
+
+    public void resetOrderNumbers() {
+        for (int i = 0; i < repairItems.size(); i++) {
+            repairItems.get(i).setOrderNumber(i + 1);
+        }
     }
 }

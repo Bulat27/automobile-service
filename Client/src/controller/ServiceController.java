@@ -31,7 +31,7 @@ public class ServiceController {
         return instance;
     }
 
-    public void saveService(Service service) throws Exception {
+    public void addService(Service service) throws Exception {
         Request request = new Request(Operation.ADD_SERVICE, service);
         Response response = Communication.getInstance().sendRequest(request);
 

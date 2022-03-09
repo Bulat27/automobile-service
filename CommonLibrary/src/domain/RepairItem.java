@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,6 +28,7 @@ public class RepairItem implements GeneralDObject {
     private BigDecimal additionalExpense;
     private BigDecimal additionalRevenue;
     private Service service;
+    private List<EmployeeEngagement> employeeEngagements = new ArrayList<>();
 
     public RepairItem() {
     }
@@ -114,6 +117,14 @@ public class RepairItem implements GeneralDObject {
         this.service = service;
     }
 
+    public List<EmployeeEngagement> getEmployeeEngagements() {
+        return employeeEngagements;
+    }
+
+    public void setEmployeeEngagements(List<EmployeeEngagement> employeeEngagements) {
+        this.employeeEngagements = employeeEngagements;
+    }
+
     @Override
     public String getTableName() {
         return "repair_item";
@@ -125,8 +136,8 @@ public class RepairItem implements GeneralDObject {
                 rs.getString("s.description"), rs.getBigDecimal("s.material_cost"));
 
         return new RepairItem(repair, rs.getInt("ri.order_number"), rs.getDate("ri.start_date").toLocalDate(), rs.getDate("ri.end_date").toLocalDate(),
-                 rs.getString("ri.remark"), rs.getBigDecimal("ri.employee_expense"), rs.getBigDecimal("ri.additional_expense"),
-                 rs.getBigDecimal("ri.additional_revenue"), s);
+                rs.getString("ri.remark"), rs.getBigDecimal("ri.employee_expense"), rs.getBigDecimal("ri.additional_expense"),
+                rs.getBigDecimal("ri.additional_revenue"), s);
     }
 
     @Override

@@ -188,6 +188,7 @@ public class RepairItemForm extends javax.swing.JDialog {
         try {
             repairItemFormController.add(txtStartDate.getText(), txtEndDate.getText(), txtRemark.getText(), txtAdditionalExpense.getText(),
                     txtAdditionalRevenue.getText(), txtDuration.getText(), (Service) cmbService.getSelectedItem(), jListEmployees.getSelectedValuesList());
+            repairItemFormController.coordinateForms();
         } catch (ValidationException ex) {
             Logger.getLogger(RepairItemForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error saving the Repair item", JOptionPane.ERROR_MESSAGE);

@@ -37,7 +37,7 @@ public class ServiceFormController {
         validate(price, name, materialCost);
         Service service = new Service(new BigDecimal(price), name, description, new BigDecimal(materialCost));
         
-        ServiceController.getInstance().saveService(service);
+        ServiceController.getInstance().addService(service);
     }
 
     public void coordinateForms() {

@@ -27,6 +27,7 @@ import view.form.ShowRepairsForm;
 import view.form.ShowServiceBooksForm;
 import static view.util.FormMode.ADD;
 import static view.util.FormMode.EDIT;
+import view.util.RefreshMode;
 
 /**
  *
@@ -155,7 +156,7 @@ public class Coordinator {
         repairItemFormController.openForm();
     }
 
-    public void refreshRepairForm(RepairItem repairItem) {
-        repairFormController.refreshRepairForm(repairItem);
+    public void refreshRepairForm(RepairItem repairItem, RefreshMode refreshMode) {
+        repairFormController.refreshRepairForm(repairItem, refreshMode);
     }
 }

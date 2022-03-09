@@ -8,12 +8,14 @@ package view.controller;
 import controller.EmployeeController;
 import controller.ServiceController;
 import domain.Employee;
+import domain.EmployeeEngagement;
 import domain.Repair;
 import domain.RepairItem;
 import domain.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -22,6 +24,7 @@ import validation.Validator;
 import view.coordinator.Coordinator;
 import view.form.RepairItemForm;
 import view.util.FormMode;
+import view.util.RefreshMode;
 
 /**
  *
@@ -53,6 +56,10 @@ public class RepairItemFormController {
     private void prepareForm() throws Exception {
         prepareServiceComboBox();
         prepareEmployeeList();
+    }
+
+    public void coordinateForms() {
+        closeForm();
     }
 
     private void closeForm() {
@@ -89,9 +96,10 @@ public class RepairItemFormController {
                 LocalDate.parse(startDate, dtf), LocalDate.parse(endDate, dtf), remark, employeeExpense, new BigDecimal(additionalExpense),
                 new BigDecimal(additionalRevenue), service);
         //TODO: Add list of EmployeeEngagements to RepairItem
+        List<EmployeeEngagement> employeeEngagements = getEmployeeEngagementList(repairItem, duration, employees);
+        repairItem.setEmployeeEngagements(employeeEngagements);
 
-        Coordinator.getInstance().refreshRepairForm(repairItem);
-        closeForm();
+        Coordinator.getInstance().refreshRepairForm(repairItem, RefreshMode.REFRESH_ADD);
     }
 
     private BigDecimal getEmployeeExpense(BigDecimal duration, List<Employee> employees) {//TODO: Make sure that this returns the correct result!
@@ -115,5 +123,15 @@ public class RepairItemFormController {
                 .validateNotNull(service, "Service is required and must not be null!")
                 .validateListIsNotEmpty(employees, "At least one employee must be engaged!")
                 .throwIfInvalide();
+    }
+
+    private List<EmployeeEngagement> getEmployeeEngagementList(RepairItem repairItem, String duration, List<Employee> employees) {
+        List<EmployeeEngagement> employeeEngagements = new ArrayList<>();
+
+        for (Employee employee : employees) {
+            EmployeeEngagement employeeEngagement = new EmployeeEngagement(employee, repairItem, Integer.parseInt(duration));
+            employeeEngagements.add(employeeEngagement);
+        }
+        return employeeEngagements;
     }
 }

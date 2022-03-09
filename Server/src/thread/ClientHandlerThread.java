@@ -99,6 +99,8 @@ public class ClientHandlerThread extends Thread {
                 return getRepairsByFKCondition(request);
             case GET_REPAIR_ITEMS_BY_FK_CONDITION:
                 return getRepairItemsByFKCondition(request);
+            case ADD_REPAIR:
+                return addRepair(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -416,6 +418,23 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successful retrieval of Repair items by FK condition!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(repairItems);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response addRepair(Request request) {
+        Response response = new Response();
+
+        Repair repair = (Repair) request.getArgument();
+
+        try {
+            Controller.getInstance().addRepair(repair);
+            System.out.println("Successfully added Repair!");
+            response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);

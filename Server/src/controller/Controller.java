@@ -167,4 +167,8 @@ public class Controller {
 
         return (List<RepairItem>) getRepairItemsByFKConditionSO.getResult();
     }
+
+    public void addRepair(Repair repair) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
