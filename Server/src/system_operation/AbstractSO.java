@@ -22,6 +22,10 @@ public abstract class AbstractSO {
     public AbstractSO() {
         repository = new DatabaseBrokerImpl();
     }
+    
+    protected AbstractSO (Repository repository) {
+        this.repository = repository;
+    }
 
     public void execute(Object param) throws Exception {
         try {

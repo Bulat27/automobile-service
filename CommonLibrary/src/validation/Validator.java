@@ -5,6 +5,10 @@
  */
 package validation;
 
+import domain.Repair;
+import domain.RepairItem;
+import domain.validation.RepairItemValidator;
+import domain.validation.RepairValidator;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author Korisnik
+ * @author Dragon
  */
 public class Validator {
 
@@ -137,9 +141,42 @@ public class Validator {
         return this;
     }
 
+    public Validator validateRepairTotalRevenue(Repair repair, String errorMessage) {
+        RepairValidator repairValidator = new RepairValidator();
+
+        try {
+            repairValidator.validateTotalRevenue(repair);
+        } catch (ValidationException ex) {
+            this.validationErrors.add(errorMessage);
+        }
+        return this;
+    }
+
+    public Validator validateRepairTotalExpense(Repair repair, String errorMessage) {
+        RepairValidator repairValidator = new RepairValidator();
+
+        try {
+            repairValidator.validateTotalExpense(repair);
+        } catch (ValidationException ex) {
+            this.validationErrors.add(errorMessage);
+        }
+        return this;
+    }
+
+    public Validator validateRepairItemEmployeeExpense(RepairItem repairItem, String errorMessage) {
+        RepairItemValidator repairItemValidator = new RepairItemValidator();
+
+        try {
+            repairItemValidator.validateEmployeeExpense(repairItem);
+        } catch (ValidationException ex) {
+            this.validationErrors.add(errorMessage);
+        }
+        return this;
+    }
 //    public Validator validateIsFirstDateBefore(LocalDate firstDate, LocalDate secondDate, String errorMessage){
 //        
 //    }
+
     public Validator throwIfInvalideParameterInstance(Object value, String errorMessage, Class<?> cls) throws ValidationException {
         if (!cls.isInstance(value)) {
 //            this.validationErrors.add(errorMessage);

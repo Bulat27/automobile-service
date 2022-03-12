@@ -33,5 +33,4 @@ public class AddEmployeeSO extends AbstractSO {
     protected void executeOperation(Object param) throws Exception {
         repository.insertRecord(param);
     }
-
 }

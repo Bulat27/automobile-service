@@ -19,6 +19,7 @@ import system_operation.employee.AddEmployeeSO;
 import system_operation.employee.DeleteEmployeeSO;
 import system_operation.employee.EditEmployeeSO;
 import system_operation.login.LoginSO;
+import system_operation.repair.AddRepairSO;
 import system_operation.repair.GetRepairsByFKConditionSO;
 import system_operation.repair_item.GetRepairItemsByFKConditionSO;
 import system_operation.service.DeleteServiceSO;
@@ -168,7 +169,8 @@ public class Controller {
         return (List<RepairItem>) getRepairItemsByFKConditionSO.getResult();
     }
 
-    public void addRepair(Repair repair) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addRepair(Repair repair) throws Exception {
+        AddRepairSO addRepairSO = new AddRepairSO();
+        addRepairSO.execute(repair);
     }
 }
