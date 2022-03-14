@@ -101,6 +101,8 @@ public class ClientHandlerThread extends Thread {
                 return getRepairItemsByFKCondition(request);
             case ADD_REPAIR:
                 return addRepair(request);
+            case DELETE_REPAIR:
+                return deleteRepair(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -429,11 +431,29 @@ public class ClientHandlerThread extends Thread {
     private Response addRepair(Request request) {
         Response response = new Response();
 
+        Repair requestRepair = (Repair) request.getArgument();
+
+        try {
+            Repair repair = Controller.getInstance().addRepair(requestRepair);
+            System.out.println("Successfully added Repair!");
+            response.setResponseType(ResponseType.SUCCESS);
+            response.setResult(repair);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response deleteRepair(Request request) {
+        Response response = new Response();
+
         Repair repair = (Repair) request.getArgument();
 
         try {
-            Controller.getInstance().addRepair(repair);
-            System.out.println("Successfully added Repair!");
+            Controller.getInstance().deleteRepair(repair);
+            System.out.println("Successfully deleted Repair!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!

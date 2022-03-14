@@ -107,6 +107,11 @@ public class ShowRepairsForm extends javax.swing.JDialog {
         });
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,6 +171,28 @@ public class ShowRepairsForm extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnDetailsActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = tblRepairs.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            int chosenOption = JOptionPane.showConfirmDialog(this,
+                    "Deleting the repair will automatically delete all corresponding repair items.\n Do you want to confirm the deletion?",
+                    "Repair deletion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (chosenOption == JOptionPane.YES_OPTION) {
+
+                try {
+                    //TODO: Add JOptionPane in which he has to confirm the deletion!
+                    showRepairsFormController.delete(selectedRow);
+                    JOptionPane.showMessageDialog(this, "Repair successfully deleted");
+                } catch (Exception ex) {
+                    Logger.getLogger(ShowRepairsForm.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Error deleting Repair: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

@@ -23,6 +23,7 @@ import view.util.FormMode;
 import static view.util.FormMode.ADD;
 import static view.util.FormMode.EDIT;
 import view.util.RefreshMode;
+import static view.util.RefreshMode.REFRESH_ADD;
 
 /**
  *
@@ -225,15 +226,17 @@ public class RepairFormController {
                 break;
 
             case ADD:
-                addRepair();
+                currentRepair = addRepair();
+                
+                Coordinator.getInstance().refreshShowRepairsForm(currentRepair, REFRESH_ADD);
                 break;
 
             default:
         }
     }
 
-    private void addRepair() throws Exception {
-        RepairController.getInstance().addRepair(currentRepair);
+    private Repair addRepair() throws Exception {
+        return RepairController.getInstance().addRepair(currentRepair);
     }
 
     public void delete(int selectedRow) {

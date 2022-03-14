@@ -134,7 +134,7 @@ public class Repair implements GeneralDObject {
     
     @Override
     public String getPKWhereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "id = " + repairID;
     }
     
     @Override

@@ -41,8 +41,18 @@ public class RepairController {
         throw response.getException();
     }
 
-    public void addRepair(Repair repair) throws Exception {
+    public Repair addRepair(Repair repair) throws Exception {
         Request request = new Request(Operation.ADD_REPAIR, repair);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.SUCCESS)) {
+            return (Repair) response.getResult();
+        }
+        throw response.getException();
+    }
+
+    public void deleteRepair(Repair repair) throws Exception {
+        Request request = new Request(Operation.DELETE_REPAIR, repair);
         Response response = Communication.getInstance().sendRequest(request);
 
         if (response.getResponseType().equals(ResponseType.ERROR)) {

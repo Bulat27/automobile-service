@@ -12,6 +12,7 @@ import java.util.List;
 import view.coordinator.Coordinator;
 import view.form.ShowRepairsForm;
 import view.form.model.TableModeRepairs;
+import view.util.RefreshMode;
 
 /**
  *
@@ -73,5 +74,24 @@ public class ShowRepairsFormController {
         TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
 
         Coordinator.getInstance().openEditRepairForm(tmr.getRepair(selectedRow), selectedRow);
+    }
+
+    public void refreshForm(Repair repair, RefreshMode refreshMode) {
+        switch (refreshMode) {
+
+            case REFRESH_ADD:
+                TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
+                tmr.addRepair(repair);
+                break;
+        }
+    }
+
+    public void delete(int selectedRow) throws Exception{
+        TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
+        Repair repair = tmr.getRepair(selectedRow);
+        
+        RepairController.getInstance().deleteRepair(repair);
+        
+        tmr.removeRepair(selectedRow);
     }
 }

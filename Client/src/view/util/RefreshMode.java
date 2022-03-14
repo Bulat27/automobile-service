@@ -11,5 +11,6 @@ package view.util;
  */
 public enum RefreshMode {
     REFRESH_ADD,
-    REFRESH_DELETE
+    REFRESH_DELETE,
+    REFRESH_EDIT
 }

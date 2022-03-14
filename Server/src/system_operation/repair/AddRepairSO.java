@@ -41,5 +41,10 @@ public class AddRepairSO extends AbstractSO {
         for (RepairItem repairItem : ((Repair) param).getRepairItems()) {
             addRepairItemSO.executeAsSuboperation(repairItem);
         }
+        result = param;
+    }
+
+    public Object getResult() {
+        return result;
     }
 }

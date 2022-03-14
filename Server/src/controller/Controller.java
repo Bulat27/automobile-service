@@ -20,6 +20,7 @@ import system_operation.employee.DeleteEmployeeSO;
 import system_operation.employee.EditEmployeeSO;
 import system_operation.login.LoginSO;
 import system_operation.repair.AddRepairSO;
+import system_operation.repair.DeleteRepairSO;
 import system_operation.repair.GetRepairsByFKConditionSO;
 import system_operation.repair_item.GetRepairItemsByFKConditionSO;
 import system_operation.service.DeleteServiceSO;
@@ -169,8 +170,15 @@ public class Controller {
         return (List<RepairItem>) getRepairItemsByFKConditionSO.getResult();
     }
 
-    public void addRepair(Repair repair) throws Exception {
+    public Repair addRepair(Repair repair) throws Exception {
         AddRepairSO addRepairSO = new AddRepairSO();
         addRepairSO.execute(repair);
+
+        return (Repair) addRepairSO.getResult();
+    }
+
+    public void deleteRepair(Repair repair) throws Exception {
+        DeleteRepairSO deleteRepairSO = new DeleteRepairSO();
+        deleteRepairSO.execute(repair);
     }
 }
