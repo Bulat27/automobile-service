@@ -24,6 +24,7 @@ import static view.util.FormMode.ADD;
 import static view.util.FormMode.EDIT;
 import view.util.RefreshMode;
 import static view.util.RefreshMode.REFRESH_ADD;
+import static view.util.RefreshMode.REFRESH_EDIT;
 
 /**
  *
@@ -222,13 +223,15 @@ public class RepairFormController {
         switch (formMode) {
 
             case EDIT:
-
+                editRepair();
+                //TODO: Implement refreshShowRepairsForm for REFRESH_EDIT
+                Coordinator.getInstance().refreshShowRepairsForm(currentRepair, REFRESH_EDIT, selectedRow);
                 break;
 
             case ADD:
                 currentRepair = addRepair();
                 
-                Coordinator.getInstance().refreshShowRepairsForm(currentRepair, REFRESH_ADD);
+                Coordinator.getInstance().refreshShowRepairsForm(currentRepair, REFRESH_ADD, -1);
                 break;
 
             default:
@@ -244,5 +247,9 @@ public class RepairFormController {
         RepairItem repairItem = tmri.getRepairItem(selectedRow);
 
         refreshRepairForm(repairItem, RefreshMode.REFRESH_DELETE);
+    }
+
+    private void editRepair() throws Exception {
+        RepairController.getInstance().editRepair(currentRepair);
     }
 }

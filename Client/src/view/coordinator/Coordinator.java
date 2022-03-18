@@ -160,7 +160,7 @@ public class Coordinator {
         repairFormController.refreshRepairForm(repairItem, refreshMode);
     }
 
-    public void refreshShowRepairsForm(Repair repair, RefreshMode refreshMode) {
-        showRepairsFormController.refreshForm(repair, refreshMode);
+    public void refreshShowRepairsForm(Repair repair, RefreshMode refreshMode, int selectedRow) {
+        showRepairsFormController.refreshForm(repair, refreshMode, selectedRow);
     }
 }

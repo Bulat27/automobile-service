@@ -18,4 +18,5 @@ public interface Repository<T> {
      public void insertRecord(T t) throws Exception;
      public void deleteRecord(T t) throws Exception;
      public void updateRecord(T t) throws Exception;
+     public void deleteRecords(T t, String whereCondition) throws Exception;
 }

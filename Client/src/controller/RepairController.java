@@ -59,4 +59,13 @@ public class RepairController {
             throw response.getException();
         }
     }
+
+    public void editRepair(Repair repair) throws Exception {
+        Request request = new Request(Operation.EDIT_REPAIR, repair);
+        Response response = Communication.getInstance().sendRequest(request);
+
+        if (response.getResponseType().equals(ResponseType.ERROR)) {
+            throw response.getException();
+        }
+    }
 }

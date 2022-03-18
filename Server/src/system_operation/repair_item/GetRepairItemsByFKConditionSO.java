@@ -5,8 +5,11 @@
  */
 package system_operation.repair_item;
 
+import domain.EmployeeEngagement;
 import domain.RepairItem;
+import java.util.List;
 import system_operation.AbstractSO;
+import system_operation.employee_engagement.GetEmployeeEngagementsByFKConditionSO;
 import validation.Validator;
 
 /**
@@ -22,12 +25,33 @@ public class GetRepairItemsByFKConditionSO extends AbstractSO {
     }
 
     @Override
-    protected void executeOperation(Object param) throws Exception {
+    protected void executeOperation(Object param) throws Exception {//TODO: Make sure that this works properly!
         RepairItem repairItem = (RepairItem) param;
-        result = repository.findRecords(repairItem, repairItem.getFKWhereCondition());
+//        result = repository.findRecords(repairItem, repairItem.getFKWhereCondition());
+        List<RepairItem> repairItems = repository.findRecords(repairItem, repairItem.getFKWhereCondition());
+
+        for (RepairItem ri : repairItems) {
+            EmployeeEngagement employeeEngagementWithFKCondition = getEmployeeEngagementWithFKCondition(ri);
+
+//            List<EmployeeEngagement> employeeEngagements
+//                    = repository.findRecords(employeeEngagementWithFKCondition, employeeEngagementWithFKCondition.getFKWhereCondition());
+            GetEmployeeEngagementsByFKConditionSO getEmployeeEngagementsByFKConditionSO = new GetEmployeeEngagementsByFKConditionSO(repository);
+            getEmployeeEngagementsByFKConditionSO.executeAsSuboperation(employeeEngagementWithFKCondition);
+            
+            ri.setEmployeeEngagements((List<EmployeeEngagement>) getEmployeeEngagementsByFKConditionSO.getResult());
+        }
+        result = repairItems;
     }
 
     public Object getResult() {
         return result;
+    }
+
+    private EmployeeEngagement getEmployeeEngagementWithFKCondition(RepairItem repairItem) {
+        EmployeeEngagement employeeEngagement = new EmployeeEngagement();
+
+        employeeEngagement.setRepairItem(repairItem);
+
+        return employeeEngagement;
     }
 }

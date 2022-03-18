@@ -76,13 +76,20 @@ public class ShowRepairsFormController {
         Coordinator.getInstance().openEditRepairForm(tmr.getRepair(selectedRow), selectedRow);
     }
 
-    public void refreshForm(Repair repair, RefreshMode refreshMode) {
+    public void refreshForm(Repair repair, RefreshMode refreshMode, int selectedRow) {
+        TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
+        
         switch (refreshMode) {
 
             case REFRESH_ADD:
-                TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
                 tmr.addRepair(repair);
                 break;
+                
+            case REFRESH_EDIT:
+              if(selectedRow != -1) tmr.setRepair(repair, selectedRow);
+              break;
+              
+            default:
         }
     }
 

@@ -103,6 +103,8 @@ public class ClientHandlerThread extends Thread {
                 return addRepair(request);
             case DELETE_REPAIR:
                 return deleteRepair(request);
+            case EDIT_REPAIR:
+                return editRepair(request);
 //            case LOGOUT:
 //                return logout(request);    
             default:
@@ -454,6 +456,23 @@ public class ClientHandlerThread extends Thread {
         try {
             Controller.getInstance().deleteRepair(repair);
             System.out.println("Successfully deleted Repair!");
+            response.setResponseType(ResponseType.SUCCESS);
+        } catch (Exception ex) {
+            ex.printStackTrace();//TODO: Delete this!
+            response.setResponseType(ResponseType.ERROR);
+            response.setException(ex);
+        }
+        return response;
+    }
+
+    private Response editRepair(Request request) {
+        Response response = new Response();
+
+        Repair repair = (Repair) request.getArgument();
+
+        try {
+            Controller.getInstance().editRepair(repair);
+            System.out.println("Successfully edited Repair!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!

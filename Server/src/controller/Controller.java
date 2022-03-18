@@ -21,6 +21,7 @@ import system_operation.employee.EditEmployeeSO;
 import system_operation.login.LoginSO;
 import system_operation.repair.AddRepairSO;
 import system_operation.repair.DeleteRepairSO;
+import system_operation.repair.EditRepairSO;
 import system_operation.repair.GetRepairsByFKConditionSO;
 import system_operation.repair_item.GetRepairItemsByFKConditionSO;
 import system_operation.service.DeleteServiceSO;
@@ -180,5 +181,10 @@ public class Controller {
     public void deleteRepair(Repair repair) throws Exception {
         DeleteRepairSO deleteRepairSO = new DeleteRepairSO();
         deleteRepairSO.execute(repair);
+    }
+
+    public void editRepair(Repair repair) throws Exception {
+        EditRepairSO editRepairSO = new EditRepairSO();
+        editRepairSO.execute(repair);
     }
 }
