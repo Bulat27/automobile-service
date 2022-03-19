@@ -5,6 +5,7 @@
  */
 package view.form.model;
 
+import constant.MyClientConstants;
 import domain.ServiceBook;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -20,7 +21,7 @@ public class TableModelServiceBooks extends AbstractTableModel {
     private final String[] columnNames = new String[]{"Client first and last name", "Vehicle description", "Initial date", "Active"};
     private final Class[] columnClass = new Class[]{String.class, String.class, String.class, String.class};
 
-    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
+//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public TableModelServiceBooks(List<ServiceBook> serviceBooks) {
         this.serviceBooks = serviceBooks;
@@ -56,7 +57,7 @@ public class TableModelServiceBooks extends AbstractTableModel {
             case 1:
                 return serviceBook.getVehicleDescription();
             case 2:
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
                 return serviceBook.getInitialDate().format(dtf);//TODO: Find a better way for this!
             case 3:
                 return serviceBook.isActive() ? "YES" : "NO";

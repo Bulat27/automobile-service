@@ -120,6 +120,34 @@ public class Validator {
         return this;
     }
 
+    public Validator validateIsStartDateBeforeEndDate(String startDate, String endDate, String pattern, String errorMessage) {
+        try {
+            if (startDate != null && endDate != null) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
+
+                LocalDate sd = LocalDate.parse(startDate, dtf);
+                LocalDate ed = LocalDate.parse(endDate, dtf);
+
+                if (!sd.isBefore(ed)) {
+                    this.validationErrors.add(errorMessage);
+                }
+
+            } else {
+                this.validationErrors.add(errorMessage);
+            }
+        } catch (DateTimeParseException ex) {
+            this.validationErrors.add(errorMessage);
+        }
+        return this;
+    }
+
+    public Validator validateIsStartDateBeforeEndDate(LocalDate startDate, LocalDate endDate, String errorMessage) {
+        if (startDate == null || endDate == null || !startDate.isBefore(endDate)) {
+            this.validationErrors.add(errorMessage);
+        }
+        return this;
+    }
+
     public Validator validateValueIsAllAlphabets(String value, String errorMessage) {
         if (value == null || value.isEmpty() || !value.matches("[a-zA-Z]+")) {
             this.validationErrors.add(errorMessage);

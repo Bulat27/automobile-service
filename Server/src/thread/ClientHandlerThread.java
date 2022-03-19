@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.coordinator.Coordinator;
-import view.form.MainForm;
 import view.util.RefreshMode;
 
 /**
@@ -36,13 +35,13 @@ public class ClientHandlerThread extends Thread {
     private Sender sender;
     private Receiver receiver;
     private Employee authenticatedEmployee;
-    private final MainForm mainForm;
+//    private final MainForm mainForm;
     
-    public ClientHandlerThread(Socket socket, MainForm mainForm) {
+    public ClientHandlerThread(Socket socket) {
         this.socket = socket;
         this.sender = new Sender(socket);
         this.receiver = new Receiver(socket);
-        this.mainForm = mainForm;
+//        this.mainForm = mainForm;
     }
     
     @Override

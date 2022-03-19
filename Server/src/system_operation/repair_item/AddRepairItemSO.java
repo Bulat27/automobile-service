@@ -39,6 +39,7 @@ public class AddRepairItemSO extends AbstractSO {
                 .validateNumberIsNonNegative(((RepairItem) param).getOrderNumber(), "OrderNumber must be a non negative integer")
                 .validateNotNull(((RepairItem) param).getStartDate(), "Start date must not be null")
                 .validateNotNull(((RepairItem) param).getEndDate(), "End date must not be null")
+                .validateIsStartDateBeforeEndDate(((RepairItem) param).getStartDate(), ((RepairItem) param).getEndDate(), "Start date must be before end date")
                 .validateNumberIsNonNegative(((RepairItem) param).getEmployeeExpense(), "EmployeeExpense must be a non negative number")
                 .validateNumberIsNonNegative(((RepairItem) param).getAdditionalExpense(), "AdditionalExpense must be a non negative number")
                 .validateNumberIsNonNegative(((RepairItem) param).getAdditionalRevenue(), "AdditionalRevenuemust be a non negative number")

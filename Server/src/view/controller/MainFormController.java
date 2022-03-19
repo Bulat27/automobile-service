@@ -52,7 +52,7 @@ public class MainFormController {
     }
 
     public void startServer() throws IOException {
-        Controller.getInstance().startServer(mainForm);
+        Controller.getInstance().startServer();
         toggleView(false);
     }
 

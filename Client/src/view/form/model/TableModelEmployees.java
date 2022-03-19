@@ -5,6 +5,7 @@
  */
 package view.form.model;
 
+import constant.MyClientConstants;
 import domain.Employee;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,7 @@ public class TableModelEmployees extends AbstractTableModel {
     private final String[] columnNames = new String[]{"First and last name", "Role", "Hourly rate", "Employment date", "Username"};
     private final Class[] columnClass = new Class[]{String.class, String.class, BigDecimal.class, String.class, String.class};
 
-    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
+//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public TableModelEmployees(List<Employee> employees) {
         this.employees = employees;
@@ -59,7 +60,7 @@ public class TableModelEmployees extends AbstractTableModel {
             case 2:
                 return employee.getHourlyRate();
             case 3:
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
                 return employee.getDateOfEmployment().format(dtf);//TODO: Find a better way for this!
             case 4:
                 return employee.getUsername();

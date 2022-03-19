@@ -51,6 +51,4 @@ public class ServiceFormController {
                 .validateValueIsNonNegativeNumber(materialCost, "Material cost is required and must be a non negative number!")
                 .throwIfInvalide();
     }
-
-    
 }

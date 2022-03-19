@@ -5,6 +5,7 @@
  */
 package view.controller;
 
+import constant.MyClientConstants;
 import controller.RepairController;
 import controller.RepairItemController;
 import domain.Repair;
@@ -37,7 +38,7 @@ public class RepairFormController {
     private Repair currentRepair;
     private int selectedRow;
 
-    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
+//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public RepairFormController(FormMode formMode, Repair selectedRepair, int selectedRow) {
         this.formMode = formMode;
@@ -195,7 +196,7 @@ public class RepairFormController {
 
     private void updateDerivedFields() {
         if (currentRepair.getStartDate() != null) {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);//TODO: Find a better place for this!
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);//TODO: Find a better place for this!
             repairForm.getTxtStartDate().setText(currentRepair.getStartDate().format(dtf));
         } else {
             repairForm.getTxtStartDate().setText("");

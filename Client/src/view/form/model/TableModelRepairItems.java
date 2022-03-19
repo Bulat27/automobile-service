@@ -5,6 +5,7 @@
  */
 package view.form.model;
 
+import constant.MyClientConstants;
 import domain.RepairItem;
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,7 @@ public class TableModelRepairItems extends AbstractTableModel {
     private final String[] columnNames = new String[]{"No.", "Service name", "Start date", "End date", "Remark", "Emp. expense", "Extra expense", "Extra revenue", "Serv. price", "Mat. cost"};
     private final Class[] columnClass = new Class[]{Integer.class, String.class, String.class, String.class, String.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class};
 
-    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
+//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public TableModelRepairItems(List<RepairItem> repairItems) {
         this.repairItems = repairItems;
@@ -51,7 +52,7 @@ public class TableModelRepairItems extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         RepairItem repairItem = repairItems.get(rowIndex);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);//TODO: Find a better way for this!
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);//TODO: Find a better way for this!
 
         switch (columnIndex) {
             case 0:

@@ -12,7 +12,6 @@ import domain.Service;
 import domain.ServiceBook;
 import java.io.IOException;
 import java.util.List;
-import system_operation.AbstractSO;
 import system_operation.employee.GetAllEmployeesSO;
 import system_operation.employee.GetEmployeesByConditionSO;
 import system_operation.employee.AddEmployeeSO;
@@ -34,7 +33,6 @@ import system_operation.service_book.EditServiceBookSO;
 import system_operation.service_book.GetAllServiceBooksSO;
 import system_operation.service_book.GetServiceBooksByConditionSO;
 import thread.ServerThread;
-import view.form.MainForm;
 
 /**
  *
@@ -55,10 +53,10 @@ public class Controller {
         return instance;
     }
 
-    public void startServer(MainForm mainForm) throws IOException {
+    public void startServer() throws IOException {
         if (serverThread == null || !serverThread.isAlive()) {
 
-            serverThread = new ServerThread(mainForm);
+            serverThread = new ServerThread();
             serverThread.start();
         }
     }

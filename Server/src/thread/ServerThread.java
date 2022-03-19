@@ -11,7 +11,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import properties.util.UtilApplicationProperties;
-import view.form.MainForm;
 
 /**
  *
@@ -21,14 +20,14 @@ public class ServerThread extends Thread {
 
     private final ServerSocket serverSocket;
     private List<ClientHandlerThread> clients;
-    private final MainForm mainForm;//TODO: This can probably be done some other way!
+//    private final MainForm mainForm;//TODO: This can probably be done some other way!
 
-    public ServerThread(MainForm mainForm) throws IOException {//TODO: Make sure that it is handled. Some JOptionPane...
+    public ServerThread() throws IOException {//TODO: Make sure that it is handled. Some JOptionPane...
         int serverPort = UtilApplicationProperties.getInstance().getServerPort();
 
         this.serverSocket = new ServerSocket(serverPort);//TODO: This needs to be read out of the configuration
         this.clients = new ArrayList<>();
-        this.mainForm = mainForm;
+//        this.mainForm = mainForm;
     }
 
     @Override
@@ -37,7 +36,7 @@ public class ServerThread extends Thread {
             try {
                 System.out.println("Waiting for a client...");
                 Socket socket = serverSocket.accept();
-                ClientHandlerThread thread = new ClientHandlerThread(socket, mainForm);
+                ClientHandlerThread thread = new ClientHandlerThread(socket);
                 thread.start();
                 clients.add(thread);
                 System.out.println("Client connected!");

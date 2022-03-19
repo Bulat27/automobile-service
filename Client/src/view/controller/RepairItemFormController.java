@@ -5,6 +5,7 @@
  */
 package view.controller;
 
+import constant.MyClientConstants;
 import controller.EmployeeController;
 import controller.ServiceController;
 import domain.Employee;
@@ -38,7 +39,7 @@ public class RepairItemFormController {
     private int selectedRow;
     private Repair currentRepair;
 
-    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
+//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public RepairItemFormController(FormMode formMode, RepairItem selectedRepairItem, int selectedRow, Repair currentRepair) {
         this.formMode = formMode;
@@ -89,7 +90,7 @@ public class RepairItemFormController {
     public void add(String startDate, String endDate, String remark, String additionalExpense, String additionalRevenue, String duration, Service service, List<Employee> employees) throws ValidationException {
         validate(startDate, endDate, remark, additionalExpense, additionalRevenue, duration, service, employees);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);//TODO: Find a better place for this!
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);//TODO: Find a better place for this!
 
         BigDecimal employeeExpense = getEmployeeExpense(new BigDecimal(duration), employees);
         RepairItem repairItem = new RepairItem(currentRepair, currentRepair.getRepairItems().size() + 1,
@@ -114,8 +115,9 @@ public class RepairItemFormController {
     //TODO: Add startDate before endDate validation!!!!
     private void validate(String startDate, String endDate, String remark, String additionalExpense, String additionalRevenue, String duration, Service service, List employees) throws ValidationException {
         Validator.startValidation()
-                .validateValueIsDate(startDate, DATE_PATTERN, "Start date field is required and date must be in format: " + DATE_PATTERN)
-                .validateValueIsDate(endDate, DATE_PATTERN, "End date field is required and date must be in format: " + DATE_PATTERN)
+                .validateValueIsDate(startDate, MyClientConstants.DATE_PATTERN, "Start date field is required and date must be in format: " + MyClientConstants.DATE_PATTERN)
+                .validateValueIsDate(endDate, MyClientConstants.DATE_PATTERN, "End date field is required and date must be in format: " + MyClientConstants.DATE_PATTERN)
+                .validateIsStartDateBeforeEndDate(startDate, endDate, MyClientConstants.DATE_PATTERN, "Start date must be before end date!")
                 .validateNotNull(remark, "Remark must not be null!")
                 .validateValueIsNonNegativeNumber(additionalExpense, "Additional expense is required and must be a non negative number!")
                 .validateValueIsNonNegativeNumber(additionalRevenue, "Additional revenue is required and must be a non negative number!")
