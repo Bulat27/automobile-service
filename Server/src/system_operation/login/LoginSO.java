@@ -9,6 +9,7 @@ import domain.Employee;
 import domain.GeneralDObject;
 import java.util.List;
 import system_operation.AbstractSO;
+import thread.coordinator.ThreadCoordinator;
 import validation.ValidationException;
 import validation.Validator;
 
@@ -45,6 +46,8 @@ public class LoginSO extends AbstractSO {
         if (result == null) {
             throw new Exception("Unknown employee!");
         }
+        
+        ThreadCoordinator.getInstance().checkIfAlreadyAuthenticated((Employee) result);
     }
     
 //    @Override

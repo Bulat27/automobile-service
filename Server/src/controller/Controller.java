@@ -41,6 +41,7 @@ import thread.ServerThread;
 public class Controller {
 
     private static Controller instance;
+    
     private ServerThread serverThread;
 
     private Controller() {

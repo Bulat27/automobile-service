@@ -8,7 +8,7 @@ package view.controller;
 import properties.util.UtilApplicationProperties;
 import validation.ValidationException;
 import validation.Validator;
-import view.coordinator.Coordinator;
+import view.coordinator.ViewCoordinator;
 import view.form.DatabaseConfigurationForm;
 
 /**
@@ -20,7 +20,7 @@ public class DatabaseConfigurationFormController {
     private DatabaseConfigurationForm databaseConfigurationForm;
 
     public DatabaseConfigurationFormController() {
-        databaseConfigurationForm = new DatabaseConfigurationForm(Coordinator.getInstance().getMainForm(), true, this);
+        databaseConfigurationForm = new DatabaseConfigurationForm(ViewCoordinator.getInstance().getMainForm(), true, this);
     }
 
     public void openForm() {

@@ -5,7 +5,7 @@
  */
 package main;
 
-import view.coordinator.Coordinator;
+import view.coordinator.ViewCoordinator;
 
 /**
  *
@@ -14,6 +14,6 @@ import view.coordinator.Coordinator;
 public class Main {
 
     public static void main(String[] args) {
-        Coordinator.getInstance().openMainForm();
+        ViewCoordinator.getInstance().openMainForm();
     }
 }

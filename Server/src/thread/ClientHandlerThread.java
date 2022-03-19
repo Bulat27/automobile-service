@@ -22,7 +22,8 @@ import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import view.coordinator.Coordinator;
+import thread.coordinator.ThreadCoordinator;
+import view.coordinator.ViewCoordinator;
 import view.util.RefreshMode;
 
 /**
@@ -30,42 +31,47 @@ import view.util.RefreshMode;
  * @author Dragon
  */
 public class ClientHandlerThread extends Thread {
-    
+
     private Socket socket;//TODO: These can probably be final!
     private Sender sender;
     private Receiver receiver;
     private Employee authenticatedEmployee;
 //    private final MainForm mainForm;
-    
+
     public ClientHandlerThread(Socket socket) {
         this.socket = socket;
         this.sender = new Sender(socket);
         this.receiver = new Receiver(socket);
 //        this.mainForm = mainForm;
     }
-    
+
+    public Employee getAuthenticatedEmployee() {
+        return authenticatedEmployee;
+    }
+
     @Override
     public void run() {
         try { //TODO:I've made some changes here, make sure everything works fine!
             while (!socket.isClosed()) {
-                
+
                 Request request = (Request) receiver.receive();
                 Response response = handleRequest(request);
                 sender.send(response);
-                
+
             }
         } catch (Exception ex) {
             Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);//TODO: Don't just log it, find a way to notify the
             //user of what happened.
 //            mainForm.removeEmployee(authenticatedEmployee);//TODO: You could also remove this ClientHandlerThread from the list!
-            Coordinator.getInstance().refreshMainForm(authenticatedEmployee, RefreshMode.REFRESH_DELETE);
+            ThreadCoordinator.getInstance().removeClientHandlerThread(this);
+            ViewCoordinator.getInstance().refreshMainForm(authenticatedEmployee, RefreshMode.REFRESH_DELETE);
             //TODO: You could also remove this ClientHandlerThread from the list!
         }
     }
-    
+
     private Response handleRequest(Request request) {
         Operation operation = request.getOperation();
-        
+
         switch (operation) {
             case LOGIN:
                 return login(request);
@@ -113,12 +119,12 @@ public class ClientHandlerThread extends Thread {
                 return null;//TODO: Maybe throw an Exception or something, not the best idea to return null
         }
     }
-    
+
     private Response login(Request request) {
         Response response = new Response();
-        
+
         Employee requestEmployee = (Employee) request.getArgument();
-        
+
         try {
             Employee employee = Controller.getInstance().login(requestEmployee);
             System.out.println("Successful authentication!");
@@ -126,7 +132,8 @@ public class ClientHandlerThread extends Thread {
             response.setResult(employee);
             this.authenticatedEmployee = employee;//TODO: Think about whether this is a good solution!
 //            mainForm.addEmployee(authenticatedEmployee);
-            Coordinator.getInstance().refreshMainForm(authenticatedEmployee, RefreshMode.REFRESH_ADD);
+            ViewCoordinator.getInstance().refreshMainForm(authenticatedEmployee, RefreshMode.REFRESH_ADD);
+            System.out.println(authenticatedEmployee.getEmployeeID());
         } catch (Exception ex) {
             ex.printStackTrace();//TODO: Delete this!
             response.setResponseType(ResponseType.ERROR);
@@ -134,7 +141,7 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     public void stopThread() throws IOException {
         if (socket != null && !socket.isClosed()) {
             socket.close();
@@ -161,9 +168,9 @@ public class ClientHandlerThread extends Thread {
 //    }
     private Response addService(Request request) {
         Response response = new Response();
-        
+
         Service service = (Service) request.getArgument();
-        
+
         try {
             Controller.getInstance().addService(service);
             System.out.println("Successfully added Service!");
@@ -175,10 +182,10 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getAllServices(Request request) {
         Response response = new Response();
-        
+
         try {
             List<Service> services = Controller.getInstance().getAllServices();
             System.out.println("Successful retrieval of Services!");
@@ -191,12 +198,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response deleteService(Request request) {
         Response response = new Response();
-        
+
         Service service = (Service) request.getArgument();
-        
+
         try {
             Controller.getInstance().deleteService(service);
             System.out.println("Successfully deleted Service!");
@@ -208,12 +215,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getServicesByCondition(Request request) {
         Response response = new Response();
-        
+
         Service service = (Service) request.getArgument();
-        
+
         try {
             List<Service> services = Controller.getInstance().getServicesByCondition(service);
             System.out.println("Successful retrieval of Services by condition!");
@@ -226,12 +233,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response addEmployee(Request request) {
         Response response = new Response();
-        
+
         Employee employee = (Employee) request.getArgument();
-        
+
         try {
             Controller.getInstance().addEmployee(employee);
             System.out.println("Successfully added Employee!");
@@ -243,10 +250,10 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getAllEmployees(Request request) {
         Response response = new Response();
-        
+
         try {
             List<Employee> employees = Controller.getInstance().getAllEmployees();
             System.out.println("Successful retrieval of Employees!");
@@ -259,12 +266,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getEmployeesByCondition(Request request) {
         Response response = new Response();
-        
+
         Employee employee = (Employee) request.getArgument();
-        
+
         try {
             List<Employee> employees = Controller.getInstance().getEmployeesByCondition(employee);
             System.out.println("Successful retrieval of Employees by condition!");
@@ -277,12 +284,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response editEmployee(Request request) {
         Response response = new Response();
-        
+
         Employee employee = (Employee) request.getArgument();
-        
+
         try {
             Controller.getInstance().editEmployee(employee);
             System.out.println("Successfully edited Employee!");
@@ -294,12 +301,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response deleteEmployee(Request request) {
         Response response = new Response();
-        
+
         Employee employee = (Employee) request.getArgument();
-        
+
         try {
             Controller.getInstance().deleteEmployee(employee);
             System.out.println("Successfully deleted Employee!");
@@ -311,12 +318,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response addServiceBook(Request request) {
         Response response = new Response();
-        
+
         ServiceBook serviceBook = (ServiceBook) request.getArgument();
-        
+
         try {
             Controller.getInstance().addServiceBook(serviceBook);
             System.out.println("Successfully added Service book!");
@@ -328,10 +335,10 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getAllServiceBooks(Request request) {
         Response response = new Response();
-        
+
         try {
             List<ServiceBook> serviceBooks = Controller.getInstance().getAllServiceBooks();
             System.out.println("Successful retrieval of Service books!");
@@ -344,12 +351,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getServiceBooksByCondition(Request request) {
         Response response = new Response();
-        
+
         ServiceBook serviceBook = (ServiceBook) request.getArgument();
-        
+
         try {
             List<ServiceBook> serviceBooks = Controller.getInstance().getServiceBooksByCondition(serviceBook);
             System.out.println("Successful retrieval of Service books by condition!");
@@ -362,12 +369,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response deleteServiceBook(Request request) {
         Response response = new Response();
-        
+
         ServiceBook serviceBook = (ServiceBook) request.getArgument();
-        
+
         try {
             Controller.getInstance().deleteServiceBook(serviceBook);
             System.out.println("Successfully deleted Service book!");
@@ -379,12 +386,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response editServiceBook(Request request) {
         Response response = new Response();
-        
+
         ServiceBook serviceBook = (ServiceBook) request.getArgument();
-        
+
         try {
             Controller.getInstance().editServiceBook(serviceBook);
             System.out.println("Successfully edited Service book!");
@@ -396,12 +403,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getRepairsByFKCondition(Request request) {
         Response response = new Response();
-        
+
         Repair repair = (Repair) request.getArgument();
-        
+
         try {
             List<Repair> repairs = Controller.getInstance().getRepairsByFKCondition(repair);
             System.out.println("Successful retrieval of Repairs by FK condition!");
@@ -414,12 +421,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response getRepairItemsByFKCondition(Request request) {
         Response response = new Response();
-        
+
         RepairItem repairItem = (RepairItem) request.getArgument();
-        
+
         try {
             List<RepairItem> repairItems = Controller.getInstance().getRepairItemsByFKCondition(repairItem);
             System.out.println("Successful retrieval of Repair items by FK condition!");
@@ -432,12 +439,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response addRepair(Request request) {
         Response response = new Response();
-        
+
         Repair requestRepair = (Repair) request.getArgument();
-        
+
         try {
             Repair repair = Controller.getInstance().addRepair(requestRepair);
             System.out.println("Successfully added Repair!");
@@ -450,12 +457,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response deleteRepair(Request request) {
         Response response = new Response();
-        
+
         Repair repair = (Repair) request.getArgument();
-        
+
         try {
             Controller.getInstance().deleteRepair(repair);
             System.out.println("Successfully deleted Repair!");
@@ -467,12 +474,12 @@ public class ClientHandlerThread extends Thread {
         }
         return response;
     }
-    
+
     private Response editRepair(Request request) {
         Response response = new Response();
-        
+
         Repair repair = (Repair) request.getArgument();
-        
+
         try {
             Controller.getInstance().editRepair(repair);
             System.out.println("Successfully edited Repair!");

@@ -8,7 +8,7 @@ package view.controller;
 import controller.Controller;
 import domain.Employee;
 import java.io.IOException;
-import view.coordinator.Coordinator;
+import view.coordinator.ViewCoordinator;
 import view.form.MainForm;
 import view.form.model.TableModelEmployee;
 import view.util.RefreshMode;
@@ -85,10 +85,10 @@ public class MainFormController {
     }
 
     public void openPortConfigurationForm() {
-        Coordinator.getInstance().openPortConfigurationForm();
+        ViewCoordinator.getInstance().openPortConfigurationForm();
     }
 
     public void openDatabaseConfigurationForm() {
-        Coordinator.getInstance().openDatabaseConfigurationForm();
+        ViewCoordinator.getInstance().openDatabaseConfigurationForm();
     }
 }

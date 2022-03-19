@@ -16,20 +16,20 @@ import view.util.RefreshMode;
  *
  * @author Dragon
  */
-public class Coordinator {
+public class ViewCoordinator {
 
-    private static Coordinator instance;
+    private static ViewCoordinator instance;
 
     private MainFormController mainFormController;
     private PortConfigurationFormController portConfigurationFormController;
     private DatabaseConfigurationFormController databaseConfigurationFormController;
 
-    private Coordinator() {
+    private ViewCoordinator() {
     }
 
-    public static Coordinator getInstance() {
+    public static ViewCoordinator getInstance() {
         if (instance == null) {
-            instance = new Coordinator();
+            instance = new ViewCoordinator();
         }
         return instance;
     }

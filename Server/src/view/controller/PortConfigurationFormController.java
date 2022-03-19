@@ -8,7 +8,7 @@ package view.controller;
 import properties.util.UtilApplicationProperties;
 import validation.ValidationException;
 import validation.Validator;
-import view.coordinator.Coordinator;
+import view.coordinator.ViewCoordinator;
 import view.form.PortConfigurationForm;
 
 /**
@@ -20,7 +20,7 @@ public class PortConfigurationFormController {
     private PortConfigurationForm portConfigurationForm;
 
     public PortConfigurationFormController() {
-        portConfigurationForm = new PortConfigurationForm(Coordinator.getInstance().getMainForm(), true, this);
+        portConfigurationForm = new PortConfigurationForm(ViewCoordinator.getInstance().getMainForm(), true, this);
     }
 
     public void openForm() {

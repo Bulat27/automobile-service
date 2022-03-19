@@ -6,6 +6,7 @@
 package system_operation.employee;
 
 import domain.Employee;
+import java.util.List;
 import system_operation.AbstractSO;
 import validation.Validator;
 
@@ -31,6 +32,12 @@ public class AddEmployeeSO extends AbstractSO {
 
     @Override
     protected void executeOperation(Object param) throws Exception {
+        List<Employee> employees = repository.findRecords(new Employee(), null);
+        
+        for (Employee employee : employees) {
+            if(employee.getUsername().equals(((Employee) param).getUsername())) throw new Exception("Employee with given username already exists");
+        }
+
         repository.insertRecord(param);
     }
 }
