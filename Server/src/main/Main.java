@@ -5,14 +5,15 @@
  */
 package main;
 
-import view.form.MainForm;
+import view.coordinator.Coordinator;
 
 /**
  *
  * @author Dragon
  */
 public class Main {
+
     public static void main(String[] args) {
-        new MainForm().setVisible(true);
+        Coordinator.getInstance().openMainForm();
     }
 }

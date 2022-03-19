@@ -144,6 +144,21 @@ public class Employee implements GeneralDObject {
         return hash;
     }
 
+//    @Override
+//    public boolean equals(Object obj) {//TODO: You can also use username here once it is unique!
+//        if (this == obj) {
+//            return true;
+//        }
+//        if (obj == null) {
+//            return false;
+//        }
+//        if (getClass() != obj.getClass()) {
+//            return false;
+//        }
+//        final Employee other = (Employee) obj;
+//        return true;
+//    }
+
     @Override
     public boolean equals(Object obj) {//TODO: You can also use username here once it is unique!
         if (this == obj) {
@@ -156,8 +171,13 @@ public class Employee implements GeneralDObject {
             return false;
         }
         final Employee other = (Employee) obj;
+        if (!Objects.equals(this.employeeID, other.employeeID)) {
+            return false;
+        }
         return true;
     }
+    
+    
 
     @Override
     public String getInsertionColumns() {

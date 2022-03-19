@@ -7,6 +7,7 @@ package view.form;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import view.controller.MainFormController;
@@ -40,6 +41,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         btnLogOut = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
         menuBarMain = new javax.swing.JMenuBar();
         menuEmployee = new javax.swing.JMenu();
         menuItemAddEmployee = new javax.swing.JMenuItem();
@@ -62,6 +64,10 @@ public class MainForm extends javax.swing.JFrame {
                 btnLogOutActionPerformed(evt);
             }
         });
+
+        lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWelcome.setText("jLabel1");
 
         menuEmployee.setText("Employee");
 
@@ -143,11 +149,14 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(196, 196, 196)
                 .addComponent(btnLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(196, Short.MAX_VALUE))
+            .addComponent(lblWelcome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(303, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
                 .addComponent(btnLogOut)
                 .addContainerGap())
         );
@@ -207,6 +216,7 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
+    private javax.swing.JLabel lblWelcome;
     private javax.swing.JMenuBar menuBarMain;
     private javax.swing.JMenu menuEmployee;
     private javax.swing.JMenuItem menuItemAddEmployee;
@@ -225,4 +235,8 @@ public class MainForm extends javax.swing.JFrame {
     public JMenu getMenuEmployee() {
         return menuEmployee;
     }  
+
+    public JLabel getLblWelcome() {
+        return lblWelcome;
+    }
 }

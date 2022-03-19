@@ -55,6 +55,8 @@ public class MainFormController {
         if (Communication.getInstance().getAuthenticatedEmployee().getEmployeeRole() == WORKER) {
             mainForm.getMenuEmployee().setEnabled(false);
         }
+        
+        mainForm.getLblWelcome().setText("Welcome " + Communication.getInstance().getAuthenticatedEmployee().getUsername());
     }
 
     public void openAddServiceBookForm() {

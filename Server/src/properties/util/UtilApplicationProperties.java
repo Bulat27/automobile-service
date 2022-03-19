@@ -7,6 +7,8 @@ package properties.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -51,5 +53,25 @@ public class UtilApplicationProperties {
     
     public int getServerPort(){
         return Integer.parseInt(properties.getProperty(APPLICATION_PROPERTIES_SERVER_PORT));
+    }
+    
+    public void setDatabaseURL(String value){
+        properties.setProperty(APPLICATION_PROPERTIES_DB_URL, value);
+    }
+    
+    public void setDatabaseUsername(String value){
+        properties.setProperty(APPLICATION_PROPERTIES_DB_USERNAME, value);
+    }
+    
+    public void setDatabasePassword(String value){
+        properties.setProperty(APPLICATION_PROPERTIES_DB_PASSWORD, value);
+    }
+    
+    public void setServerPort(String value){
+        properties.setProperty(APPLICATION_PROPERTIES_SERVER_PORT, value);
+    }
+    
+    public void saveChanges() throws IOException{
+        properties.store(new FileOutputStream(new File(APPLICATION_PROPERTIES_FILE_PATH)), null);
     }
 }

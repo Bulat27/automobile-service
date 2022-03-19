@@ -177,6 +177,22 @@ public class Validator {
 //        
 //    }
 
+    public Validator validateValueIsValidPortNumber(String value, String errorMessage) {
+        if (value == null || value.isEmpty()) {
+            this.validationErrors.add(errorMessage);
+        } else {
+            try {
+                int number = Integer.parseInt(value);
+                if (number < 1024 || number > 65535) {
+                    this.validationErrors.add(errorMessage);
+                }
+            } catch (NumberFormatException e) {
+                this.validationErrors.add(errorMessage);
+            }
+        }
+        return this;
+    }
+
     public Validator throwIfInvalideParameterInstance(Object value, String errorMessage, Class<?> cls) throws ValidationException {
         if (!cls.isInstance(value)) {
 //            this.validationErrors.add(errorMessage);

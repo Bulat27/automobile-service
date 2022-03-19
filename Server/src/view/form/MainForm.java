@@ -5,13 +5,14 @@
  */
 package view.form;
 
-import controller.Controller;
-import domain.Employee;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JMenu;
 import javax.swing.JOptionPane;
-import view.form.model.TableModelEmployee;
+import javax.swing.table.TableModel;
+import view.controller.MainFormController;
 
 /**
  *
@@ -19,15 +20,17 @@ import view.form.model.TableModelEmployee;
  */
 public class MainForm extends javax.swing.JFrame {
 
-    private TableModelEmployee tme;
-    
+//    private TableModelEmployee tme;
+    private MainFormController mainFormController;
+
     /**
      * Creates new form MainForm
+     *
+     * @param mainFormController
      */
-    public MainForm() {
+    public MainForm(MainFormController mainFormController) {
         initComponents();
-        toggleStartStopButtons(true);
-        prepareTable(); //TODO: This can be moved to some Form Controller!
+        this.mainFormController = mainFormController;
     }
 
     /**
@@ -91,9 +94,19 @@ public class MainForm extends javax.swing.JFrame {
         menuConfiguration.setText("Configuration");
 
         menuItemServerConfiguration.setText("Server configuration");
+        menuItemServerConfiguration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemServerConfigurationActionPerformed(evt);
+            }
+        });
         menuConfiguration.add(menuItemServerConfiguration);
 
         menuItemDatabaseConfiguration.setText("Database configuration");
+        menuItemDatabaseConfiguration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemDatabaseConfigurationActionPerformed(evt);
+            }
+        });
         menuConfiguration.add(menuItemDatabaseConfiguration);
 
         menuBarMain.add(menuConfiguration);
@@ -141,8 +154,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartServerActionPerformed
         try {
-            Controller.getInstance().startServer(this);
-            toggleStartStopButtons(false);
+            mainFormController.startServer();
         } catch (IOException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Start server error", JOptionPane.ERROR_MESSAGE);
@@ -151,18 +163,21 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnStopServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopServerActionPerformed
         try {
-            Controller.getInstance().stopServer();
-            toggleStartStopButtons(true);
+            mainFormController.stopServer();
         } catch (IOException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Stop server error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnStopServerActionPerformed
 
-    private void toggleStartStopButtons(boolean signal) {
-        btnStartServer.setEnabled(signal);
-        btnStopServer.setEnabled(!signal);
-    }
+    private void menuItemServerConfigurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemServerConfigurationActionPerformed
+        mainFormController.openPortConfigurationForm();
+    }//GEN-LAST:event_menuItemServerConfigurationActionPerformed
+
+    private void menuItemDatabaseConfigurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDatabaseConfigurationActionPerformed
+        mainFormController.openDatabaseConfigurationForm();
+    }//GEN-LAST:event_menuItemDatabaseConfigurationActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStartServer;
     private javax.swing.JButton btnStopServer;
@@ -177,16 +192,19 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable tblEmployees;
     // End of variables declaration//GEN-END:variables
 
-    private void prepareTable() {
-        tme = new TableModelEmployee();
-        tblEmployees.setModel(tme);
+    public JButton getBtnStartServer() {
+        return btnStartServer;
     }
-    
-    public void addEmployee(Employee employee){
-        tme.addEmployee(employee);
+
+    public JButton getBtnStopServer() {
+        return btnStopServer;
     }
-    
-    public void removeEmployee(Employee employee){
-        tme.removeEmployee(employee);
+
+    public JMenu getMenuConfiguration() {
+        return menuConfiguration;
+    }
+
+    public void setTableEmployeesModel(TableModel tableModel) {
+        tblEmployees.setModel(tableModel);
     }
 }
