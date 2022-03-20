@@ -52,7 +52,7 @@ public class RepairForm extends javax.swing.JDialog {
         tblRepairItems = new javax.swing.JTable();
         btnSave = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
+        btnDetails = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -120,10 +120,10 @@ public class RepairForm extends javax.swing.JDialog {
             }
         });
 
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+        btnDetails.setText("Details");
+        btnDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
+                btnDetailsActionPerformed(evt);
             }
         });
 
@@ -160,7 +160,7 @@ public class RepairForm extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10))
-                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
@@ -192,9 +192,9 @@ public class RepairForm extends javax.swing.JDialog {
                         .addGap(32, 32, 32)
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEdit)
-                        .addGap(18, 18, 18)
                         .addComponent(btnDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDetails)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSave)
                         .addGap(28, 28, 28))))
@@ -235,14 +235,18 @@ public class RepairForm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditActionPerformed
+    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        int selectedRow = tblRepairItems.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            repairFormController.showDetails(selectedRow);
+        }
+    }//GEN-LAST:event_btnDetailsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

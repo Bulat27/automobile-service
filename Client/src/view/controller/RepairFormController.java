@@ -3,6 +3,8 @@ package view.controller;
 import constant.MyClientConstants;
 import controller.RepairController;
 import controller.RepairItemController;
+import domain.Employee;
+import domain.EmployeeEngagement;
 import domain.Repair;
 import domain.RepairItem;
 import java.math.BigDecimal;
@@ -236,5 +238,12 @@ public class RepairFormController {
 
     private void editRepair() throws Exception {
         RepairController.getInstance().editRepair(currentRepair);
+    }
+
+    public void showDetails(int selectedRow) {
+        TableModelRepairItems tmri = (TableModelRepairItems) repairForm.getTblRepairItems().getModel();
+        RepairItem repairItem = tmri.getRepairItem(selectedRow);
+
+        Coordinator.getInstance().openEngagedEmployeesForm(repairItem.getEmployeeList());
     }
 }

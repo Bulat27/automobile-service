@@ -1,5 +1,6 @@
 package view.controller;
 
+import communication.Communication;
 import controller.EmployeeController;
 import domain.Employee;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ShowEmployeesFormController {
 
     private void prepareForm() throws Exception {
         prepareTable();
+        showEmployeesForm.getBtnEdit().setVisible(false);
     }
 
     private void prepareTable() throws Exception {
@@ -79,9 +81,13 @@ public class ShowEmployeesFormController {
     public void delete(int selectedRow) throws Exception {
         TableModelEmployees tme = (TableModelEmployees) showEmployeesForm.getTblEmployees().getModel();
         Employee employee = tme.getEmployee(selectedRow);
+        
+        if (employee.equals(Communication.getInstance().getAuthenticatedEmployee())) {
+            throw new Exception("You cannot delete your own account!");
+        }
 
         EmployeeController.getInstance().deleteEmployee(employee);
 
-        tme.removeEmployee(selectedRow);
+        tme.removeEmployee(selectedRow);      
     }
 }

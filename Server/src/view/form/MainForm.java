@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
@@ -201,5 +202,9 @@ public class MainForm extends javax.swing.JFrame {
 
     public void setTableEmployeesModel(TableModel tableModel) {
         tblEmployees.setModel(tableModel);
+    }
+
+    public JLabel getLblServerStatusText() {
+        return lblServerStatusText;
     }
 }

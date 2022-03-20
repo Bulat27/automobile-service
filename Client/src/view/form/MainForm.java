@@ -48,9 +48,6 @@ public class MainForm extends javax.swing.JFrame {
         menuService = new javax.swing.JMenu();
         menuItemAddService = new javax.swing.JMenuItem();
         menuItemSearchServices = new javax.swing.JMenuItem();
-        menuRepair = new javax.swing.JMenu();
-        menuItemAddRepair = new javax.swing.JMenuItem();
-        menuItemSearchRepair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,16 +121,6 @@ public class MainForm extends javax.swing.JFrame {
         menuService.add(menuItemSearchServices);
 
         menuBarMain.add(menuService);
-
-        menuRepair.setText("Repair");
-
-        menuItemAddRepair.setText("Add");
-        menuRepair.add(menuItemAddRepair);
-
-        menuItemSearchRepair.setText("Search");
-        menuRepair.add(menuItemSearchRepair);
-
-        menuBarMain.add(menuRepair);
 
         setJMenuBar(menuBarMain);
 
@@ -215,14 +202,11 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBarMain;
     private javax.swing.JMenu menuEmployee;
     private javax.swing.JMenuItem menuItemAddEmployee;
-    private javax.swing.JMenuItem menuItemAddRepair;
     private javax.swing.JMenuItem menuItemAddService;
     private javax.swing.JMenuItem menuItemAddServiceBook;
     private javax.swing.JMenuItem menuItemSearchEmployees;
-    private javax.swing.JMenuItem menuItemSearchRepair;
     private javax.swing.JMenuItem menuItemSearchServiceBooks;
     private javax.swing.JMenuItem menuItemSearchServices;
-    private javax.swing.JMenu menuRepair;
     private javax.swing.JMenu menuService;
     private javax.swing.JMenu menuServiceBook;
     // End of variables declaration//GEN-END:variables

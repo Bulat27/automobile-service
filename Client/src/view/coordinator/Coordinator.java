@@ -4,7 +4,9 @@ import domain.Employee;
 import domain.Repair;
 import domain.RepairItem;
 import domain.ServiceBook;
+import java.util.List;
 import view.controller.EmployeeFormController;
+import view.controller.EngagedEmployeesFormController;
 import view.controller.ServiceFormController;
 import view.controller.LoginFormController;
 import view.controller.MainFormController;
@@ -42,6 +44,7 @@ public class Coordinator {
     private ShowRepairsFormController showRepairsFormController;
     private RepairFormController repairFormController;
     private RepairItemFormController repairItemFormController;
+    private EngagedEmployeesFormController engagedEmployeesFormController;
 
     private Coordinator() {
     }
@@ -153,5 +156,10 @@ public class Coordinator {
 
     public void refreshShowRepairsForm(Repair repair, RefreshMode refreshMode, int selectedRow) {
         showRepairsFormController.refreshForm(repair, refreshMode, selectedRow);
+    }
+
+    public void openEngagedEmployeesForm(List<Employee> employees) {
+        engagedEmployeesFormController = new EngagedEmployeesFormController(employees);
+        engagedEmployeesFormController.openForm();
     }
 }

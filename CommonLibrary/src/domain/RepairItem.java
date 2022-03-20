@@ -121,6 +121,15 @@ public class RepairItem implements GeneralDObject {
         this.employeeEngagements = employeeEngagements;
     }
 
+    public List<Employee> getEmployeeList() {
+        List<Employee> employees = new ArrayList();
+
+        for (EmployeeEngagement employeeEngagement : employeeEngagements) {
+            employees.add(employeeEngagement.getEmployee());
+        }
+        return employees;
+    }
+
     @Override
     public String getTableName() {
         return "repair_item";
