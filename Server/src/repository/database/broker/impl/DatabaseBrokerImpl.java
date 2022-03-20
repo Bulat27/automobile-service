@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package repository.database.broker.impl;
 
 import repository.database.broker.DatabaseBroker;
@@ -46,7 +41,7 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
 
     @Override
     public List<GeneralDObject> findRecords(GeneralDObject gdo, String whereCondition) throws Exception {
-        String query = "SELECT * FROM " + gdo.getTableName() + gdo.getJoinCondition();//TODO: Add the JOIN for gdo.getJOIN() or something like that!
+        String query = "SELECT * FROM " + gdo.getTableName() + gdo.getJoinCondition();
         if (whereCondition != null) {
             query += " WHERE " + whereCondition;
         }
@@ -75,23 +70,6 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
         executePreparedStatementUpdate(query, gdo);
     }
 
-//     public boolean executeUpdate(String upit) {
-//        Statement st = null;
-//        boolean signal = false;
-//        try {
-//            st = conn.createStatement();
-//            int rowcount = st.executeUpdate(upit);
-//            if (rowcount > 0) {
-//                signal = true;
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(BrokerBazePodataka1.class.getName()).log(Level.SEVERE, null, ex);
-//            signal = false;
-//        } finally {
-//            close(null, st, null);
-//        }
-//        return signal;
-//    }
     //Works for INSERT and UPDATE, not for delete
     public void executePreparedStatementUpdate(String query, GeneralDObject gdo) throws Exception {
         try (PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -115,10 +93,10 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
     @Override
     public void deleteRecord(GeneralDObject gdo) throws Exception {
         String query = "DELETE FROM " + gdo.getTableName() + " WHERE " + gdo.getPKWhereCondition();
-        //TODO: Maybe add execute NonPreparedUpdate
+
         try (Statement st = connection.createStatement()) {
             int rowCount = st.executeUpdate(query);
-            
+
             if (rowCount <= 0) {
                 throw new Exception("No rows affected, failed delete");
             }
@@ -127,14 +105,6 @@ public class DatabaseBrokerImpl extends DatabaseBroker<GeneralDObject> {
         }
     }
 
-//    @Override
-//    public void deleteRecords(GeneralDObject gdo, String whereCondition) throws Exception {
-//        String query = "DELETE FROM " + gdo.getTableName() + " WHERE " + whereCondition;
-//        
-//        try(Statement st = connection.createStatement()){
-//            st.executeUpdate(query);
-//        }
-//    }
     @Override
     public void deleteRecords(GeneralDObject gdo, String whereCondition) throws Exception {
         String query = "DELETE FROM " + gdo.getTableName() + " WHERE " + whereCondition;

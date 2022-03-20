@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form;
 
 import domain.Employee;
@@ -18,18 +13,16 @@ import view.controller.LoginFormController;
 public class LoginForm extends javax.swing.JFrame {
 
     private final LoginFormController loginController;
-    
+
     //TODO: Implement hide and show for JPasswordField (I have saved a bookmark)
     /**
      * Creates new form FrmLogin
      *
      * @param loginController
      */
-    //private Controller controller;
     public LoginForm(LoginFormController loginController) {
         initComponents();
         this.loginController = loginController;
-        //this.controller = new Controller();
     }
 
     /**
@@ -121,16 +114,4 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-//    public void validateForm() throws Exception {//TODO: Make a Validator for this!
-//        String errorMessage = "";
-//        if (txtUsername.getText().isEmpty()) {
-//            errorMessage += "Username cannot be empty!\n";
-//        }
-//        if (String.valueOf(txtPassword.getPassword()).isEmpty()) {
-//            errorMessage += "Password cannot be empty!\n";
-//        }
-//        if (!errorMessage.isEmpty()) {
-//            throw new Exception(errorMessage);
-//        }
-//    }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form.model;
 
 import domain.Service;
@@ -65,15 +60,15 @@ public class TableModelServices extends AbstractTableModel {
     public void addService(Service service) {
         this.services.add(service);
         //fireTableDataChanged();
-        fireTableRowsInserted(services.size() - 1, services.size() - 1);//TODO: Make sure this suffices
+        fireTableRowsInserted(services.size() - 1, services.size() - 1);
     }
 
     public void removeService(int index) {
         services.remove(index);
         fireTableDataChanged();
     }
-    
-    public Service getService(int index){
+
+    public Service getService(int index) {
         return services.get(index);
     }
 
@@ -84,5 +79,5 @@ public class TableModelServices extends AbstractTableModel {
     public void setServices(List<Service> services) {
         this.services = services;
         fireTableDataChanged();
-    } 
+    }
 }

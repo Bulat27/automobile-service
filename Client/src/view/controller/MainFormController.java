@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import communication.Communication;
@@ -26,7 +21,7 @@ public class MainFormController {
         mainForm = new MainForm(this);
     }
 
-    public void openForm() {//TODO: You could add interface for FormControllers
+    public void openForm() {
         prepareForm();
         mainForm.setVisible(true);
     }
@@ -55,7 +50,7 @@ public class MainFormController {
         if (Communication.getInstance().getAuthenticatedEmployee().getEmployeeRole() == WORKER) {
             mainForm.getMenuEmployee().setEnabled(false);
         }
-        
+
         mainForm.getLblWelcome().setText("Welcome " + Communication.getInstance().getAuthenticatedEmployee().getUsername());
     }
 

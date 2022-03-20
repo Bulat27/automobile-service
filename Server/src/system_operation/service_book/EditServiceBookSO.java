@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system_operation.service_book;
 
 import domain.ServiceBook;
@@ -14,7 +9,7 @@ import validation.Validator;
  * @author Dragon
  */
 public class EditServiceBookSO extends AbstractSO {
-    
+
     @Override
     protected void precondition(Object param) throws Exception {
         Validator.startValidation()
@@ -25,7 +20,7 @@ public class EditServiceBookSO extends AbstractSO {
                 .validateNotNull(((ServiceBook) param).getInitialDate(), "Initial date must not be null")
                 .throwIfInvalide();
     }
-    
+
     @Override
     protected void executeOperation(Object param) throws Exception {
         repository.updateRecord(param);

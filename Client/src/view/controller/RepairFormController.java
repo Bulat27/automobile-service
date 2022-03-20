@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import constant.MyClientConstants;
@@ -38,8 +33,6 @@ public class RepairFormController {
     private Repair currentRepair;
     private int selectedRow;
 
-//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
-
     public RepairFormController(FormMode formMode, Repair selectedRepair, int selectedRow) {
         this.formMode = formMode;
         this.currentRepair = selectedRepair;
@@ -67,9 +60,6 @@ public class RepairFormController {
     private void prepareForm() throws Exception {
         prepareTable();
 
-//        if (formMode == ADD && currentRepair == null) {
-//            currentRepair = new Repair();
-//        }
         if (formMode == EDIT && currentRepair != null) {
             prepareFields();
         }
@@ -123,10 +113,6 @@ public class RepairFormController {
     public void refreshRepairForm(RepairItem repairItem, RefreshMode refreshMode) {
         updateCurrentRepair(repairItem, refreshMode);
         updateRepairFormComponents(refreshMode);
-
-        for (RepairItem repairItem1 : currentRepair.getRepairItems()) {//TODO: DELETE THIS!
-            System.out.println(repairItem1.getOrderNumber() + " " + repairItem1.getRemark());
-        }
     }
 
     private void updateCurrentRepair(RepairItem repairItem, RefreshMode refreshMode) {
@@ -196,7 +182,7 @@ public class RepairFormController {
 
     private void updateDerivedFields() {
         if (currentRepair.getStartDate() != null) {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);//TODO: Find a better place for this!
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
             repairForm.getTxtStartDate().setText(currentRepair.getStartDate().format(dtf));
         } else {
             repairForm.getTxtStartDate().setText("");
@@ -225,13 +211,11 @@ public class RepairFormController {
 
             case EDIT:
                 editRepair();
-                //TODO: Implement refreshShowRepairsForm for REFRESH_EDIT
                 Coordinator.getInstance().refreshShowRepairsForm(currentRepair, REFRESH_EDIT, selectedRow);
                 break;
 
             case ADD:
                 currentRepair = addRepair();
-                
                 Coordinator.getInstance().refreshShowRepairsForm(currentRepair, REFRESH_ADD, -1);
                 break;
 

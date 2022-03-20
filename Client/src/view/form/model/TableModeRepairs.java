@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form.model;
 
 import constant.MyClientConstants;
@@ -21,8 +16,6 @@ public class TableModeRepairs extends AbstractTableModel {
     private List<Repair> repairs;
     private final String[] columnNames = new String[]{"Name", "Start date", "Total revenue", "Total expense"};
     private final Class[] columnClass = new Class[]{String.class, String.class, BigDecimal.class, BigDecimal.class};
-
-//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public TableModeRepairs(List<Repair> repairs) {
         this.repairs = repairs;
@@ -57,7 +50,7 @@ public class TableModeRepairs extends AbstractTableModel {
                 return repair.getName();
             case 1:
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
-                return repair.getStartDate().format(dtf);//TODO: Find a better way for this!
+                return repair.getStartDate().format(dtf);
             case 2:
                 return repair.getTotalRevenue();
             case 3:
@@ -70,7 +63,7 @@ public class TableModeRepairs extends AbstractTableModel {
     public void addRepair(Repair repair) {
         this.repairs.add(repair);
         //fireTableDataChanged();
-        fireTableRowsInserted(repairs.size() - 1, repairs.size() - 1);//TODO: Make sure this suffices
+        fireTableRowsInserted(repairs.size() - 1, repairs.size() - 1);
     }
 
     public void removeRepair(int index) {

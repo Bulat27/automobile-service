@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system_operation.repair_item;
 
 import domain.EmployeeEngagement;
@@ -25,7 +20,7 @@ public class GetRepairItemsByFKConditionSO extends AbstractSO {
     }
 
     @Override
-    protected void executeOperation(Object param) throws Exception {//TODO: Make sure that this works properly!
+    protected void executeOperation(Object param) throws Exception {
         RepairItem repairItem = (RepairItem) param;
 //        result = repository.findRecords(repairItem, repairItem.getFKWhereCondition());
         List<RepairItem> repairItems = repository.findRecords(repairItem, repairItem.getFKWhereCondition());
@@ -37,7 +32,7 @@ public class GetRepairItemsByFKConditionSO extends AbstractSO {
 //                    = repository.findRecords(employeeEngagementWithFKCondition, employeeEngagementWithFKCondition.getFKWhereCondition());
             GetEmployeeEngagementsByFKConditionSO getEmployeeEngagementsByFKConditionSO = new GetEmployeeEngagementsByFKConditionSO(repository);
             getEmployeeEngagementsByFKConditionSO.executeAsSuboperation(employeeEngagementWithFKCondition);
-            
+
             ri.setEmployeeEngagements((List<EmployeeEngagement>) getEmployeeEngagementsByFKConditionSO.getResult());
         }
         result = repairItems;

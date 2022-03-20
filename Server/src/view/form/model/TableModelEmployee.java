@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form.model;
 
 import domain.Employee;
@@ -47,7 +42,7 @@ public class TableModelEmployee extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Employee employee = employees.get(rowIndex);
-        
+
         switch (columnIndex) {
             case 0:
                 return employee.getUsername();
@@ -63,7 +58,7 @@ public class TableModelEmployee extends AbstractTableModel {
     public void addEmployee(Employee employee) {
         this.employees.add(employee);
         //fireTableDataChanged();
-        fireTableRowsInserted(employees.size() - 1, employees.size() - 1);//TODO: Make sure this suffices
+        fireTableRowsInserted(employees.size() - 1, employees.size() - 1);
     }
 
     public void removeEmployee(Employee employee) {

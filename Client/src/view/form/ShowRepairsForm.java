@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form;
 
 import java.awt.Dialog;
@@ -29,11 +24,6 @@ public class ShowRepairsForm extends javax.swing.JDialog {
      * @param modal
      * @param showRepairsFormController
      */
-//    public ShowRepairsForm(java.awt.Frame parent, boolean modal, ShowRepairsFormController showRepairsFormController) {
-//        super(parent, modal);
-//        initComponents();
-//        this.showRepairsFormController = showRepairsFormController;
-//    }
     public ShowRepairsForm(Dialog owner, boolean modal, ShowRepairsFormController showRepairsFormController) {
         super(owner, modal);
         initComponents();
@@ -183,7 +173,6 @@ public class ShowRepairsForm extends javax.swing.JDialog {
             if (chosenOption == JOptionPane.YES_OPTION) {
 
                 try {
-                    //TODO: Add JOptionPane in which he has to confirm the deletion!
                     showRepairsFormController.delete(selectedRow);
                     JOptionPane.showMessageDialog(this, "Repair successfully deleted");
                 } catch (Exception ex) {

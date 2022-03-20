@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package communication;
 
 import communication.util.ResponseType;
@@ -12,13 +7,14 @@ import java.io.Serializable;
  *
  * @author Dragon
  */
-public class Response implements Serializable{
-    
+public class Response implements Serializable {
+
     private ResponseType responseType;
     private Object result;
     private Exception exception;
 
-    public Response() {}
+    public Response() {
+    }
 
     public Response(ResponseType responseType, Object result, Exception exception) {
         this.responseType = responseType;

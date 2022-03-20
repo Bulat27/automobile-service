@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form.model;
 
 import constant.MyClientConstants;
@@ -21,8 +16,6 @@ public class TableModelRepairItems extends AbstractTableModel {
     private List<RepairItem> repairItems;
     private final String[] columnNames = new String[]{"No.", "Service name", "Start date", "End date", "Remark", "Emp. expense", "Extra expense", "Extra revenue", "Serv. price", "Mat. cost"};
     private final Class[] columnClass = new Class[]{Integer.class, String.class, String.class, String.class, String.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class, BigDecimal.class};
-
-//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public TableModelRepairItems(List<RepairItem> repairItems) {
         this.repairItems = repairItems;
@@ -52,7 +45,7 @@ public class TableModelRepairItems extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         RepairItem repairItem = repairItems.get(rowIndex);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);//TODO: Find a better way for this!
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
 
         switch (columnIndex) {
             case 0:
@@ -83,7 +76,7 @@ public class TableModelRepairItems extends AbstractTableModel {
     public void addRepairItem(RepairItem repairItem) {
         this.repairItems.add(repairItem);
         //fireTableDataChanged();
-        fireTableRowsInserted(repairItems.size() - 1, repairItems.size() - 1);//TODO: Make sure this suffices
+        fireTableRowsInserted(repairItems.size() - 1, repairItems.size() - 1);
     }
 
     public void removeRepairItem(int index) {

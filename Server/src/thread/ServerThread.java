@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package thread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import properties.util.UtilApplicationProperties;
 import thread.coordinator.ThreadCoordinator;
 
@@ -18,15 +15,11 @@ import thread.coordinator.ThreadCoordinator;
 public class ServerThread extends Thread {
 
     private final ServerSocket serverSocket;
-//    private List<ClientHandlerThread> clients;
-//    private final MainForm mainForm;//TODO: This can probably be done some other way!
 
     public ServerThread() throws IOException {//TODO: Make sure that it is handled. Some JOptionPane...
         int serverPort = UtilApplicationProperties.getInstance().getServerPort();
 
-        this.serverSocket = new ServerSocket(serverPort);//TODO: This needs to be read out of the configuration
-//        this.clients = new ArrayList<>();
-//        this.mainForm = mainForm;
+        this.serverSocket = new ServerSocket(serverPort);
     }
 
     @Override
@@ -37,14 +30,12 @@ public class ServerThread extends Thread {
                 Socket socket = serverSocket.accept();
                 ClientHandlerThread thread = new ClientHandlerThread(socket);
                 thread.start();
-//                clients.add(thread);
                 ThreadCoordinator.getInstance().addClientHandlerThread(thread);
                 System.out.println("Client connected!");
             } catch (IOException ex) {
-                ex.printStackTrace();//TODO: Think about this handling here! Is a Logger enough or something else is neccessary?
+                Logger.getLogger(ServerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-//        stopAllClientThreads();
         ThreadCoordinator.getInstance().stopAllClientHandlerThreads();
     }
 
@@ -53,14 +44,4 @@ public class ServerThread extends Thread {
             serverSocket.close();
         }
     }
-
-//    private void stopAllClientThreads() {
-//        for (ClientHandlerThread client : clients) {
-//            try {
-//                client.stopThread();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();//TODO: Think about this handling here! Is a Logger enough or something else is neccessary?
-//            }
-//        }
-//    }
 }

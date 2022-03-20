@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package validation;
 
 import domain.Repair;
@@ -24,6 +19,8 @@ import java.util.stream.Collectors;
 public class Validator {
 
     private final List<String> validationErrors;
+
+    private static final String ALPHABETS_REGEX = "[a-zA-Z]+";
 
     private Validator() {
         validationErrors = new ArrayList();
@@ -47,18 +44,6 @@ public class Validator {
         return this;
     }
 
-//    public Validator validateValueIsNonNegativeNumber(String value, String errorMessage) throws ValidationException {
-//        try {
-//            if (value != null) {
-//                BigDecimal number = new BigDecimal(value);
-//            } else {
-//                this.validationErros.add(errorMessage);
-//            }
-//        } catch (NumberFormatException nfe) {
-//            this.validationErros.add(errorMessage);
-//        }
-//        return this;
-//    }
     public Validator validateValueIsNonNegativeNumber(String value, String errorMessage) {
         if (value == null) {
             this.validationErrors.add(errorMessage);
@@ -91,22 +76,7 @@ public class Validator {
         return this;
     }
 
-//    public Validator validateValueIsDate(String value, String pattern, String errorMessage) {//TODO:Do this using LocalDate and other Java 8 stuff
-//        //TODO: You could also add a validation in order to check if date is the value in the past or something like that!
-//        try {
-//            if (value != null) {
-//                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-//                sdf.parse(value);
-//            } else {
-//                this.validationErrors.add(errorMessage);
-//            }
-//        } catch (ParseException ex) {
-//            this.validationErrors.add(errorMessage);
-//        }
-//        return this;
-//    }
-    public Validator validateValueIsDate(String value, String pattern, String errorMessage) {//TODO:Do this using LocalDate and other Java 8 stuff
-        //TODO: You could also add a validation in order to check if date is the value in the past or something like that!
+    public Validator validateValueIsDate(String value, String pattern, String errorMessage) {
         try {
             if (value != null) {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
@@ -149,7 +119,7 @@ public class Validator {
     }
 
     public Validator validateValueIsAllAlphabets(String value, String errorMessage) {
-        if (value == null || value.isEmpty() || !value.matches("[a-zA-Z]+")) {
+        if (value == null || value.isEmpty() || !value.matches(ALPHABETS_REGEX)) {
             this.validationErrors.add(errorMessage);
         }
         return this;
@@ -201,9 +171,6 @@ public class Validator {
         }
         return this;
     }
-//    public Validator validateIsFirstDateBefore(LocalDate firstDate, LocalDate secondDate, String errorMessage){
-//        
-//    }
 
     public Validator validateValueIsValidPortNumber(String value, String errorMessage) {
         if (value == null || value.isEmpty()) {
@@ -223,7 +190,6 @@ public class Validator {
 
     public Validator throwIfInvalideParameterInstance(Object value, String errorMessage, Class<?> cls) throws ValidationException {
         if (!cls.isInstance(value)) {
-//            this.validationErrors.add(errorMessage);
             throw new ValidationException(errorMessage);
         }
         return this;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system_operation;
 
 import repository.database.broker.DatabaseBroker;
@@ -15,15 +10,14 @@ import repository.Repository;
  */
 public abstract class AbstractSO {
 
-    //TODO: Add a reference to a Database broker (if each SO needs it)
     protected final Repository repository;
     protected Object result;
 
     public AbstractSO() {
         repository = new DatabaseBrokerImpl();
     }
-    
-    protected AbstractSO (Repository repository) {
+
+    protected AbstractSO(Repository repository) {
         this.repository = repository;
     }
 
@@ -33,13 +27,13 @@ public abstract class AbstractSO {
             startTransaction();
             executeOperation(param);
             commitTransaction();
-            System.out.println("Successful operation!");//TODO: Delete all of these "prints"
+            System.out.println("Successful operation!");
         } catch (Exception ex) {
             System.out.println("Unsuccessful operation!");
             rollbackTransaction();
             throw ex;
         } finally {
-            closeConnection();//TODO: Check whether you have to close it each time?
+            closeConnection();
         }
     }
 
@@ -47,7 +41,6 @@ public abstract class AbstractSO {
 
     protected abstract void executeOperation(Object param) throws Exception;
 
-    //TODO: Implement these when you implement the Database broker!
     private void startTransaction() throws Exception {
         ((DatabaseBroker) repository).connect();
     }

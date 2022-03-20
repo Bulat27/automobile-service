@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import domain.Employee;
@@ -41,7 +36,7 @@ import thread.ServerThread;
 public class Controller {
 
     private static Controller instance;
-    
+
     private ServerThread serverThread;
 
     private Controller() {
@@ -67,8 +62,7 @@ public class Controller {
     }
 
     public Employee login(Employee requestEmployee) throws Exception {
-        LoginSO loginSO = new LoginSO();//TODO: Once you put getResult in AbstractSO, then use AbstractSO here and only cast in returu e.g.
-        //return (Employee) loginSO.getResult();
+        LoginSO loginSO = new LoginSO();
         loginSO.execute(requestEmployee);
 
         return (Employee) loginSO.getResult();

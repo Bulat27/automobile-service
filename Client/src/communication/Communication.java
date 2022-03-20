@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package communication;
 
 import domain.Employee;
@@ -21,8 +16,11 @@ public class Communication {
     private Sender sender;
     private Receiver receiver;
     private boolean connected = false;
-    //TODO: Add the authenticated client on the client side!
+
     private Employee authenticatedEmployee;
+
+    private static final String SERVER_ADRESS = "127.0.0.1";
+    private static final int SERVER_PORT = 9000;
 
     private Communication() {
     }
@@ -34,14 +32,13 @@ public class Communication {
         return instance;
     }
 
-    public void connect() throws IOException {//TODO: Reasses this way of handling Exception. Maybe, a server form opens and if the connection
-        //fails, than you can show JOptionPane and close everything.
-        socket = new Socket("127.0.0.1", 9000); //TODO: This needs to be read from a file!
+    public void connect() throws IOException {
+        socket = new Socket(SERVER_ADRESS, SERVER_PORT);
         System.out.println("Client is connected!");
         sender = new Sender(socket);
         receiver = new Receiver(socket);
         connected = true;
-//        new LoginForm().setVisible(true);//TODO: This can be done by some Coordinator or something, we will se about that!
+
         Coordinator.getInstance().openLoginForm();
     }
 
@@ -49,8 +46,6 @@ public class Communication {
         if (!connected) {
             throw new Exception("Request cannot be send before a connection has been made!");
         }
-//TODO: Make a custom Exception for this!
-
         sender.send(request);
         System.out.println("Request has been sent...");
         return (Response) receiver.receive();

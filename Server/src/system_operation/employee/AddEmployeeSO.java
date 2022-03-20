@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system_operation.employee;
 
 import domain.Employee;
@@ -33,11 +28,12 @@ public class AddEmployeeSO extends AbstractSO {
     @Override
     protected void executeOperation(Object param) throws Exception {
         List<Employee> employees = repository.findRecords(new Employee(), null);
-        
-        for (Employee employee : employees) {
-            if(employee.getUsername().equals(((Employee) param).getUsername())) throw new Exception("Employee with given username already exists");
-        }
 
+        for (Employee employee : employees) {
+            if (employee.getUsername().equals(((Employee) param).getUsername())) {
+                throw new Exception("Employee with given username already exists");
+            }
+        }
         repository.insertRecord(param);
     }
 }

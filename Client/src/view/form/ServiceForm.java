@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form;
 
 import java.util.logging.Level;
@@ -17,8 +12,10 @@ import view.controller.ServiceFormController;
 public class ServiceForm extends javax.swing.JDialog {
 
     private ServiceFormController serviceFormController;
+
     /**
      * Creates new form FormService
+     *
      * @param parent
      * @param modal
      * @param addServiceFormController
@@ -125,8 +122,8 @@ public class ServiceForm extends javax.swing.JDialog {
         try {
             serviceFormController.save(txtPrice.getText(), txtName.getText(),
                     txtDescription.getText(), txtMaterialCost.getText());
-             JOptionPane.showMessageDialog(this, "Service successfully saved");
-             serviceFormController.coordinateForms();
+            JOptionPane.showMessageDialog(this, "Service successfully saved");
+            serviceFormController.coordinateForms();
         } catch (Exception ex) {
             Logger.getLogger(ServiceForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error saving the service", JOptionPane.ERROR_MESSAGE);

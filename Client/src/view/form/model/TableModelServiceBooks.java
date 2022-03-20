@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form.model;
 
 import constant.MyClientConstants;
@@ -20,8 +15,6 @@ public class TableModelServiceBooks extends AbstractTableModel {
     private List<ServiceBook> serviceBooks;
     private final String[] columnNames = new String[]{"Client first and last name", "Vehicle description", "Initial date", "Active"};
     private final Class[] columnClass = new Class[]{String.class, String.class, String.class, String.class};
-
-//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public TableModelServiceBooks(List<ServiceBook> serviceBooks) {
         this.serviceBooks = serviceBooks;
@@ -58,7 +51,7 @@ public class TableModelServiceBooks extends AbstractTableModel {
                 return serviceBook.getVehicleDescription();
             case 2:
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
-                return serviceBook.getInitialDate().format(dtf);//TODO: Find a better way for this!
+                return serviceBook.getInitialDate().format(dtf);
             case 3:
                 return serviceBook.isActive() ? "YES" : "NO";
             default:
@@ -69,7 +62,7 @@ public class TableModelServiceBooks extends AbstractTableModel {
     public void addServiceBook(ServiceBook serviceBook) {
         this.serviceBooks.add(serviceBook);
         //fireTableDataChanged();
-        fireTableRowsInserted(serviceBooks.size() - 1, serviceBooks.size() - 1);//TODO: Make sure this suffices
+        fireTableRowsInserted(serviceBooks.size() - 1, serviceBooks.size() - 1);
     }
 
     public void removeServiceBook(int index) {

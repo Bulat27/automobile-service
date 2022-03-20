@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import java.math.BigDecimal;
@@ -38,7 +33,6 @@ public class Repair implements GeneralDObject {
         this.name = name;
         this.startDate = startDate;
         this.serviceBook = serviceBook;
-//        this.repairItems = new ArrayList<>();
     }
 
     public Long getRepairID() {
@@ -124,11 +118,6 @@ public class Repair implements GeneralDObject {
 
     @Override
     public GeneralDObject getNewRecord(ResultSet rs) throws SQLException {
-//        ServiceBook sb = new ServiceBook(rs.getLong("sb.id"), rs.getString("sb.client_first_name"), rs.getString("sb.client_last_name"),
-//                rs.getString("sb.vehicle_description"), rs.getDate("sb.initial_date").toLocalDate(), rs.getInt("sb.active") == 1);
-
-//        return new Repair(rs.getLong("r.id"), rs.getBigDecimal("r.total_revenue"), rs.getBigDecimal("r.total_expense"),
-//                rs.getString("r.name"), rs.getDate("r.start_date").toLocalDate(), serviceBook);
         return new Repair(rs.getLong("id"), rs.getBigDecimal("total_revenue"), rs.getBigDecimal("total_expense"),
                 rs.getString("name"), rs.getDate("start_date").toLocalDate(), serviceBook);
     }

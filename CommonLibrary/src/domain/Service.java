@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import java.math.BigDecimal;
@@ -22,7 +17,8 @@ public class Service implements GeneralDObject {
     private String description;
     private BigDecimal materialCost;
 
-    public Service() {}
+    public Service() {
+    }
 
     public Service(Long serviceID, BigDecimal price, String name, String description, BigDecimal materialCost) {
         this.serviceID = serviceID;
@@ -38,7 +34,7 @@ public class Service implements GeneralDObject {
         this.description = description;
         this.materialCost = materialCost;
     }
-    
+
     public Long getServiceID() {
         return serviceID;
     }
@@ -105,7 +101,7 @@ public class Service implements GeneralDObject {
     }
 
     @Override
-    public void setPreparedStatementParameters(PreparedStatement ps) throws SQLException{
+    public void setPreparedStatementParameters(PreparedStatement ps) throws SQLException {
         ps.setBigDecimal(1, price);
         ps.setString(2, name);
         ps.setString(3, description);

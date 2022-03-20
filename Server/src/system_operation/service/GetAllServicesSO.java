@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system_operation.service;
 
 import domain.Service;
@@ -12,11 +7,10 @@ import system_operation.AbstractSO;
  *
  * @author Dragon
  */
-public class GetAllServicesSO extends AbstractSO{
+public class GetAllServicesSO extends AbstractSO {
 
     @Override
     protected void precondition(Object param) throws Exception {
-        
     }
 
     @Override
@@ -26,5 +20,5 @@ public class GetAllServicesSO extends AbstractSO{
 
     public Object getResult() {
         return result;
-    } 
+    }
 }

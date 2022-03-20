@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import controller.RepairController;
@@ -78,27 +73,29 @@ public class ShowRepairsFormController {
 
     public void refreshForm(Repair repair, RefreshMode refreshMode, int selectedRow) {
         TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
-        
+
         switch (refreshMode) {
 
             case REFRESH_ADD:
                 tmr.addRepair(repair);
                 break;
-                
+
             case REFRESH_EDIT:
-              if(selectedRow != -1) tmr.setRepair(repair, selectedRow);
-              break;
-              
+                if (selectedRow != -1) {
+                    tmr.setRepair(repair, selectedRow);
+                }
+                break;
+
             default:
         }
     }
 
-    public void delete(int selectedRow) throws Exception{
+    public void delete(int selectedRow) throws Exception {
         TableModeRepairs tmr = (TableModeRepairs) showRepairsForm.getTblRepairs().getModel();
         Repair repair = tmr.getRepair(selectedRow);
-        
+
         RepairController.getInstance().deleteRepair(repair);
-        
+
         tmr.removeRepair(selectedRow);
     }
 }

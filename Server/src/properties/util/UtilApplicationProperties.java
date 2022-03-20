@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package properties.util;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -38,40 +32,40 @@ public class UtilApplicationProperties {
         }
         return instance;
     }
-    
-    public String getDatabaseURL(){
+
+    public String getDatabaseURL() {
         return properties.getProperty(APPLICATION_PROPERTIES_DB_URL);
     }
-    
-    public String getDatabaseUsername(){
+
+    public String getDatabaseUsername() {
         return properties.getProperty(APPLICATION_PROPERTIES_DB_USERNAME);
     }
-    
-    public String getDatabasePassword(){
+
+    public String getDatabasePassword() {
         return properties.getProperty(APPLICATION_PROPERTIES_DB_PASSWORD);
     }
-    
-    public int getServerPort(){
+
+    public int getServerPort() {
         return Integer.parseInt(properties.getProperty(APPLICATION_PROPERTIES_SERVER_PORT));
     }
-    
-    public void setDatabaseURL(String value){
+
+    public void setDatabaseURL(String value) {
         properties.setProperty(APPLICATION_PROPERTIES_DB_URL, value);
     }
-    
-    public void setDatabaseUsername(String value){
+
+    public void setDatabaseUsername(String value) {
         properties.setProperty(APPLICATION_PROPERTIES_DB_USERNAME, value);
     }
-    
-    public void setDatabasePassword(String value){
+
+    public void setDatabasePassword(String value) {
         properties.setProperty(APPLICATION_PROPERTIES_DB_PASSWORD, value);
     }
-    
-    public void setServerPort(String value){
+
+    public void setServerPort(String value) {
         properties.setProperty(APPLICATION_PROPERTIES_SERVER_PORT, value);
     }
-    
-    public void saveChanges() throws IOException{
+
+    public void saveChanges() throws IOException {
         properties.store(new FileOutputStream(new File(APPLICATION_PROPERTIES_FILE_PATH)), null);
     }
 }

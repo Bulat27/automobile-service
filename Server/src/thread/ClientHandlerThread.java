@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package thread;
 
 import communication.Receiver;
@@ -36,13 +31,11 @@ public class ClientHandlerThread extends Thread {
     private Sender sender;
     private Receiver receiver;
     private Employee authenticatedEmployee;
-//    private final MainForm mainForm;
 
     public ClientHandlerThread(Socket socket) {
         this.socket = socket;
         this.sender = new Sender(socket);
         this.receiver = new Receiver(socket);
-//        this.mainForm = mainForm;
     }
 
     public Employee getAuthenticatedEmployee() {
@@ -51,7 +44,7 @@ public class ClientHandlerThread extends Thread {
 
     @Override
     public void run() {
-        try { //TODO:I've made some changes here, make sure everything works fine!
+        try {
             while (!socket.isClosed()) {
 
                 Request request = (Request) receiver.receive();
@@ -62,10 +55,8 @@ public class ClientHandlerThread extends Thread {
         } catch (Exception ex) {
             Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);//TODO: Don't just log it, find a way to notify the
             //user of what happened.
-//            mainForm.removeEmployee(authenticatedEmployee);//TODO: You could also remove this ClientHandlerThread from the list!
             ThreadCoordinator.getInstance().removeClientHandlerThread(this);
             ViewCoordinator.getInstance().refreshMainForm(authenticatedEmployee, RefreshMode.REFRESH_DELETE);
-            //TODO: You could also remove this ClientHandlerThread from the list!
         }
     }
 
@@ -130,12 +121,11 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successful authentication!");
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(employee);
+
             this.authenticatedEmployee = employee;//TODO: Think about whether this is a good solution!
-//            mainForm.addEmployee(authenticatedEmployee);
             ViewCoordinator.getInstance().refreshMainForm(authenticatedEmployee, RefreshMode.REFRESH_ADD);
-            System.out.println(authenticatedEmployee.getEmployeeID());
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -176,7 +166,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully added Service!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -192,7 +182,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(services);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -209,7 +199,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully deleted Service!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -227,7 +217,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(services);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -244,7 +234,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully added Employee!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -260,7 +250,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(employees);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -278,7 +268,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(employees);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -295,7 +285,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully edited Employee!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -312,7 +302,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully deleted Employee!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -329,7 +319,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully added Service book!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -345,7 +335,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(serviceBooks);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -363,7 +353,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(serviceBooks);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -380,7 +370,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully deleted Service book!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -397,7 +387,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully edited Service book!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -415,7 +405,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(repairs);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -433,7 +423,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(repairItems);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -451,7 +441,7 @@ public class ClientHandlerThread extends Thread {
             response.setResponseType(ResponseType.SUCCESS);
             response.setResult(repair);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -468,7 +458,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully deleted Repair!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }
@@ -485,7 +475,7 @@ public class ClientHandlerThread extends Thread {
             System.out.println("Successfully edited Repair!");
             response.setResponseType(ResponseType.SUCCESS);
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
+            Logger.getLogger(ClientHandlerThread.class.getName()).log(Level.SEVERE, null, ex);
             response.setResponseType(ResponseType.ERROR);
             response.setException(ex);
         }

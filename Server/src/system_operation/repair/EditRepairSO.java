@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system_operation.repair;
 
 import domain.Repair;
@@ -35,10 +30,9 @@ public class EditRepairSO extends AbstractSO {
     @Override
     protected void executeOperation(Object param) throws Exception {
         repository.updateRecord(param);
-        //TODO: Implement editing of the RepairItems in the database under the SAME TRANSTACION!
+
         RepairItem ri = ((Repair) param).getRepairItems().get(0);
-//        List<RepairItem> existingRepairItems = repository.findRecords(ri, ri.getFKWhereCondition());
-        repository.deleteRecords(ri, "repair_id = " + ri.getRepair().getRepairID());//TODO: CHANGE THIS!!!!!!!!!!! DELETE ONLY THE ONES ASSOCIATED WITH THAT REPAIR!
+        repository.deleteRecords(ri, "repair_id = " + ri.getRepair().getRepairID());
 
         AddRepairItemSO addRepairItemSO = new AddRepairItemSO(repository);//Make sure that you don't have to instantiate new one each time!
 

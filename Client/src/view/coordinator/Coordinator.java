@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.coordinator;
 
 import domain.Employee;
 import domain.Repair;
 import domain.RepairItem;
 import domain.ServiceBook;
-import java.awt.Dialog;
 import view.controller.EmployeeFormController;
 import view.controller.ServiceFormController;
 import view.controller.LoginFormController;
@@ -64,9 +58,6 @@ public class Coordinator {
         loginController.openForm();
     }
 
-//    public void closeLoginForm() {
-//        loginController.closeForm();
-//    }
     public void openMainForm() {
         mainFormController = new MainFormController();
         mainFormController.openForm();

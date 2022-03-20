@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import constant.MyClientConstants;
@@ -31,7 +26,6 @@ public class EmployeeFormController {
     private Employee selectedEmployee;
     private int selectedRow;
 
-//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
     public EmployeeFormController(FormMode formMode, Employee selectedEmployee, int selectedRow) {
         this.formMode = formMode;
         this.selectedEmployee = selectedEmployee;
@@ -51,7 +45,7 @@ public class EmployeeFormController {
     public void save(String firstName, String lastName, String role, String hourlyRate, String dateOfEmployment, String username, char[] password) throws Exception {
         validate(firstName, lastName, role, hourlyRate, dateOfEmployment, username, password);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);//TODO: Find a better place for this!
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
 
         Employee employee = new Employee(firstName, lastName, EmployeeRole.valueOf(role), new BigDecimal(hourlyRate),
                 LocalDate.parse(dateOfEmployment, dtf), username, String.valueOf(password));
@@ -114,16 +108,16 @@ public class EmployeeFormController {
         employeeForm.getTxtLastName().setText(selectedEmployee.getLastName());
         employeeForm.getCmbRole().setSelectedItem(selectedEmployee.getEmployeeRole());
         employeeForm.getTxtHourlyRate().setText(String.valueOf(selectedEmployee.getHourlyRate()));
-        employeeForm.getTxtDateOfEmployment().setText(selectedEmployee.getDateOfEmployment().format(DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN)));//TODO: Move this somewhere else (the pattern thing)
+        employeeForm.getTxtDateOfEmployment().setText(selectedEmployee.getDateOfEmployment().format(DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN)));
         employeeForm.getTxtUserName().setText(selectedEmployee.getUsername());
-        employeeForm.getTxtPassword().setText(selectedEmployee.getPassword());//TODO: Implement show and hide!  
+        employeeForm.getTxtPassword().setText(selectedEmployee.getPassword());
     }
 
     private void edit(Employee employee) throws Exception {
         if (selectedEmployee != null) {
             employee.setEmployeeID(selectedEmployee.getEmployeeID());
             EmployeeController.getInstance().editEmployee(employee);
-            //TODO: Implement refreshing of the form after edit
+
             if (selectedRow != -1) {
                 Coordinator.getInstance().refreshShowEmployeesForm(employee, selectedRow);
             }

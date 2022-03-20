@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import constant.MyClientConstants;
@@ -38,8 +33,6 @@ public class RepairItemFormController {
     private RepairItem selectedRepairItem;
     private int selectedRow;
     private Repair currentRepair;
-
-//    private static final String DATE_PATTERN = "dd.MM.yyyy";//TODO: Find a better place for this!
 
     public RepairItemFormController(FormMode formMode, RepairItem selectedRepairItem, int selectedRow, Repair currentRepair) {
         this.formMode = formMode;
@@ -78,7 +71,7 @@ public class RepairItemFormController {
         }
     }
 
-    private void prepareEmployeeList() throws Exception {//TODO: Make sure that this works properly!
+    private void prepareEmployeeList() throws Exception {
         List<Employee> employees = EmployeeController.getInstance().getAllEmployees();
         JList<Object> jListEmployees = repairItemForm.getjListEmployees();
 
@@ -90,20 +83,20 @@ public class RepairItemFormController {
     public void add(String startDate, String endDate, String remark, String additionalExpense, String additionalRevenue, String duration, Service service, List<Employee> employees) throws ValidationException {
         validate(startDate, endDate, remark, additionalExpense, additionalRevenue, duration, service, employees);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);//TODO: Find a better place for this!
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
 
         BigDecimal employeeExpense = getEmployeeExpense(new BigDecimal(duration), employees);
         RepairItem repairItem = new RepairItem(currentRepair, currentRepair.getRepairItems().size() + 1,
                 LocalDate.parse(startDate, dtf), LocalDate.parse(endDate, dtf), remark, employeeExpense, new BigDecimal(additionalExpense),
                 new BigDecimal(additionalRevenue), service);
-        //TODO: Add list of EmployeeEngagements to RepairItem
+
         List<EmployeeEngagement> employeeEngagements = getEmployeeEngagementList(repairItem, duration, employees);
         repairItem.setEmployeeEngagements(employeeEngagements);
 
         Coordinator.getInstance().refreshRepairForm(repairItem, RefreshMode.REFRESH_ADD);
     }
 
-    private BigDecimal getEmployeeExpense(BigDecimal duration, List<Employee> employees) {//TODO: Make sure that this returns the correct result!
+    private BigDecimal getEmployeeExpense(BigDecimal duration, List<Employee> employees) {
         BigDecimal employeeExpense = BigDecimal.ZERO;
 
         for (Employee employee : employees) {
@@ -112,7 +105,6 @@ public class RepairItemFormController {
         return employeeExpense;
     }
 
-    //TODO: Add startDate before endDate validation!!!!
     private void validate(String startDate, String endDate, String remark, String additionalExpense, String additionalRevenue, String duration, Service service, List employees) throws ValidationException {
         Validator.startValidation()
                 .validateValueIsDate(startDate, MyClientConstants.DATE_PATTERN, "Start date field is required and date must be in format: " + MyClientConstants.DATE_PATTERN)

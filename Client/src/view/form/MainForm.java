@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view.form;
 
 import java.util.logging.Level;
@@ -210,7 +206,6 @@ public class MainForm extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
                         JOptionPane.showMessageDialog(this, "Error opening show Service books form: " + ex.getMessage(), "Search error", JOptionPane.ERROR_MESSAGE);
-
         }
     }//GEN-LAST:event_menuItemSearchServiceBooksActionPerformed
 

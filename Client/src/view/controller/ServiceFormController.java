@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import controller.ServiceController;
@@ -36,7 +31,7 @@ public class ServiceFormController {
     public void save(String price, String name, String description, String materialCost) throws Exception {
         validate(price, name, materialCost);
         Service service = new Service(new BigDecimal(price), name, description, new BigDecimal(materialCost));
-        
+
         ServiceController.getInstance().addService(service);
     }
 

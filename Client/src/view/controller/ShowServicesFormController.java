@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.controller;
 
 import controller.ServiceController;
@@ -59,7 +54,7 @@ public class ShowServicesFormController {
         List<Service> services = ServiceController.getInstance().getServicesByCondition(s);
 
         TableModelServices tms = (TableModelServices) showServicesForm.getTblServices().getModel();
-        tms.setServices(services);//TODO: Make sure that this suffices, and that there is no need to instantiate new TableModelServices
+        tms.setServices(services);
     }
 
     private Service getServiceWithCondition(String name) {

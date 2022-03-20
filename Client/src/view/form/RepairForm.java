@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form;
 
 import java.awt.Dialog;
@@ -236,12 +231,7 @@ public class RepairForm extends javax.swing.JDialog {
         int selectedRow = tblRepairItems.getSelectedRow();
 
         if (selectedRow >= 0) {
-//            try {
-                repairFormController.delete(selectedRow);
-//            } catch (Exception ex) {
-//                Logger.getLogger(RepairForm.class.getName()).log(Level.SEVERE, null, ex);
-//                JOptionPane.showMessageDialog(this, "Error deleting Repair item: " + ex.getMessage(), "Delete Error", JOptionPane.ERROR_MESSAGE);
-//            }
+            repairFormController.delete(selectedRow);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package repository.database.connection;
 
 import java.io.IOException;
@@ -30,8 +25,6 @@ public class DBConnectionFactory {
     }
 
     public Connection getConnection() throws SQLException, IOException {
-
-        //TODO: Read from configuration file!
         if (connection == null || connection.isClosed()) {
             try {
                 String url = UtilApplicationProperties.getInstance().getDatabaseURL();

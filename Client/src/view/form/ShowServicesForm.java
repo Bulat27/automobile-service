@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view.form;
 
 import java.util.logging.Level;
@@ -151,7 +146,7 @@ public class ShowServicesForm extends javax.swing.JDialog {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedRow = tblServices.getSelectedRow();
-        
+
         if (selectedRow >= 0) {
             try {
                 showServicesFormController.delete(selectedRow);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package communication;
 
 import java.io.ObjectInputStream;
@@ -25,8 +20,7 @@ public class Receiver {
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             return in.readObject();
         } catch (Exception ex) {
-            ex.printStackTrace();//TODO: Delete this!
-            throw new Exception("Error receiving object:" + ex.getMessage());//TODO: Find a way to close the Stream without closing the socket!
+            throw new Exception("Error receiving object:" + ex.getMessage());
         }
     }
 }
