@@ -2,6 +2,8 @@ package system_operation.repair_item;
 
 import domain.EmployeeEngagement;
 import domain.RepairItem;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import system_operation.AbstractSO;
 import system_operation.employee_engagement.GetEmployeeEngagementsByFKConditionSO;
@@ -35,6 +37,8 @@ public class GetRepairItemsByFKConditionSO extends AbstractSO {
 
             ri.setEmployeeEngagements((List<EmployeeEngagement>) getEmployeeEngagementsByFKConditionSO.getResult());
         }
+        sortByOrderNumber(repairItems);
+
         result = repairItems;
     }
 
@@ -48,5 +52,14 @@ public class GetRepairItemsByFKConditionSO extends AbstractSO {
         employeeEngagement.setRepairItem(repairItem);
 
         return employeeEngagement;
+    }
+
+    private void sortByOrderNumber(List<RepairItem> repairItems) {
+        Collections.sort(repairItems, new Comparator<RepairItem>() {
+            @Override
+            public int compare(RepairItem ri1, RepairItem ri2) {
+                return ri1.getOrderNumber() - ri2.getOrderNumber();
+            }
+        });
     }
 }

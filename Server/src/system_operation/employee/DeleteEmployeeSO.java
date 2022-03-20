@@ -17,7 +17,7 @@ public class DeleteEmployeeSO extends AbstractSO {
                 .throwIfInvalideParameterInstance(param, "Parameter must be an instance of Employee", Employee.class);
 
         ThreadCoordinator.getInstance().throwIfAlreadyAuthenticated((Employee) param,
-                "Employee with username: " + ((Employee) param).getUsername() + " cannot be deleted because he is currently logged in.");
+                "Employee with username: " + ((Employee) param).getUsername() + " cannot be deleted because he/she is currently logged in.");
     }
 
     @Override
