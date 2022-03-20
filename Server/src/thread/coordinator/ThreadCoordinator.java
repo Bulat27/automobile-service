@@ -47,10 +47,10 @@ public class ThreadCoordinator {
         }
     }
 
-    public void checkIfAlreadyAuthenticated(Employee employee) throws Exception {
+    public void throwIfAlreadyAuthenticated(Employee employee, String errorMessage) throws Exception {
         for (ClientHandlerThread clientHandler : clientHandlers) {
             if (clientHandler.getAuthenticatedEmployee() != null && clientHandler.getAuthenticatedEmployee().equals(employee)) {
-                throw new Exception("Employee with username: " + employee.getUsername() + " is already logged in.");
+                throw new Exception(errorMessage);
             }
         }
     }

@@ -37,7 +37,8 @@ public class LoginSO extends AbstractSO {
             throw new Exception("Unknown employee!");
         }
 
-        ThreadCoordinator.getInstance().checkIfAlreadyAuthenticated((Employee) result);
+        ThreadCoordinator.getInstance().throwIfAlreadyAuthenticated((Employee) result,
+                "Employee with username: " + ((Employee) result).getUsername() + " is already logged in.");
     }
 
     public Object getResult() {
