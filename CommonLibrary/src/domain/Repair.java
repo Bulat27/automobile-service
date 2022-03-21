@@ -93,6 +93,11 @@ public class Repair implements GeneralDObject {
     }
 
     private void updateDerivedFields() {
+        updateFinancialData();
+        updateDate();
+    }
+
+    private void updateFinancialData() {
         BigDecimal tr = BigDecimal.ZERO;
         BigDecimal te = BigDecimal.ZERO;
 
@@ -109,6 +114,17 @@ public class Repair implements GeneralDObject {
         }
         System.out.println(totalRevenue);
         System.out.println(totalExpense);
+    }
+
+    private void updateDate() {
+        LocalDate earliestDate = LocalDate.MAX;
+
+        for (RepairItem repairItem : repairItems) {
+            if (repairItem.getStartDate() != null && repairItem.getStartDate().isBefore(earliestDate)) {
+                earliestDate = repairItem.getStartDate();
+            }
+        }
+        startDate = earliestDate;
     }
 
     @Override

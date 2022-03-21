@@ -3,6 +3,7 @@ package view.form.model;
 import constant.MyClientConstants;
 import domain.Repair;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -50,7 +51,7 @@ public class TableModeRepairs extends AbstractTableModel {
                 return repair.getName();
             case 1:
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern(MyClientConstants.DATE_PATTERN);
-                return repair.getStartDate().format(dtf);
+                return repair.getStartDate() != LocalDate.MAX ? repair.getStartDate().format(dtf) : "";
             case 2:
                 return repair.getTotalRevenue();
             case 3:

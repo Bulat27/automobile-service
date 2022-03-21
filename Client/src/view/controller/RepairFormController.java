@@ -3,8 +3,6 @@ package view.controller;
 import constant.MyClientConstants;
 import controller.RepairController;
 import controller.RepairItemController;
-import domain.Employee;
-import domain.EmployeeEngagement;
 import domain.Repair;
 import domain.RepairItem;
 import java.math.BigDecimal;
@@ -168,7 +166,8 @@ public class RepairFormController {
                 earliestDate = repairItem.getStartDate();
             }
         }
-        return !earliestDate.equals(LocalDate.MAX) ? earliestDate : null;
+//        return !earliestDate.equals(LocalDate.MAX) ? earliestDate : LocalDate.MAX;
+        return earliestDate;
     }
 
     private void updateRepairFormComponents(RefreshMode refreshMode) {
