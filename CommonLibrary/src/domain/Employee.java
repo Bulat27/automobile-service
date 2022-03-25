@@ -27,7 +27,9 @@ public class Employee implements GeneralDObject {
     public Employee() {
     }
 
-    public Employee(Long employeeID, String firstName, String lastName, EmployeeRole employeeRole, BigDecimal hourlyRate, LocalDate dateOfEmployment, String username, String password) {
+    public Employee(Long employeeID, String firstName, String lastName, EmployeeRole employeeRole, BigDecimal hourlyRate,
+            LocalDate dateOfEmployment, String username, String password) {
+
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;

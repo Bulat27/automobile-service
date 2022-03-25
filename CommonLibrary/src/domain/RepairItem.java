@@ -29,7 +29,9 @@ public class RepairItem implements GeneralDObject {
     public RepairItem() {
     }
 
-    public RepairItem(Repair repair, Integer orderNumber, LocalDate startDate, LocalDate endDate, String remark, BigDecimal employeeExpense, BigDecimal additionalExpense, BigDecimal additionalRevenue, Service service) {
+    public RepairItem(Repair repair, Integer orderNumber, LocalDate startDate, LocalDate endDate,
+            String remark, BigDecimal employeeExpense, BigDecimal additionalExpense, BigDecimal additionalRevenue, Service service) {
+
         this.repair = repair;
         this.orderNumber = orderNumber;
         this.startDate = startDate;
